@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=PT+Sans&Source+Sans+Pro&Roboto+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700;900&display=swap");
 * {
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
@@ -22,6 +23,7 @@
 
 * {
     --accent: #f1c40f;
+    --codeBackgroudColor: rgba(44,58,71,.2);
 }
 
 body:not(.ready) {
@@ -112,11 +114,12 @@ body {
     letter-spacing: 0;
     margin: 0;
     overflow-x: hidden;
-    font-family: "JetBrainsMono";
+    font-family: "Nunito Sans", sans-serif;
 }
 
 .markdown-section h2 {
     color: #fff;
+    font-weight: 900;
 }
 
 img {
@@ -276,11 +279,13 @@ main.hidden {
 }
 
 .anchor span {
-    color: #3498db;
+    color: #ff7979;
 }
 
 .anchor:hover {
     text-decoration: underline
+    /* padding-bottom: 8px;
+    border-bottom: 4px solid var(--accent); */
 }
 
 .sidebar {
@@ -786,7 +791,7 @@ body {
 .markdown-section h4,
 .markdown-section strong {
     color: var(--textColor);
-    font-weight: 600
+    font-weight: 900
 }
 
 .markdown-section a {
@@ -796,12 +801,16 @@ body {
 
 .markdown-section h1 {
     font-size: 2.5rem;
-    margin: 0 0 1rem
+    margin: 0 0 4rem
 }
 
 .markdown-section h2 {
     font-size: 1.75rem;
     margin: 45px 0 .8rem
+}
+
+.markdown-section h2 .anchor span {
+    color: #ffbe76;
 }
 
 .markdown-section h3 {
@@ -814,7 +823,7 @@ body {
 }
 
 .markdown-section h4 a span {
-    color: #d35400;
+    color: #badc58;
 }
 
 .markdown-section h5 {
@@ -828,14 +837,16 @@ body {
 
 .markdown-section figure,
 .markdown-section p {
-    margin: 1.2em 0
+    margin: 1em 0 2.5em 0;
 }
 
 .markdown-section ol,
 .markdown-section p,
 .markdown-section ul {
     line-height: 1.6rem;
-    word-spacing: .05rem
+    word-spacing: 0.05rem;
+    font-weight: 200;
+    font-size: 1.1rem;
 }
 
 .markdown-section ol,
@@ -845,14 +856,15 @@ body {
 
 .markdown-section blockquote {
     border-left: 4px solid var(--accent);
-    color: var(--blockQuoteColor);
+    /* color: var(--blockQuoteColor); */
     margin: 2em 0;
-    padding-left: 20px
+    padding: 8px 20px;
+    background: black;
 }
 
 .markdown-section blockquote p {
     font-weight: 600;
-    margin-left: 0
+    margin: 0
 }
 
 .markdown-section iframe {
@@ -864,12 +876,13 @@ body {
 }
 
 .markdown-section code {
-    border-radius: 2px;
-    color: var(--highlightColor);
+    border-radius: 4px;
+    /* color: var(--highlightColor); */
+    color: white;
     font-size: .9em;
-    font-family: "JetBrainsMonoBold";
+    font-family: "Ubuntu Mono", monospace;
     margin: 0 2px;
-    padding: 3px 5px;
+    padding: 4px 8px;
     white-space: pre-wrap;
     font-weight: bold;
 }
@@ -1000,7 +1013,7 @@ a code {
     border-radius: 2px;
     color: var(--codeTextColor);
     display: block;
-    font-size: .9em;
+    font-size: 1em;
     line-height: inherit;
     margin: 0 2px;
     max-width: inherit;
