@@ -24,6 +24,8 @@
 * {
     --accent: #f1c40f;
     --codeBackgroudColor: rgba(44,58,71,.2);
+    --textColor: white;
+    --faint-red-border: rgba(255, 121, 121, .7);
 }
 
 body:not(.ready) {
@@ -303,9 +305,10 @@ main.hidden {
 
 .sidebar>h1 {
     margin: 0 auto 1rem;
-    font-size: 1.5rem;
-    font-weight: 300;
-    text-align: center
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-align: center;
+    color: var(--accent);
 }
 
 .sidebar>h1 a {
@@ -800,7 +803,7 @@ body {
 }
 
 .markdown-section h1 {
-    font-size: 2.5rem;
+    font-size: 3.5em;
     margin: 0 0 4rem
 }
 
@@ -837,7 +840,7 @@ body {
 
 .markdown-section figure,
 .markdown-section p {
-    margin: 1em 0 2.5em 0;
+    margin: 1em 0 0 0;
 }
 
 .markdown-section ol,
@@ -901,10 +904,15 @@ a code {
     -moz-osx-font-smoothing: initial;
     -webkit-font-smoothing: initial;
     line-height: 1.5rem;
-    margin: 1.2em 0;
+    margin: 3em 0;
     overflow: auto;
     position: relative;
     word-wrap: normal
+}
+
+.markdown-section pre > code {
+    border-radius: 8px !important;
+    border: 2px solid var(--faint-red-border);
 }
 
 .token.cdata,

@@ -1,4 +1,4 @@
-# Installing Mage Engine
+# Installation
 
 Installing the Engine is as simple as running the following npm command:
 
