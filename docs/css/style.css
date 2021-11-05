@@ -776,7 +776,7 @@ body {
 .sidebar ul li.active>a {
     border-right: 2px solid;
     color: var(--accent);
-    font-weight: 600
+    font-weight: 900
 }
 
 .app-sub-sidebar li:before {
@@ -796,7 +796,7 @@ body {
 
 .markdown-section a {
     color: var(--accent);
-    font-weight: 600
+    font-weight: 900
 }
 
 .markdown-section h1 {
@@ -863,7 +863,7 @@ body {
 }
 
 .markdown-section blockquote p {
-    font-weight: 600;
+    font-weight: 900;
     margin: 0
 }
 
@@ -1043,7 +1043,7 @@ pre:after {
     color: var(--codeTypeColor);
     content: attr(data-lang);
     font-size: .6rem;
-    font-weight: 600;
+    font-weight: 900;
     height: 15px;
     line-height: 15px;
     padding: 5px 10px 0;
