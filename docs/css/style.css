@@ -23,9 +23,11 @@
 
 * {
     --accent: #f1c40f;
+    --h2-color: #ffbe76;
     --codeBackgroudColor: rgba(44,58,71,.2);
     --textColor: white;
     --faint-red-border: rgba(255, 121, 121, .7);
+    --borderColor: rgba(255,190,118, .2);
 }
 
 body:not(.ready) {
@@ -48,6 +50,21 @@ body:not(.ready) {
     width: 90% !important;
     border-radius: 15px;
     text-indent: 15px;
+}
+
+.search h2 {
+    font-size: 1.4em;
+    margin: 10px 0;
+    color: var(--h2-color);
+}
+
+.search .matching-post {
+    border-bottom: 1px solid var(--borderColor) !important;
+    padding: 8px;
+}
+
+.search .matching-post a:hover h2 {
+    color: var(--accent);
 }
 
 body:not(.ready) .app-nav,
@@ -435,7 +452,7 @@ body.sticky .sidebar-toggle {
 
 .markdown-section hr {
     border: none;
-    border-bottom: 1px solid rgba(22, 160, 133, .4);
+    border-bottom: 1px solid var(--borderColor);
     margin: 2em 0
 }
 
@@ -803,7 +820,7 @@ body {
 }
 
 .markdown-section h1 {
-    font-size: 3.5em;
+    font-size: 4em;
     margin: 0 0 4rem
 }
 
@@ -813,7 +830,7 @@ body {
 }
 
 .markdown-section h2 .anchor span {
-    color: #ffbe76;
+    color: var(--h2-color);
 }
 
 .markdown-section h3 {
