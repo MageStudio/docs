@@ -1,2 +1,2 @@
-- [< Home](/)
+- [🏡 Home](/)
 - [Changelog](/editor/changelog.md)

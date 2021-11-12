@@ -1,13 +1,19 @@
-- [< Home](/)
+- [🏡 Home](/)
 
 - Getting started
   - [1. Install](/engine/getting-started/installing-mage-engine.md "Installing Mage Engine")
   - [2. Project Setup](/engine/getting-started/setting-up-your-project.md "Setting up your project")
-  - [3. Creating the first scene](/engine/getting-started/creating-first-scene.md "Creating your first scene")
+  - [3. Creating the first Level](/engine/getting-started/creating-first-level.md "Creating your first level")
   - [4. Hello Cube](/engine/getting-started/hello-cube.md "Hello Cube")
   - [5. Camera](/engine/getting-started/camera.md "Camera")
   - [6. Scripts](/engine/getting-started/scripts.md "Scripts")
   - [7. Handling input](/engine/getting-started/handling-input.md "Handling Input")
+  - [8. Applying Textures](/engine/getting-started/applying-textures.md "Applying textures")
+  - [9. Lights and Skybox](/engine/getting-started/lights_and_lightbox.md "Lights and skybox")
+  - [10. Physics](/engine/getting-started/physics.md "Physics")
+  - [11. Driving around](/engine/getting-started/driving_around.md "Driving around")
+  - [12. UI](/engine/getting-started/ui.md "UI")
+  - [13. The End?](/engine/getting-started/the_end.md "The End")
   
 - Advanced
   - [Configuration](/engine/advanced/configuration.md)

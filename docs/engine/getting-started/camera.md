@@ -2,13 +2,13 @@
 
 Accessing the camera and controlling its behaviour is really easy. The Camera is accessibile through the `Scene` module from `mage-engine`.
 
-You can get it by doing this:
+First, import `Scene`:
 
 ```js
 import { Scene } from 'mage-engine';
 ```
 
-Now you can access the camera whenever you want inside your scene, so let's try to change its position to something a bit more convenient.
+Now you can access the camera whenever you want inside your level, so let's try to change its position to something a bit more convenient.
 
 ```js
 ...
@@ -27,7 +27,7 @@ onCreate() {
 }
 ```
 
-- `Scene.getCamera()` will return the Camera object for this scene, you can now use it to change its position or it's direction.
+- `Scene.getCamera()` will return the Camera object for this scene, you can now use it to change its position or its direction.
 - `camera.setPosition` allows you to change its position. In this example, we're using `{ y: 7, z: 15 }`. You don't need to specity each coordinate, Mage will default the missing value to the current value of the Camera.
 - `camera.lookAt` will set the target of the Camera. In this case, we're explicitly telling the camera to look at the origin `{x: 0, y: 0, z:0 }`. If we wanted to make the camera look at the cube, we coould have done something like this:
 

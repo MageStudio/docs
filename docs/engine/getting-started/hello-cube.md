@@ -1,11 +1,11 @@
 # Hello Cube
 
-Adding a cube to the scene is incredibly straightforward. What you need to do is import it from `mage-engine` and create a new instance of it. Our newly created `FirstScene` will look like this:
+Adding a cube to the scene is incredibly straightforward. What you need to do is import it from `mage-engine` and create a new instance of it. Our newly created `FirstLevel` will look like this:
 
 ```js
 import { Level, Cube } from 'mage-engine';
 
-class FirstScene extends Level {
+class FirstLevel extends Level {
 
     onCreate() {
         const size = 10;
@@ -17,7 +17,7 @@ class FirstScene extends Level {
     }
 }
 
-export default FirstScene;
+export default FirstLevel;
 ```
 
 ---
@@ -27,8 +27,6 @@ export default FirstScene;
 Before we add anything to our new scene, we should add some style.
 
 ```css
-    body,
-    #gameContainer,
     canvas {
         position: absolute;
         margin: 0;
@@ -46,6 +44,8 @@ You can inject this style in our `index.html` for now.
 
 ## Run the application
 
+!> We're going to assume you know how to bundle your application. Bundling the app should produce some distributable files (mainly a `app.js` and one `app.css`). If you're not sure how to achieve this, have a look at the [Bundling](/engine/advanced/bundling.md) page.
+  
 For now, the best way to launch the application is to use a python module called `SimpleHTTPServer`. When invoked, it will launch a simple HTTP serve (hence the module name) in your root folder.
 
 ```python

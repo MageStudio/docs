@@ -107,6 +107,6 @@ What happens if you execute the app now? (Spoiler: the same thing as before.)
 
 ---
 
-## The End?
+## Still boring
 
-No, not really. You now have the basic notions for getting started with Mage. Head over to the Advanced section of this documentation and explore what the engine can do for you. From now on, **sky is the limit**.
+Ok, fine. You're right, this is still pretty boring. Let's spicy it up a bit, and apply some textures to this boring box. [Applying textures](/engine/getting-started/applying-textures.md).

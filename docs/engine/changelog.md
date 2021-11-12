@@ -1,4 +1,4 @@
-# Mage Engine changelog
+# Changelog
 
 ## patch: `v3.0.4` Latest
 

@@ -24,6 +24,7 @@
 * {
     --accent: #f1c40f;
     --h2-color: #ffbe76;
+    --faint-orange-color: rgba(255,190,118, .2);
     --codeBackgroudColor: rgba(44,58,71,.2);
     --textColor: white;
     --faint-red-border: rgba(255, 121, 121, .7);
@@ -341,7 +342,19 @@ main.hidden {
 .sidebar .sidebar-nav {
     line-height: 2em;
     padding-bottom: 40px;
-    padding-left: 8px;
+    padding-left: 16px;
+}
+
+.sidebar-nav li.open ul {
+    padding-left: 24px;
+    border-left: 1px solid var(--faint-orange-color);
+    margin-left: -13px;
+}
+
+.sidebar-nav li.folder::before {
+    left: -16px !important;
+    border-right-color: var(--h2-color) !important;
+    border-bottom-color: var(--h2-color) !important;
 }
 
 .sidebar li.collapse .app-sub-sidebar {
@@ -492,7 +505,7 @@ body.sticky .sidebar-toggle {
 
 .markdown-section p.tip {
     border-bottom-right-radius: 2px;
-    border-left: 4px solid rgb(231, 76, 60);
+    border-left: 4px solid var(--faint-red-border);
     border-top-right-radius: 2px;
     margin: 2em 0;
     padding: 12px 24px 12px 30px;
@@ -501,7 +514,7 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section p.tip:before {
-    background-color: rgb(231, 76, 60);
+    background-color: var(--faint-red-border);
     border-radius: 100%;
     color: #fff;
     content: "!";
@@ -518,7 +531,7 @@ body.sticky .sidebar-toggle {
 }
 
 .markdown-section p.tip code {
-    background-color: #efefef
+    background-color: rgba(231, 76, 60, .3);
 }
 
 .markdown-section p.tip em {
@@ -786,7 +799,9 @@ body {
 }
 
 .sidebar ul li a:hover {
-    text-decoration: underline
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    color: var(--h2-color);
 }
 
 .sidebar ul li ul {
@@ -879,7 +894,7 @@ body {
     /* color: var(--blockQuoteColor); */
     margin: 2em 0;
     padding: 8px 20px;
-    background: black;
+    background: rgba(0, 0, 0, .3);
 }
 
 .markdown-section blockquote p {
@@ -905,6 +920,7 @@ body {
     padding: 4px 8px;
     white-space: pre-wrap;
     font-weight: bold;
+    letter-spacing: .1em;
 }
 
 a code {
