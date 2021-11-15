@@ -3,7 +3,7 @@ name: Sync docs to s3
 on:
   push:
     branches:
-    - github-action-s3-sync
+    - master
 
 jobs:
   deploy:
