@@ -25,4 +25,5 @@ window.addEventListener('load', () => {
 
 - We added a new `textures` field in our `assets` object. Each entry will be used by the engine to load the textures automatically at startup. This means that when the application is running, each texture is ready to be used.
 
-?> Assets configuration can get a bit more complicated than this, please refer to the proper documentation page here: [Loading Assets](/engine/advanced/assets/loading.md)
+?> Assets configuration can get a bit more complicated than this, please refer to the proper documentation page here: [Loading Assets](/engine/advanced/assets/loading.md).
+

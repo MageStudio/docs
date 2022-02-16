@@ -46,7 +46,7 @@ You can inject this style in our `index.html` for now.
 
 !> We're going to assume you know how to bundle your application. Bundling the app should produce some distributable files (mainly a `app.js` and one `app.css`). If you're not sure how to achieve this, have a look at the [Bundling](/engine/advanced/bundling.md) page.
   
-For now, the best way to launch the application is to use a python module called `SimpleHTTPServer`. When invoked, it will launch a simple HTTP serve (hence the module name) in your root folder.
+For now, the best way to launch the application is to use a python module called `SimpleHTTPServer`. When invoked, it will launch a simple HTTP server (hence the module name) in your root folder.
 
 ```python
 python -m SimpleHTTPServer
