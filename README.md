@@ -3,7 +3,7 @@
 This repositorys hosts [`mage-engine`](https://github.com/MageStudio/Mage) documentation.
 
 For the latest version, please visit:
-[https://magestudio.github.io/mage-docs/#/](https://magestudio.github.io/mage-docs/#/)
+[https://www.mage.studio/docs/#/](https://www.mage.studio/docs/#/)
 
 ---
 ## Exploring docs locally
