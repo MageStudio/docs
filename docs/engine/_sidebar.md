@@ -9,7 +9,7 @@
   - [6. Scripts](/engine/getting-started/scripts.md "Scripts")
   - [7. Handling input](/engine/getting-started/handling-input.md "Handling Input")
   - [8. Applying Textures](/engine/getting-started/applying-textures.md "Applying textures")
-  - [9. Lights and Skybox](/engine/getting-started/lights_and_lightbox.md "Lights and skybox")
+  - [9. Lights and Skybox](/engine/getting-started/lights_and_skybox.md "Lights and skybox")
   - [10. Physics](/engine/getting-started/physics.md "Physics")
   - [11. Driving around](/engine/getting-started/driving_around.md "Driving around")
   - [12. UI](/engine/getting-started/ui.md "UI")
@@ -21,6 +21,7 @@
     - [1. Level](/engine/advanced/core/level.md)
     - [2. Entity](/engine/advanced/core/entity.md)
     - [3. Element](/engine/advanced/core/element.md)
+    - [4. Constants](/engine/advanced/core/constants.md)
     - Base Elements
       - [1. Cube](/engine/advanced/core/base/cube.md)
       - [2. Box](/engine/advanced/core/base/box.md)
@@ -39,6 +40,11 @@
     - [4. Mobile](/engine/advanced/input/mobile.md)
   - [UI](/engine/advanced/ui.md)
   - [State Management](/engine/advanced/state_management.md)
+  - Lights
+    - [1. AmbientLight](/engine/advanced/lights/ambientlight.md)
+    - [2. SunLight](/engine/advanced/lights/sunlight.md)
+    - [3. HemisphereLight](/engine/advanced/lights/hemispherelight.md)
+    - [4. PointLight](/engine/advanced/lights/pointlight.md)
   - Assets
     - [1. Loading assets](/engine/advanced/assets/loading.md)
     - [2. Audio](/engine/advanced/assets/audio.md)

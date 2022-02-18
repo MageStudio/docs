@@ -35,12 +35,12 @@
         <li class='example' data-src='./hello-cube/index.html'>Hello Cube</li>
         <li class='example' data-src='./cube-scripts/index.html'>Scripts</li>
         <li class='example' data-src='./cube-texture/index.html'>Textures</li>
+        <li class='example' data-src='./lights/index.html'>Lights and skybox</li>
     </ul>
     <iframe class='example-frame'></iframe>
 
     <script>
         document.querySelectorAll('.example').forEach(el => el.addEventListener('click', e => {
-            console.log('going to ', e.target.dataset.src);
             document.querySelector('iframe').src = e.target.dataset.src;
         }));
     </script>
