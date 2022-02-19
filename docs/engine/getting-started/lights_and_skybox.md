@@ -183,9 +183,17 @@ createSky() {
         distance
     );
 }
+
+onCreate() {
+    // what we had before
+    this.createSky();
+}
 ```
 
-- `Sky` is one of the many effects available within `mage-engine`.
+- `Sky` is one of the many effects available within `mage-engine`. You can find out more about it in its dedicated page [here](/engine/advanced/effects/scenery/sky.md);
 
 Here is the final look of what we achieved so far:
-![Rotating purple cube on orange floor with sky](img/orange_purple_sky.png "ROtating purple cube on orange floor with sky");
+![Rotating purple cube on orange floor with sky](img/orange_purple_sky.png "ROtating purple cube on orange floor with sky")
+
+### What's next?
+Now that we have a somewhat decently looking scene, how about we complicate things by [introducing physics to the mix](/engine/getting-started/physics.md)?

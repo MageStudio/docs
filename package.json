@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "serve:docs": "docsify serve docs",
-        "serve:examples": "parcel ./examples/index.html ./examples/*/index.html ./examples/**/assets/**/* --no-cache",
+        "serve:examples": "parcel build ./examples/**/index.html --no-cache",
         "init:docs": "docsify init ./docs",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -22,7 +22,11 @@
     "dependencies": {
         "docsify-cli": "^4.4.0",
         "docsify-darklight-theme": "^1.1.1",
-        "mage-engine": "3.16.0",
-        "parcel": "^2.0.1"
+        "mage-engine": "3.16.1",
+        "parcel": "2.3.2",
+        "@parcel/transformer-raw": "2.3.2"
+    },
+    "devDependencies": {
+        "process": "^0.11.10"
     }
 }

@@ -34,19 +34,19 @@ The Element constructor will set the body if both geometry and material are prov
 
 ?> For more information about tags, please refer to the Entity document page [here](/engine/advanced/core/entity.md).
 
-#### hasMesh(): boolean
+#### hasBody(): boolean
 
 Checks if this element has an attached mesh. Returns `true` if the mesh is present, `false` otherwise.
 
-#### getMesh(): ThreeMesh
+#### getBody(): ThreeMesh
 
 This method will return the ThreeMesh attached to this element if present.
 
-#### getMeshByName(name: string): ThreeMesh
+#### getBodyByName(name: string): ThreeMesh
 
 This method will search for the ThreeMesh with the required name inside this element. If found, it will be returned. If not found, `undefined` will be returned.
 
-#### setMesh({ mesh?: ThreeMesh, geometry?: ThreeGeometry, material?: ThreeMaterial })
+#### setBody({ body?: ThreeMesh, geometry?: ThreeGeometry, material?: ThreeMaterial })
 
 This method sets the ThreeMesh attached to this element. You have three options:
 
@@ -86,7 +86,7 @@ This method will set the texture map for this element.
 This method changes the type of material used for this element. 
 
 - `materialName` can be one of the following values:
-```javascript
+```js
 const MATERIALS = {
     LAMBERT: 0,
     PHONG: 1,

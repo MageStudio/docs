@@ -60,7 +60,8 @@
   - Effects
     - [1. PostProcessing](/engine/advanced/effects/postprocessing.md)
     - [2. Particles](/engine/advanced/effects/particles.md)
-    - [3. Scenery](/engine/advanced/effects/scenery.md)
+    - Scenery
+      - [1. Sky](/engine/advanced/effects/scenery/sky.md)
   - Utilities
     - [1. Math](/engine/utilities/math.md)
     - [2. Features](/engine/utilities/features.md)

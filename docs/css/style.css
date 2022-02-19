@@ -542,7 +542,28 @@ body.sticky .sidebar-toggle {
 .markdown-section p.warn {
     background: rgba(46, 204, 113, .2);
     border-radius: 2px;
-    padding: 1rem
+    padding: 1rem;
+    border-left: 4px solid rgb(46, 204, 113);
+}
+
+.markdown-section p.warn code {
+    background-color: rgba(46, 204, 113, .4);
+}
+
+.markdown-section p.warn::before {
+    content: '?';
+    background: rgb(46, 204, 113);
+    font-weight: bold;
+    border-radius: 100%;
+    padding: 2px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    line-height: 16px;
+    text-align: center;
+    font-size: .9em;
+    left: 7px;
 }
 
 .markdown-section ul.task-list>li {

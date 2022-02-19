@@ -49,12 +49,6 @@ The user lands on `www.domain.com/?value=10&anotherValue=20#/myLevel`. What will
 }
 ```
 
-#### progressAnimation(callback: function)
-
-This method allows you to control the loading animation of your level. Here you can perform any DOM manipulation for your loading screen.
-
-?> At this point in time, the loading screen is not part of your Inferno tree structure and Mage is not able to handle it. This means the loading screen has to be handled separately by this function: our suggestion is to have the loading screen always visible and in "loading" state, and to remove it inside this function.
-
 #### loadScene(url: string)
 
 - `url` is the url (or relative path) to a JSON representation of the
@@ -72,19 +66,6 @@ export default class MyLevel extends Level {
 ```
 
 Given the above level, the following url will be loaded: `assets/scenes/MyLevel.json`.
-
-#### enableUI(rootComponent: InfernoComponent, options: Object)
-
-This method will enable and render your ui elements on the page. Once called, it will also execute the `onUIEnabled` lifecycle method (its documentation is [here](/engine/advanced/core/level.md?id=onuienabled)).
-
-- `rootComponent` is the root component you want to render. For the time being Mage only supports Inferno components.
-- `options` represents a list of options for the component.
-
-?> For more informations on how to render your ui components, please refer to this [page](/engine/advanced/ui.md).
-
-#### disableUI()
-
-This method will disable and unmount your ui elements. Once called, it will also execute the `onUIDisabled` lifecycle method (its documentation is [here](/engine/advanced/core/level.md?id=onuidisabled)).
 
 #### enableInput()
 
@@ -136,14 +117,6 @@ This lifecycle method gets called when you call `enableInput`. Check documentati
 #### onInputDisabled
 
 This lifecycle method gets called when you call `disableInput`. Check documentation [here](/engine/core/level.md?id=disableinput).
-
-#### onUiEnabled
-
-This lifecycle method gets called when you call `enableUI`. Check documentation [here](/engine/core/level.md?id=enableui).
-
-#### onUiDisabled
-
-This lifecycle method gets called when you call `disableUI`. Check documentation [here](/engine/core/level.md?id=disableui).
 
 ---
 
