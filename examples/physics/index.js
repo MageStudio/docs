@@ -36,27 +36,34 @@ export default class Example extends Level {
         floor.enablePhysics({ mass: 0 })
     }
 
+    onUpdate() {
+        if (this.cube) {
+            Scene.getCamera().lookAt(this.cube.getPosition());
+        }
+    }
+
     onCreate() {
         const size = 10;
-        const cube = new Cube(size);
+        this.cube = new Cube(size);
 
-        cube.setPosition({ x: 0, y: 20, z: 0 });
-        cube.setTextureMap('purple');
-        cube.setMaterialFromName(constants.MATERIALS.STANDARD);
+        this.cube.setPosition({ x: 0, y: 50, z: 0 });
+        this.cube.setRotation({ x: Math.random(), y: Math.random(), z: Math.random() })
+        this.cube.setTextureMap('purple');
+        this.cube.setMaterialFromName(constants.MATERIALS.STANDARD);
 
         const camera = Scene.getCamera();
         camera.setPosition({ z: 15, y: 15 });
-        camera.lookAt(cube.getPosition());
+        
 
-        Scripts.create('rotation', Rotation);
-        cube.addScript('rotation');
+        // Scripts.create('rotation', Rotation);
+        // cube.addScript('rotation');
         const sky = new Sky();
         sky.setSun(.1, .1, 100)
 
         this.createFloor();
         this.addAmbientLight();
 
-        cube.enablePhysics({ mass: 1 })
+        this.cube.enablePhysics({ mass: .1, restitution: 2 })
     }
 }
 
@@ -83,7 +90,7 @@ const config = {
 
     physics: {
         enabled: true,
-        path: '/assets/ammo.js',
+        path: 'physics/assets/ammo.js',
         gravity: { x: 0, y: -9.8, z: 0}
     },
 
