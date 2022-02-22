@@ -6,6 +6,8 @@ Mage Studio includes the Engine and the Editor. Use either to create 3D games an
 
 Explore the documentation and find out what you can build!
 
+?> [Join the Discord Server](https://discord.gg/YvyMRcvd77)! It's the best way to get in touch with me, raise issues, talk about the development and see upcoming projects.
+
 ## Engine
 - [Documentation](/engine/)
 - [Examples](#)
