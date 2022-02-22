@@ -1,4 +1,4 @@
-import { Router, store, Level, Cube, AmbientLight, Scene, Box, Scripts, constants, SunLight, PALETTES, Sky, Models } from 'mage-engine';
+import { Router, store, Level, Cube, AmbientLight, Scene, Box, Scripts, constants, SunLight, PALETTES, Sky, Models, Physics } from 'mage-engine';
 
 import Rotation from './rotation';
 import Root from './Root.jsx';
@@ -25,6 +25,16 @@ export default class Example extends Level {
 
     createWheel(wheelNo) {
         return Models.getModel('wheel', { name: `wheel_${wheelNo}` });
+    }
+
+    resetCar() {
+        const position = {
+            x: 0,
+            y: 20,
+            z: 0
+        };
+
+        Physics.resetVehicle(this.car, position, constants.ZERO_QUATERNION);
     }
     
     createCar() {
@@ -99,13 +109,13 @@ export default class Example extends Level {
         this.createFloor();
         this.addAmbientLight();
         this.generateCubes();
-        const target = this.createCar();
+        this.car = this.createCar();
 
         // const camera = Scene.getCamera();
         // camera.setPosition({ x: -10, y: 15, z: -10 });
         // camera.lookAt({ x: 0, y: 0, z: 0 });
 
-        Scene.getCamera().addScript(Scripts.BUILTIN.SMOOTH_CAR_FOLLOW, { target });
+        Scene.getCamera().addScript(Scripts.BUILTIN.SMOOTH_CAR_FOLLOW, { target: this.car });
     }
 }
 

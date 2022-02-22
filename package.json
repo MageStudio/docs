@@ -22,9 +22,12 @@
     "dependencies": {
         "docsify-cli": "^4.4.0",
         "docsify-darklight-theme": "^1.1.1",
-        "mage-engine": "3.16.3"
+        "mage-engine": "3.16.5"
     },
     "devDependencies": {
-        "snowpack": "3.8.8"
+        "@snowpack/plugin-babel": "^2.1.7",
+        "babel-plugin-inferno": "^6.3.0",
+        "snowpack": "3.8.8",
+        "xferno": "0.0.7"
     }
 }

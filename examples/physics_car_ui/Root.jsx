@@ -1,25 +1,41 @@
-import { createVNode, Fragment, Component } from 'inferno';
+import { Component } from 'inferno';
 import { GameRunner } from 'mage-engine';
 
-window.gm = GameRunner;
 
 const SpeedIndicator = ({ speed }) => {
+    const style = {
+        position: 'absolute',
+        top: '480px',
+        'z-index': '9999999',
+        left: '24px',
+        'font-size': '4em',
+    }
     return (
-        <span>
-            { speed }
+        <span style={style}>
+            { Math.floor(Math.abs(speed)) }
         </span>
     );
 };
 
 const ResetButton = ({ onClick }) => {
+    const style = {
+        'position': 'absolute',
+        'z-index': '999999',
+        'top': '24px',
+        'left': '24px',
+        'height': '36px',
+        'width': '120px',
+        'border': '2px solid black',
+        'background': 'transparent',
+    }
     return (
-        <button onClick={onClick}>
+        <button style={style} onClick={onClick}>
             reset
         </button>
     );
 };
 
-export default class Root extends Component {
+class Root extends Component {
     constructor(props) {
         super(props);
 
@@ -29,17 +45,20 @@ export default class Root extends Component {
     }
 
     componentDidMount() {
-        const level = GameRunner.getCurrentLevel();
-        // setInterval(() => {
-        //     if (level && level.car) {
-        //         const { speed } = level.car.getPhysicsState();
-        //         this.setState({ speed });
-        //     }
-        // }, 250);
+        setInterval(() => {
+            const level = GameRunner.getCurrentLevel();
+            if (level && level.car) {
+                const state = level.car.getPhysicsState();
+                console.log(state);
+                this.setState(state);
+            }
+        }, 250);
     }
 
     handleResetButtonClick = () => {
-        GameRunner.getCurrentLevel().resetCar();
+        GameRunner
+            .getCurrentLevel()
+            .resetCar();
     }
 
     render() {
@@ -53,3 +72,5 @@ export default class Root extends Component {
         )
     }
 }
+
+export default Root;

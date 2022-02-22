@@ -4,7 +4,7 @@ module.exports = {
     examples: '/',
   },
   plugins: [
-    /* ... */
+    ['@snowpack/plugin-babel']
   ],
   packageOptions: {
     /* ... */
@@ -13,7 +13,7 @@ module.exports = {
     /* ... */
   },
   buildOptions: {
-    jsxFactory: "createVNode",
-    jsxFragment: 'Fragment'
+    // jsxFactory: "createVNode",
+    // jsxFragment: 'Fragment'
   },
 };

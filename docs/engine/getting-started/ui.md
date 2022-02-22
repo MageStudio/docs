@@ -46,7 +46,11 @@ This one is quite easy as well. It will display a button on screen: its purpose 
 Let's now create a root component that will take care of both child components.
 
 ```js
-import { Component, GameRunner } from 'inferno';
+import { Component } from 'inferno';
+import {
+    // previous imports
+    GameRunner
+} from 'mage-engine';
 
 class Root extends Component {
     constructor(props) {
@@ -58,9 +62,9 @@ class Root extends Component {
     }
 
     componentDidMount() {
-        const level = GameRunner.getCurrentLevel();
         setInterval(() => {
-            if (level.car) {
+            const level = GameRunner.getCurrentLevel();
+            if (level && level.car) {
                 const { speed } = level.car.getPhysicsState();
                 this.setState({ speed });
             }
@@ -68,7 +72,9 @@ class Root extends Component {
     }
 
     handleResetButtonClick = () => {
-        GameRunner.getCurrentLevel().resetCar();
+        GameRunner
+            .getCurrentLevel()
+            .resetCar();
     }
 
     render() {
@@ -91,6 +97,31 @@ What is happening in `Root.js`:
 
 ?> More information on `GameRunner` is available on its dedicated page [here](/engine/advanced/gamerunner.md). The same applies for the `Element` [page](/engine/advanced/core/element.md), where `getPhysicsState` is explained.
 
+- We're also setting a `onClick` event handler on our button. When pressed, it wil call the `resetCar` method on our current level. Unfortunately, we don't have that yet. So let's go back to our level and create it:
+
+### Level.js
+```js
+import {
+    // previous imports
+    Physics
+} from 'mage-engine';
+
+// inside your level class
+resetCar() {
+    const position = {
+        x: 0, 
+        y: 20,
+        z: 0
+    };
+    Physics.resetVehicle(this.car, position, constants.ZERO_QUATERNION);
+}
+```
+
+What is happening here?
+- We are calling `Physics.resetVehicle()`: since this is a phyisics based example, we need to inform the Physics module we want to reset our vehicle to a desired position and rotation. In this case, we're resetting the car to `{ x: 0, y: 20, z: 0 }` with no rotation (`constants.ZERO_QUATERNION`).
+
+?> More on the Physics module in its dedicated [page](/engine/advanced/physics.md).
+
 ## Enabling UI
 
 Enabling UI is pretty straightforward. Just head over your configuration object, and add the following:
@@ -107,3 +138,15 @@ const config = {
 ```
 
 ?> Again, configuration has its dedicated page [here](/engine/advanced/configuration.md).
+
+This is all you need to enable the UI for this example.
+
+!> Purpose of this guide is not to explain you how to style your UI. You can use regular CSS to position everything on your screen, including the `canvas` element where your scene is rendered.
+
+### How does it look like?
+For me, something like this: 
+![Driving with UI](img/driving_ui.png "driving car with UI showing speed and reset button")
+
+As you drive around, you should be able to see your speed displayed in the `SpeedIndicator` component. When pressing the reset button, your car should reset to the position we defined earlier.
+
+Is this [the end?](/engine/getting-started/the_end.md)
