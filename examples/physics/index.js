@@ -37,19 +37,19 @@ export default class Example extends Level {
     }
 
     onUpdate() {
-        if (this.cube) {
-            Scene.getCamera().lookAt(this.cube.getPosition());
+        if (this.cameraTarget) {
+            Scene.getCamera().lookAt(this.cameraTarget.getPosition());
         }
     }
 
     onCreate() {
         const size = 10;
-        this.cube = new Cube(size);
+        const cube = new Cube(size);
 
-        this.cube.setPosition({ x: 0, y: 50, z: 0 });
-        this.cube.setRotation({ x: Math.random(), y: Math.random(), z: Math.random() })
-        this.cube.setTextureMap('purple');
-        this.cube.setMaterialFromName(constants.MATERIALS.STANDARD);
+        cube.setPosition({ x: 0, y: 50, z: 0 });
+        cube.setRotation({ x: Math.random(), y: Math.random(), z: Math.random() })
+        cube.setTextureMap('purple');
+        cube.setMaterialFromName(constants.MATERIALS.STANDARD);
 
         const camera = Scene.getCamera();
         camera.setPosition({ z: 15, y: 15 });
@@ -63,7 +63,8 @@ export default class Example extends Level {
         this.createFloor();
         this.addAmbientLight();
 
-        this.cube.enablePhysics({ mass: .1, restitution: 2 })
+        cube.enablePhysics({ mass: .1, restitution: 2 });
+        this.cameraTarget = cube;
     }
 }
 

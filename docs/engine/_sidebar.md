@@ -57,6 +57,12 @@
     - [3. Orbit](/engine/advanced/controls/orbit.md)
     - [4. Transform](/engine/advanced/controls/transform.md)
     - [5. Fly](/engine/advanced/controls/fly.md)
+  - Scripting
+    - Builtin
+      - [1. BaseCar](/engine/advanced/scripting/builtin/basecar.md)
+      - [2. SmoothCarFollow](/engine/advanced/scripting/builtin/smoothcarfollow.md)
+      - [3. Trails](/engine/advanced/scripting/builtin/trails.md)
+    - [1. Scripts](/engine/advanced/scripting/scripts.md)
   - Effects
     - [1. PostProcessing](/engine/advanced/effects/postprocessing.md)
     - [2. Particles](/engine/advanced/effects/particles.md)
@@ -67,6 +73,7 @@
     - [2. Features](/engine/utilities/features.md)
     - [3. Workers](/engine/utilities/workers.md)
   - [Router](/engine/advanced/router.md)
+  - [GameRunner](/engine/advanced/gamerunner.md)
   - [Animations](/engine/advanced/animations.md)
   - [State Machines](/engine/advanced/state_machines.md)
   - [Physics](/engine/advanced/physics.md)

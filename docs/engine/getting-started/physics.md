@@ -43,15 +43,83 @@ createFloor() {
     floor.enablePhysics({ mass: 0 });
 }
 
+onUpdate(dt) {
+    if (cameraTarget) {
+        Scene.getCamera().lookAt(this.cameraTarget.getPosition());
+    }
+}
+
 onCreate() {
     // same code as before
-    cube.setPosition({y : 20 });
-    cube.enablePhysics({ mass: 1 });
+    cube.setPosition({ y : 50 });
+    cube.setRotation({ x: Math.random(), y: Math.random(), z: Math.random() });
+    cube.enablePhysics({ mass: 0.1 });
+
+    this.cameraTarget = cube;
 }
 ```
 
 - `floor.enablePhysics()` and `cube.enablePhysics()` are all that's needed to enable physics for these two elements. The method requires a set of options:
   - `mass`: this is the most important value. When set to `0`, will make the element static. Any value above `0` will make the element dynamic.
-- We increased the cube `y` position to `20`.
+- We increased the cube `y` position to `50`.
+- We set a random rotation for the cube using `cube.setRotation()`.
 
-If everything has gone right, this is what you should be able to see now
+- `onUpdate` : this is a level lifecycle method. It will be invoked at every frame, and it will receive the elapsed delta time as parameter. In here, we're telling the camera to look at the camera target (the cube).
+
+?> More information on the `onUpdate` and other lifecycle methods can be found [here](/engine/advanced/core/level.md).
+
+If everything has gone right, this is what you should be able to see now:
+
+<video controls height="480" width="640" style="display: block; margin: auto; ">
+     <source src="engine/getting-started/img/falling_purple_cube.mp4"
+            type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+
+### From one to many
+Sure, one falling cube looks nice, but what about 50 small ones? We can have something like this:
+
+```js
+    import {
+        // previous imports
+        math
+    } from 'mage-engine';
+
+    // inside our level
+    generateCubes() {
+        for (let i=0; i<50; i++) {
+            const cube = new Cube(1);
+            cube.setName(`${i}`);
+            cube.setTextureMap('purple');
+            cube.setPosition({
+                x: math.randomIntFromInterval(-10, 10),
+                y: Math.random() * 5 + 10,
+                z: math.randomIntFromInterval(-10, 10)
+            });
+            cube.setRotation({
+                x: Math.random(),
+                y: Math.random(),
+                z: Math.random()
+            });
+
+            cube.setMaterialFromName(constants.MATERIALS.STANDARD);
+
+            cube.enablePhysics({ mass: .1 });
+        }
+    }
+
+    onUpdate() {
+        // if (cameraTarget) {
+        //     Scene.getCamera().lookAt(this.cameraTarget.getPosition());
+        // }
+    }
+
+    onCreate() {
+        // same as before
+        this.generateCubes();
+    }
+```
+
+## Let's go for a drive now
+
+We created a platform, we created 50 "obstacles". What's the best way to proceed? Drive through the obstacles and watch them flying! Let's start [driving around](/engine/getting-started/driving-around.md).

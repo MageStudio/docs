@@ -13,6 +13,7 @@ module.exports = {
     /* ... */
   },
   buildOptions: {
-    /* ... */
+    jsxFactory: "createVNode",
+    jsxFragment: 'Fragment'
   },
 };
