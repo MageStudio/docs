@@ -38,6 +38,10 @@ const config = {
         alpha: true
     },
 
+    postprocessing: {
+        enabled: true
+    },
+
     lights: {
         shadows: true
     },
@@ -66,7 +70,7 @@ const config = {
 
 window.addEventListener('load', function() {
     Router.on('/', Intro);
-    Router.on('/2dlevel', First);
+    Router.on('/level', First);
 
     Router.start(config, assets, '#gameContainer');
 });
@@ -82,7 +86,7 @@ Let's break it down: we're going to see how to configure your app, define your a
 
 Mage configuration is split in a few different blocks.
 
-### `screen`
+### screen
 
 ```json
 screen: {
@@ -99,16 +103,43 @@ screen: {
 - `frameRate: number`: this value will be used in one of the callbacks.
 - `alpha: boolean`: This boolean toggles transparency.
 
-### `lights`
+### postprocessing
+
+The postprocessing block is only meant to either enable or disable postprocessing in your levels. Adding or removing effects can be done via code in your Level.
 
 ```json
-lights: {
-    shadows
+postprocessing: {
+    enabled
+}
+```
+- `enabled: boolean`: This toggles Postprocessing for your level.
+
+!> If `enabled=false`, adding effects to the postprocessing pipeline will resul in no effects being displayed on the screen.
+
+### lights
+
+```json
+ lights: {
+    shadows,
+    shadowType,
+    textureAnisotropy
 }
 ```
 - `shadows: boolean`: This boolean toggles shadows.
+- `shadowType: string`: This option sets the type of shadows to be used in your application. Possible options are:
 
-### `physics`
+```js
+const SHADOW_TYPES = {
+    BASIC: 'BASIC',
+    SOFT: 'SOFT',
+    HARD: 'HARD',
+};
+```
+- `textureAnisotropy: number`: This will determine the anisotropy for textures.
+
+?> For more information about texture anisotropy, please refer to the official Three.js documentation [here](https://threejs.org/docs/?q=texture#api/en/textures/Texture.anisotropy).
+
+### physics
 
 ```json
 physics: {
@@ -120,9 +151,9 @@ physics: {
 - `enabled: boolean`: This boolean toggles physics.
 - `path: string`: This property refers to the position of the physics worker.
 
-?> Mage uses a WebWorker for Physics handling, thanks to [OimoJS](http://lo-th.github.io/Oimo.js/index.html#basic). For more information about enabling and working with Physics, refer to its page [here](/engine/advanced/physics.md).
+?> Mage uses a WebWorker for Physics handling, thanks to [AmmoJS](https://github.com/kripken/ammo.js/). For more information about enabling and working with Physics, refer to its page [here](/engine/advanced/physics.md).
 
-### `tween`
+### tween
 
 Mage uses a tweening library to handle smooth transitions from one state tom another. You can enable/disable it using this property.
 
@@ -134,7 +165,7 @@ tween: {
 
 - `enabled: boolean`: This boolean toggles the tweening library.
 
-### `camera`
+### camera
 
 ```json
 camera: {
@@ -148,7 +179,7 @@ camera: {
 - `near: number`: This value represents the distance of the `near` plane from the camera.
 - `far: number`: This value represents the distance of the `far` plane from the camera.
 
-### `fog`
+### fog
 
 ```json
 fog: {
