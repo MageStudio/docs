@@ -21,9 +21,11 @@ By "physical object", we mean Models and each of the Base Elements. Each base el
 
 ## Methods
 
-#### constructor(geometry: ThreeGeometry, material: ThreeMaterial, options: Object)
+#### constructor({ geometry: ThreeGeometry, material: ThreeMaterial, body: ThreeMesh, ...options: Object })
 
-The Element constructor will set the body if both geometry and material are provided.
+The Element constructor will set the body if:
+- either both geometry and material are provided.
+- or a body is provided.
 
 ?> Element extends Entity, so refer to the the Entity constructor for additional information ([here](/engine/advanced/core/entity.md?id=constructor)).
 

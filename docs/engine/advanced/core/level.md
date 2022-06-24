@@ -67,21 +67,6 @@ export default class MyLevel extends Level {
 
 Given the above level, the following url will be loaded: `assets/scenes/MyLevel.json`.
 
-#### enableInput()
-
-This method will enable input handling and will set listeners for all the supported input events. The following input modules are available and are documented:
-
-- [Keyboard](/engine/advanced/input/keyboard.md).
-- [Mouse](/engine/advanced/input/mouse.md).
-- [Gamepad](/engine/advanced/input/gamepad.md).
-- [Mobile](/engine/advanced/input/mobile.md).
-
-Once called, this method will also execute the `onInputEnabled` lifecycle methods (its documentation is [here](/engine/advanced/core/level.md?id=oninputenabled)).
-
-#### disableInput()
-
-This method will disable input handling and will detach listener for all the supported input events. Once called, this method will also execute the `onInputDisabled` lifecycle methods (its documentation is [here](/engine/advanced/core/level.md?id=oninputdisabled)).
-
 #### toJSON(): json
 
 This method will return a JSON representation of the level.
@@ -109,14 +94,6 @@ This lifecycle method gets called everytime you update the Redux store.
 #### onUpdate(dt: ms)
 
 This lifecycle method gets called for every frame. You can use this to dinamically update elements of your level, even if it's recommended to use a [script](/engine/advanced/scripts.md).
-
-#### onInputEnabled()
-
-This lifecycle method gets called when you call `enableInput`. Check documentation [here](/engine/core/level.md?id=emableinput).
-
-#### onInputDisabled
-
-This lifecycle method gets called when you call `disableInput`. Check documentation [here](/engine/core/level.md?id=disableinput).
 
 ---
 
