@@ -1,6 +1,35 @@
 # Changelog
 
-## patch: `v3.17.5` **Latest**
+## minor: `v3.19.0` **Latest**
+
+Added Labels to the engine. The following has been added:
+- `LabelComponent`: When creating a Label, make your Inferno component extend the `LabelComponent` class, as it has the required instructions for the engine.
+- `html-to-image`: This library is being used to export Inferno components to images.
+
+### patch: `v3.17.10`
+
+Added missing `.None` to easing function used by Entities.
+
+### patch: `v3.17.9`
+
+Fixed typo.
+
+### patch: `v3.17.8`
+
+Fixed a bug occuring when switching levels with Physics settings enabled.
+
+### patch: `v3.17.7`
+
+Improved disposal of Entities.
+
+### patch: `v3.17.6`
+
+A few improvements:
+- `Models.getModel` has been renamed to `Models.get` : a deprecation warning message will be displayed when using `getModel`
+- Entities now have a `addTo` method, which allows Entities to be added to other entities. (Similar to `.add`, but with `addTo` the Entity is the child).
+
+
+### patch: `v3.17.5`
 
 Performance improvements.
 
