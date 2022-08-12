@@ -1,9 +1,24 @@
 # Changelog
 
-## minor: `v3.19.0` **Latest**
+## patch: `v3.20.1` **Latest**
+
+Better tweening:
+- exposing `tweenTo` function from `easing` module.
+- Supporting `repeat` option for between.js
+
+### minor: `v3.20.0`
+
+Fixed a series of issues:
+- Keyboard input was compromised and no longer working.
+- Lights body was not properly set.
+- Added easing functions and looping to the constants.
+- Fixed camera not setting its body properly.
+
+### minor: `v3.19.0`
 
 Added Labels to the engine. The following has been added:
 - `LabelComponent`: When creating a Label, make your Inferno component extend the `LabelComponent` class, as it has the required instructions for the engine.
+- `Label` element: uses an Inferno component to render HTML as 3D content in your application.
 - `html-to-image`: This library is being used to export Inferno components to images.
 
 ### patch: `v3.17.10`

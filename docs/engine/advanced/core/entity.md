@@ -222,19 +222,19 @@ This will set the body of this entity.
 
 ### Properties
 
-#### setUuid(uuid: String)
-
-#### uuid(): String
-
-#### setId(id: String)
-
-#### id(): String
-
 #### setName(name: String)
+
+This will set the name of this Entity.
+
+!> Be careful, Mage engine uses the name to store information about the identity. This means the name has to be unique in your application!
 
 #### getName(): String
 
+This will return this Entity's name.
+
 #### setVisible(flag: boolean)
+
+This will set the visibility of this Entity.
 
 ---
 
@@ -363,22 +363,67 @@ Yes, you guessed it right. This will disable scripts for this Entity.
 
 ### Miscellaneous
 
+These are a combination of utilities and setters/getters that can help you handling your entity.
+
 #### isSerializable(): boolean
 
 This will return `true` or `false` depending on if the entity is serializable or not.
 
 #### setEntityType(type: String)
 
+Each Entity has a type. The following types are allowed:
+
+```javascript
+const ENTITY_TYPES = {
+    SCENE: 'SCENE',
+    CAMERA: 'CAMERA',
+    MESH: 'MESH',
+    LABEL: 'LABEL',
+    LIGHT: {
+        DEFAULT: 'LIGHT.DEFAULT',
+        AMBIENT: 'LIGHT.AMBIENT',
+        SUN: 'LIGHT.SUN',
+        HEMISPHERE: 'LIGHT.HEMISPHERE',
+        POINT: 'LIGHT.POINT',
+        SPOT: 'LIGHT.SPOT'
+    },
+    AUDIO: {
+        DEFAULT: 'AUDIO.DEFAULT',
+        AMBIENT: 'AUDIO.AMBIENT',
+        DIRECTIONAL: 'AUDIO.DIRECTIONAL',
+        BACKGROUND: 'AUDIO.BACKGROUND'
+    },
+    MODEL: 'MODEL',
+    SPRITE: 'SPRITE',
+    PARTICLE: 'PARTICLE',
+    EFFECT: {
+        PARTICLE: 'EFFECT.PARTICLE',
+        SCENERY: 'EFFECT.SCENERY'
+    },
+    HELPER: {
+        GRID: 'HELPER.GRID',
+        AXES: 'HELPER.AXES'
+    },
+    UNKNOWN: 'UNKNOWN'
+};
+```
+
 #### getEntityType(): String
+
+This will return the type of this Entity.
 
 #### equals(entity: Entity): boolean
 
-#### setName(name: String)
-
-#### getName(): String
+This will compare this Entity with another one and return `true` or `false` for their equality.
 
 #### setData(key: String, data: any)
 
+Entities can store data that can be retrieved at later date. This method allows you to store information in the body's `userData` field.
+
 #### getData(key: String): any
 
+This will allow the user to retrieve previously saved data from the body's `userData` field.
+
 #### toJSON(): Object
+
+This will return a JSON version of this entity, depending if it's serializable or not.

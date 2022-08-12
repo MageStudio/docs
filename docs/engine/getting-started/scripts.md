@@ -1,6 +1,6 @@
 # Scripts
 
-Scripts are an incredibly powerful tool, that will allow to customise the beaviour of the entities on your screen, and can be shared across your entire application. Each Script you create has to be a class extending `BaseScript` from `mage-engine`.
+Scripts are an incredibly powerful tool, that will allow to customise the beaviour of the entities on your screen, and can be shared across your entire application. Each Script you register has to be a class extending `BaseScript` from `mage-engine`.
 
 Let's write a sample script that will make our cube rotate. Create a new file, `rotate.js` in your root folder;
 
@@ -39,7 +39,7 @@ Explanation:
 
 ?> Why multiplying the angle by `dt` ? `dt` represents the delta since the last frame. In order to achieve frame-rate indipendence and smooth animations, we need to multiply the angle by `dt`.
 
-?> Scripts have more functionalities that are not covered in this short tutorial. Please head over the corresponding API section for further details [Scripts](/).
+?> Scripts have more functionalities that are not covered in this short tutorial. Please head over the corresponding API section for further details [Scripts](/engine/advanced/scripting/scripts.md).
 
 ---
 
@@ -63,7 +63,7 @@ class FirstScene extends Level {
 
     onCreate() {
         // this should already contain the cube creation and the camera position update.
-        Scripts.create('rotation', RotationScript);
+        Scripts.register('rotation', RotationScript);
     }
 }
 
@@ -74,8 +74,8 @@ export default FirstScene;
 What happened here?
 
 - We imported `Scripts` from `mage-engine`. This module is responsible for creating and retrieving scripts.
-- We imported `RotationScript` from the file we created earlier. This is needed because we need to send this to the function described in the next step.
-- `Scripts.create(name, ScriptClass)`: this is the actual registration of the Script. From now on, we can refer to this script using the name we just defined, `'rotation'`.
+- We imported `RotationScript` from the file we registerd earlier. This is needed because we need to send this to the function described in the next step.
+- `Scripts.register(name, ScriptClass)`: this is the actual registration of the Script. From now on, we can refer to this script using the name we just defined, `'rotation'`.
 
 We still need to do something, which is telling the cube how to use it. Luckily for us, this is incredibly straightforward:
 
@@ -88,7 +88,7 @@ class FirstScene extends Level {
 
     onCreate() {
         // this should already contain the cube creation and the camera position update.
-        Scripts.create('rotation', RotationScript);
+        Scripts.register('rotation', RotationScript);
 
         cube.addScript('rotation');
     }
