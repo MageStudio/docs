@@ -22,7 +22,7 @@
     "dependencies": {
         "docsify-cli": "^4.4.0",
         "docsify-darklight-theme": "^1.1.1",
-        "mage-engine": "3.20.0"
+        "mage-engine": "3.20.1"
     },
     "devDependencies": {
         "@snowpack/plugin-babel": "^2.1.7",
