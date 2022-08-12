@@ -21,7 +21,7 @@
     - [1. Level](/engine/advanced/core/level.md)
     - [2. Entity](/engine/advanced/core/entity.md)
     - [3. Element](/engine/advanced/core/element.md)
-    - [4. Constants](/engine/advanced/core/constants.md)
+    - [4. Stats](/engine/advanced/core/stats.md)
     - Base Elements
       - [1. Cube](/engine/advanced/core/base/cube.md)
       - [2. Box](/engine/advanced/core/base/box.md)

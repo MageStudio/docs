@@ -49,11 +49,11 @@ import {
 
 // inside our level once again
 createWheel(wheelNo) {
-    return Models.getModel('wheel', { name: `wheel_${wheelNo}` });
+    return Models.get('wheel', { name: `wheel_${wheelNo}` });
 }
 
 createCar() {
-    const car = Models.getModel('car', { name: 'mycar' });
+    const car = Models.get('car', { name: 'mycar' });
     car.setPosition({ y: 14 });
 
     const wheels = [
