@@ -1,0 +1,9 @@
+2023-11-28T14:39:09.198Z  +2004ms [debug] Config loaded {"version":"2.36.7","cdkVersion":"2.110.1","constructsVersion":"10.3.0","config":{"name":"MageStudioDocs","region":"us-east-1","stage":"development","ssmPrefix":"/sst/MageStudioDocs/development/"},"metafile":{"inputs":{"sst.config.ts":{"bytes":618,"imports":[{"path":"sst","kind":"import-statement","external":true},{"path":"sst/constructs","kind":"import-statement","external":true},{"path":"<runtime>","kind":"import-statement","external":true}],"format":"esm"}},"outputs":{".sst.config.1701182347214.mjs":{"imports":[{"path":"sst/constructs","kind":"import-statement","external":true}],"exports":["DocsStack","config","default"],"entryPoint":"sst.config.ts","inputs":{"sst.config.ts":{"bytesInOutput":552}},"bytes":886}}},"paths":{"config":"/Users/marcostagni/dev/personal/docs/sst.config.ts","root":"/Users/marcostagni/dev/personal/docs","out":"/Users/marcostagni/dev/personal/docs/.sst","artifacts":"/Users/marcostagni/dev/personal/docs/.sst/artifacts"}}
+2023-11-28T14:39:09.624Z   +426ms [debug] Using AWS profile 
+2023-11-28T14:39:09.629Z     +5ms [debug] Created AWS client STSClient
+2023-11-28T14:39:09.631Z     +2ms [debug] Fetching app metadata
+2023-11-28T14:39:09.631Z     +0ms [debug] Initializing bootstrap context
+2023-11-28T14:39:09.632Z     +1ms [debug] Created AWS client CloudFormationClient
+2023-11-28T14:39:10.154Z   +522ms [debug] Using identity Account: 043370590783 User: AIDAQUGIWWI72JKTIQ3AG
+2023-11-28T14:39:10.166Z    +12ms [debug] Loaded bootstrap status
+2023-11-28T14:39:10.166Z     +0ms [debug] Bootstrap context initialized {"status":"ready","version":"7.2","bucket":"sstbootstrap-useast124d14e4b-1lilcqm849frg"}

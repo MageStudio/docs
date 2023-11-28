@@ -1,33 +1,35 @@
 {
-    "name": "mage-docs",
-    "version": "0.0.0",
-    "description": "Mage Documentation",
-    "main": "index.js",
-    "scripts": {
-        "serve:docs": "docsify serve docs",
-        "serve:examples": "snowpack dev",
-        "init:docs": "docsify init ./docs",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/MageStudio/mage-docs.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/MageStudio/mage-docs/issues"
-    },
-    "homepage": "https://github.com/MageStudio/mage-docs#readme",
-    "dependencies": {
-        "docsify-cli": "^4.4.0",
-        "docsify-darklight-theme": "^1.1.1",
-        "mage-engine": "3.20.1"
-    },
-    "devDependencies": {
-        "@snowpack/plugin-babel": "^2.1.7",
-        "babel-plugin-inferno": "^6.3.0",
-        "snowpack": "3.8.8",
-        "xferno": "0.0.7"
-    }
+  "name": "mage-docs",
+  "version": "0.0.0",
+  "description": "Mage Documentation",
+  "main": "index.js",
+  "scripts": {
+    "dev:env": "npx sst dev",
+    "dev": "docsify serve docs",
+    "serve:examples": "snowpack dev",
+    "init:docs": "docsify init ./docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MageStudio/mage-docs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MageStudio/mage-docs/issues"
+  },
+  "homepage": "https://github.com/MageStudio/mage-docs#readme",
+  "dependencies": {
+    "docsify-cli": "^4.4.0",
+    "docsify-darklight-theme": "^1.1.1",
+    "mage-engine": "3.20.1",
+    "sst": "^2.36.7"
+  },
+  "devDependencies": {
+    "@snowpack/plugin-babel": "^2.1.7",
+    "babel-plugin-inferno": "^6.3.0",
+    "snowpack": "3.8.8",
+    "xferno": "0.0.7"
+  }
 }
