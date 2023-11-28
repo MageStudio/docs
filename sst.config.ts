@@ -10,9 +10,6 @@ export function DocsStack({ stack }) {
       domainAlias: "www.docs.mage.studio",
       hostedZone: "mage.studio",
     },
-    dev: {
-      deploy: true,
-    },
   });
 
   // Show the URLs in the output
