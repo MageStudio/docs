@@ -26,19 +26,16 @@
   --background: rgba(9, 26, 40, 0.95);
   --accent: #f1c40f;
   --h2-color: #ffbe76;
-  /* --h4-color: #badc58; */
-  /* --h4-color: #fa983a; */
-  /* --h4-color: #82ccdd; */
   --h4-color: #3498db;
   --faint-orange-color: rgba(255, 190, 118, 0.2);
   --codeBackgroundColor: rgba(9, 26, 40, 1);
-  /* --codeBackgroundColor: rgba(0, 0, 0, 0.4); */
   --codeFontFamily: "JetBrainsMono";
-  /* --codeBoxBorderColor: rgba(60, 99, 130, 0.3); */
+  --codeTypeColor: #fff;
   --textColor: white;
   --faint-red-border: rgba(255, 121, 121, 0.7);
   --red: #ff7979;
-  /* --borderColor: rgba(255,190,118, .2); */
+  --borderColor: rgba(255, 190, 118, 0.2);
+  --sidebarSublink: "#b4b4b4";
 }
 
 body:not(.ready) {
