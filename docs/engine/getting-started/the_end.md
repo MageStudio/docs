@@ -60,12 +60,9 @@ Join the discord server [here](https://discord.gg/YvyMRcvd77): It's the best way
 
 Explore the [repository](https://github.com/MageStudio/Mage) on github.
 
-
-
-
 </br>
 </br>
 </br>
 </br>
 
-**The beginning is the end, and the end is the beginning.**
+**The beginning is the end, and the end is the beginning. - Adam.**
