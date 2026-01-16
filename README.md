@@ -1,23 +1,36 @@
-# Mage Documentation
+# Mage Studio Documentation
 
-This repositorys hosts [`mage-engine`](https://github.com/MageStudio/Mage) documentation.
+This repository hosts [`mage-engine`](https://github.com/MageStudio/Mage) documentation, built with Docsify and served via Vite.
 
 For the latest version, please visit:
-[https://www.mage.studio/docs/#/](https://www.mage.studio/docs/#/)
+[https://docs.mage.studio](https://docs.mage.studio)
 
 ---
-## Exploring docs locally
 
-Once you cloned the repository, install dependencies with:
+## Getting Started
 
-```bash
-npm i
-```
-
-and serve the docs via:
+### Install dependencies
 
 ```bash
-npm run serve:docs
+npm install
 ```
 
-Documentation will be available on [`localhost:3000`](http://localhost:3000/#/).
+### Development
+
+```bash
+npm run dev
+```
+
+Documentation will be available on [`localhost:3001`](http://localhost:3001).
+
+### Build for production
+
+```bash
+npm run build
+```
+
+### Preview production build
+
+```bash
+npm run preview
+```
