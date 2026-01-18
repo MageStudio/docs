@@ -15,7 +15,12 @@ This will install mage-engine `v3.23.10` . You should be able to see something l
 "mage-engine": "3.23.10",
 ```
 
-?> Have a look at the [changelog](/engine/changelog.md) if you want to have a look at what happened.
+::: tip
+Have a look at the [changelog](/engine/changelog.md) if you want to have a look at what happened.
+:::
+:::
+
+
 
 This is everything you need to do in order to start. Check the next step on how to set up your project before creating your first level.
 

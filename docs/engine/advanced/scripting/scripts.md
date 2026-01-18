@@ -2,7 +2,12 @@
 
 Mage engine allows you to define Elements' behaviours in the form of scripts: these are Javascript classes extending the `BaseScript` class from the engine. Once registered with the `Scripts`, they can be assigned to Elements, shared across multiple entities and extended for more complicated usage.
 
-?> The `Getting Started` guide is already providing an insight of how Scripts work. Please have a look [here](/engine/getting-started/scripts.md).
+::: tip
+The `Getting Started` guide is already providing an insight of how Scripts work. Please have a look [here](/engine/getting-started/scripts.md).
+:::
+:::
+
+
 
 ---
 
@@ -33,7 +38,12 @@ export default Rotation extends BaseScript {
 - `start(element: Entity, options: Object)`: this method will be called as soon as you attach a script to your entity and its first argument will be the target entity. `options` is an object containing all the parameters required by the script. In this example, we're passing an `initialAngle` and a `speed`: both will be used in the `update` method.
 - `update(dt)`: this function will be called for each frame of your scene, and it will receive the current `dt`. Here we update the angle by incrementing it by `this.speed`, and we call the `setRotation` method on the element.
 
-?> Why multiplying the angle by `dt` ? `dt` represents the delta time since the last frame. In order to achieve frame-rate indipendence and smooth animations, we need to multiply the angle by `dt`.
+::: tip
+Why multiplying the angle by `dt` ? `dt` represents the delta time since the last frame. In order to achieve frame-rate indipendence and smooth animations, we need to multiply the angle by `dt`.
+:::
+:::
+
+
 
 ---
 
@@ -65,7 +75,12 @@ Each Entity offers a very easy to use API when it comes to adding scripts.
 myEntity.addScript('rotation', { angle: 0, speed: 0.02 });
 ```
 
-?> Entities have an entire set of APIs you can use to add scripts, enable/disable them as well as extracting them or interacting with them. Please refer to [this page](/engine/advanced/core/entity.md) for more information.
+::: tip
+Entities have an entire set of APIs you can use to add scripts, enable/disable them as well as extracting them or interacting with them. Please refer to [this page](/engine/advanced/core/entity.md) for more information.
+:::
+:::
+
+
 
 Once added, the script will execute its `start` method, passing it the entity and the provided options. Scripts have different methods, which you can see described below:
 
@@ -86,13 +101,20 @@ This is called as soon as the script is attached to the Element. As described ab
 
 `update` is called every frame. It will receive the time elapsed since last frame in milliseconds.
 
-!> Please note that if your Element has more than one script attached, each one will be called in order. This means that if you performed `element.addScript('first'); element.addScript('second');`, `first` script will be updated right before `second`.
+::: warning
+Please note that if your Element has more than one script attached, each one will be called in order. This means that if you performed `element.addScript('first'); element.addScript('second');`, `first` script will be updated right before `second`.
+:::
 
 #### physicsUpdate(dt: Float)
 
 This method is called once the Physics module has completed its updating operations on the element. It will receive the time elapsed since last update in milliseconds.
 
-?> When configuring the Physics module, you can define a fixed rate of updates for it. This will greatly modify the delta time received by this function. Please refer to [this page](/engine/advanced/configuration.md?id=physics) for more details.
+::: tip
+When configuring the Physics module, you can define a fixed rate of updates for it. This will greatly modify the delta time received by this function. Please refer to [this page](/engine/advanced/configuration.md?id=physics) for more details.
+:::
+:::
+
+
 
 #### onDispose()
 
@@ -111,7 +133,12 @@ import { Scripts } from 'mage-engine';
 element.addScript(Scripts.BUILTIN.BASECAR);
 ```
 
-?> These scripts are alread registered, so you don't need to call `.register` beforehand.
+::: tip
+These scripts are alread registered, so you don't need to call `.register` beforehand.
+:::
+:::
+
+
 
 #### BUILTIN.BASECAR
 

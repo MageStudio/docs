@@ -5,7 +5,7 @@ Only a couple things are needed in order to load a texture on our box:
 
 First, the texture itself. Yes, use the image below.
 <br/>
- <img src="engine/getting-started/img/wood_crate.jpg" alt="drawing" style="width:300px; display:block; margin:auto;"/>
+ <img src="/engine/getting-started/img/wood_crate.jpg" alt="drawing" style="width:300px; display:block; margin:auto;"/>
 
 Then, a new entry in our app assets description. Remember the assets object we created in the `index.js` file earlier? We're going to change it like so:
 
@@ -27,7 +27,12 @@ window.addEventListener('load', () => {
 
 >In this case, the crate texture will be referenced using the name `crate`, the key used in the definition.
 
-?> Assets configuration can get a bit more complicated than this, please refer to the proper documentation page here: [Loading Assets](/engine/advanced/assets/loading.md).
+::: tip
+Assets configuration can get a bit more complicated than this, please refer to the proper documentation page here: [Loading Assets](/engine/advanced/assets/loading.md).
+:::
+:::
+
+
 
 ### Applying texture to the cube
 
@@ -64,6 +69,6 @@ What happened here?
 
 Running the application now should result in something looking like this:
 
-![Rotating textured cube on black background](/img/cube_rotation_with_texture.gif "Rotating textured cube on black background")
+![Rotating textured cube on black background](./img/cube_rotation_with_texture.gif "Rotating textured cube on black background")
 
 Yes, I know what you're thinking, this looks exactly like before! Let's make the scene a bit more interesting by adding some [lights and a skybox](/engine/getting-started/lights_and_skybox.md).

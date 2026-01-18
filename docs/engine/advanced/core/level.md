@@ -28,7 +28,12 @@ window.addEventListener('load', function() {
 });
 ```
 
-?> A more in depth explanation of how the Router module works, how it handles levels and which methods exposes can be found [here](/engine/advanced/router.md).
+::: tip
+A more in depth explanation of how the Router module works, how it handles levels and which methods exposes can be found [here](/engine/advanced/router.md).
+:::
+:::
+
+
 
 ---
 
@@ -77,7 +82,7 @@ This method will return a JSON representation of the level.
 
 Here is a representation of the Level lifecycle:
 
-![startup lifecycle](/img/level_lifecycle.png)
+![startup lifecycle](./img/level_lifecycle.png)
 
 #### onCreate()
 
@@ -89,7 +94,12 @@ This lifecycle method gets called everytime you update the Redux store.
 
 - `state: Object`: this object represents the current state of your application.
 
-?> For a more in-depth explanation on how to handle a Redux store in your Mage application, check out this [page](/engine/advanced/state_management.md).
+::: tip
+For a more in-depth explanation on how to handle a Redux store in your Mage application, check out this [page](/engine/advanced/state_management.md).
+:::
+:::
+
+
 
 #### onUpdate(dt: ms)
 

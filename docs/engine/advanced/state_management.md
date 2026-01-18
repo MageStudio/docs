@@ -8,7 +8,9 @@ In order to create the store, you need to accomplish two things:
 - Define and create your reducers
 - Define the initial state of your application.
 
-!> It's important that you create the store before starting your Router.
+::: warning
+It's important that you create the store before starting your Router.
+:::
 
 After that, you can simply call the `createStore` method from the `Store` module like so:
 
@@ -105,17 +107,29 @@ store.createStore(reducers, {}, debug);
 
 This is everything you need to know in order to have working reducers in your application.
 
-!> Mage will internally combine all your reducers with its internal reducers when you call `.createStore`.
+::: warning
+Mage will internally combine all your reducers with its internal reducers when you call `.createStore`.
+:::
 
 ## Actions
 
 You can decide to dispatch actions from either your UI or your levels/scripts (or any other module).
 
-?> How to dispatch actions from your UI is explained below.
+::: tip
+How to dispatch actions from your UI is explained below.
+:::
+:::
+
+
 
 If you want to dispatch actions from within your levels/scripts, you can do that by calling the `.dispatch(action)` method on the store `store` module.
 
-?> The usage of this method is explained below.
+::: tip
+The usage of this method is explained below.
+:::
+:::
+
+
 
 ## Methods
 
@@ -129,7 +143,12 @@ As explained above, this method will create the store.
 - `initialState: object`: This represents the initial state of your application.
 - `debug?: boolean` (default: `false`): This flag is used to turn on the debug mode. During development, if you're using the Redux dev tools, having this flat set to `true` will help you debugging your issues.
 
-?> For more information on how to install the Redux dev tools, please refer to their official documentation [here](https://redux.js.org/).
+::: tip
+For more information on how to install the Redux dev tools, please refer to their official documentation [here](https://redux.js.org/).
+:::
+:::
+
+
 
 #### getState(): object
 
@@ -146,7 +165,12 @@ onCreate() {
     store.dispatch({ type: 'LOADED' });
 }
 ```
-?> Mage is using the `redux-thunk` middleware, which allows you to dispatch more sophisticated actions and delay the dispatch of other actions based on conditions. For more information, please refer to their official documentation [here](https://github.com/reduxjs/redux-thunk).
+::: tip
+Mage is using the `redux-thunk` middleware, which allows you to dispatch more sophisticated actions and delay the dispatch of other actions based on conditions. For more information, please refer to their official documentation [here](https://github.com/reduxjs/redux-thunk).
+:::
+:::
+
+
 
 ---
 
@@ -194,4 +218,6 @@ In order to connect your level to the store, there are no extra steps required. 
 
 You can always get the current state by invoking the `getState()` function of the `store` module.
 
-!> It's currently not possible to hook your scripts to state changes, so you will need to manually get the current state of the store by invoking the `getState()` method.
+::: warning
+It's currently not possible to hook your scripts to state changes, so you will need to manually get the current state of the store by invoking the `getState()` method.
+:::

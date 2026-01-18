@@ -21,7 +21,12 @@ Input.enableMouse();
 
 ## Events
 
-?> All the following events have listeners in your Scene, according to the following pattern: for each event, the listener that will be used is `onEventName`, assuming that the event is `eventName`. Note that the difference between the listener name and the event name is the upperCase event name preceded by the prefix `on`.
+::: tip
+All the following events have listeners in your Scene, according to the following pattern: for each event, the listener that will be used is `onEventName`, assuming that the event is `eventName`. Note that the difference between the listener name and the event name is the upperCase event name preceded by the prefix `on`.
+:::
+:::
+
+
 
 If you want to set up listeners in your scripts, you have to:
 
@@ -136,7 +141,12 @@ This event will be fired once the page receives a `meshClick` event. Your listen
     - `normalized`: this object holds the normalised values of the above coordinates.
 - `meshes`: this is a list of all the meshes that intercepted the click.
 
-?> Each entry of the `meshes` list is a `BaseMesh`. Please refer to the [BaseMesh](/advanced/mesh.md) documentation.
+::: tip
+Each entry of the `meshes` list is a `BaseMesh`. Please refer to the [BaseMesh](/advanced/mesh.md) documentation.
+:::
+:::
+
+
 
 ---
 
@@ -166,7 +176,12 @@ const meshes = Input.mouse.getIntersections();
 console.log(meshes); // [ { mesh1 }, { mesh2 } ... ] 
 ```
 
-?> Each entry of the returned list is a `BaseMesh`. Please refer to the [BaseMesh](/advanced/mesh.md) documentation.
+::: tip
+Each entry of the returned list is a `BaseMesh`. Please refer to the [BaseMesh](/advanced/mesh.md) documentation.
+:::
+:::
+
+
 
 ---
 

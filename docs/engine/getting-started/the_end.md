@@ -6,31 +6,66 @@ Let's have a quick recap! We spoke about a variety of topics:
 
 We created the first level, configured the `Router` to handle it and we learnt how to start the application [here](/engine/getting-started/creating-first-level.md).
 
-?> Level documentation [here](/engine/advanced/core/level.md).
+::: tip
+Level documentation [here](/engine/advanced/core/level.md).
+:::
+:::
 
-?> Router documentation [here](/engine/advanced/router.md)
+
+
+::: tip
+Router documentation [here](/engine/advanced/router.md)
+:::
+:::
+
+
 
 ## Adding elements to the Scene
 
 We then explored the way of adding elements to the scene (in this demo, just a simple cube) [here](/engine/getting-started/hello-cube.md). We also explored how to control the Camera position and behaviour in the scene.
 
-?> Element documentation is [here](/engine/advanced/core/element.md).
+::: tip
+Element documentation is [here](/engine/advanced/core/element.md).
+:::
+:::
+
+
 
 ## Adding behaviour to your elements with Scripts.
 
 We created the first simple script for our test cube, settings its rotation over time [here](/engine/getting-started/scripts.md).
 
-?> Scripts documentation is [here](/engine/advanced/scripting/scripts.md).
+::: tip
+Scripts documentation is [here](/engine/advanced/scripting/scripts.md).
+:::
+:::
+
+
 
 ## Handing user input (keyboard and mouse) via level or script.
 
 Handlng user input is fundamental. The topic is very big and is covere in its separate pages. In this step we simply figured out how to move our simple cube on script based on which key was pressed. All of that happened [here](/engine/getting-starte/handling-input.md).
 
-?> Keyboard input documentation is [here](/engine/advanced/input/keyboard.md)
+::: tip
+Keyboard input documentation is [here](/engine/advanced/input/keyboard.md)
+:::
+:::
 
-?> Mouse input documentation is [here](/engine/advanced/input/mouse.md)
 
-?> Gamepad input documentation is [here](/engine/advanced/input/gamepad.md)
+
+::: tip
+Mouse input documentation is [here](/engine/advanced/input/mouse.md)
+:::
+:::
+
+
+
+::: tip
+Gamepad input documentation is [here](/engine/advanced/input/gamepad.md)
+:::
+:::
+
+
 
 ## Applying textures and using lights.
 
@@ -44,9 +79,19 @@ Since things were a bit too easy, we started using Physics! We loaded models in,
 
 Last but not least, we saw how to integrate a user interface in the application [here](/engine/getting-started/ui.md). We didn't cover state management or more advanced features, which are explained in their dedicated page.
 
-?> UI documentation is [here](/engine/advanced/ui.md).
+::: tip
+UI documentation is [here](/engine/advanced/ui.md).
+:::
+:::
 
-?> State management is [here](/engine/advanced/state_management.md).
+
+
+::: tip
+State management is [here](/engine/advanced/state_management.md).
+:::
+:::
+
+
 
 ---
 

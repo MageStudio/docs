@@ -35,11 +35,21 @@ In order to create our car, we're going to do a few things:
 - Import the wheels
 - Use one of the engine builtin scripts, called `BaseCar`. This will handle everything that's needed for the car to work just fine (Input handling, initial setup) and it's fully customisable.
 
-?> The engine has a number of builtin scripts, and `BaseCar` is just one of them. Please head over to the dedicated page [here](/engine/advanced/scripting/scripts.md).
+::: tip
+The engine has a number of builtin scripts, and `BaseCar` is just one of them. Please head over to the dedicated page [here](/engine/advanced/scripting/scripts.md).
+:::
+:::
+
+
 
 Let's create a couple new functions for this in our level:
 
-?> Why are we creating a bunch of functions in the same file? For simplicity's sake.
+::: tip
+Why are we creating a bunch of functions in the same file? For simplicity's sake.
+:::
+:::
+
+
 
 ```js
 import {
@@ -104,21 +114,33 @@ onCreate() {
 
 The creation process is pretty straightforward. Invoking `this.createCar` will import the chassis model into the scene, import 4 wheels, then assign the `BASECAR` builtin script to the car itself.
 
-?> The `BASECAR` script is not very complicated, but it allows you to define a vehicle, its mass, suspensions and wheels in a very easy way. More information on that in its dedicated page [here](/engine/advanced/scripting/builtin/basecar.md).
+::: tip
+The `BASECAR` script is not very complicated, but it allows you to define a vehicle, its mass, suspensions and wheels in a very easy way. More information on that in its dedicated page [here](/engine/advanced/scripting/builtin/basecar.md).
+:::
+:::
 
-?> For the purpose of this example, we moved the camera to be in `{ x: -10, y: 15, z: -10 }`, focused on the origin. This will allow us to watch the action a bit better. In the next guide the three lines setting the camera position will not be needed.
+
+
+::: tip
+For the purpose of this example, we moved the camera to be in `{ x: -10, y: 15, z: -10 }`, focused on the origin. This will allow us to watch the action a bit better. In the next guide the three lines setting the camera position will not be needed.
+:::
+:::
+
+
 
 ### How does this look like?
 
 Run your application, and use `w`,`s`, `a`, and `d` to control the car. Hopefully, something like this: 
 
 <video controls height="480" width="640" style="display: block; margin: auto; ">
-     <source src="engine/getting-started/img/falling_car.mp4"
+     <source src="/engine/getting-started/img/falling_car.mp4"
             type="video/mp4">
     Sorry, your browser doesn't support embedded videos.
 </video>
 
-!> Quick note: we are spawning cubes in random positions with random rotations. This means that they might spawn underneath the car, making it flip. Just reload the page until everything runs fine! This is just a demo, so edge cases like this one are not covered.
+::: warning
+Quick note: we are spawning cubes in random positions with random rotations. This means that they might spawn underneath the car, making it flip. Just reload the page until everything runs fine! This is just a demo, so edge cases like this one are not covered.
+:::
 
 ## Follow that car!
 
@@ -130,12 +152,17 @@ Scene.getCamera().addScript(Scripts.BUILTIN.SMOOTH_CAMERA_FOLLOW, { target: car 
 
 The script options must include a target, which is the car we just created.
 
-?> The `SMOOTH_CAR_FOLLOW` script is configurable, and its API is fully described [here](/engine/advanced/scripting/builtin/smooth_car_follow.md).
+::: tip
+The `SMOOTH_CAR_FOLLOW` script is configurable, and its API is fully described [here](/engine/advanced/scripting/builtin/smooth_car_follow.md).
+:::
+:::
+
+
 
 Let's have a look at how it is now!
 
 <video controls height="480" width="640" style="display: block; margin: auto; ">
-     <source src="engine/getting-started/img/following_car.mp4"
+     <source src="/engine/getting-started/img/following_car.mp4"
             type="video/mp4">
     Sorry, your browser doesn't support embedded videos.
 </video>

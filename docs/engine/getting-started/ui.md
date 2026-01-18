@@ -2,9 +2,16 @@
 
 This guide will give you a short introduction to UI. Mage engine uses `inferno` for its components and `redux` for state management.
 
-!> This guide is assuming you have basic knowledge of how React-like UI frameworks work, so it's not going into details when it comes to the inner workings of the framework.
+::: warning
+This guide is assuming you have basic knowledge of how React-like UI frameworks work, so it's not going into details when it comes to the inner workings of the framework.
+:::
 
-?>  The topic is quite extensive, and it's fully covered in its dedicated page. For more information about state management, head over [here](/engine/advanced/state_management.md). If you need a deeper introduction to UI, please refer to [this page](/engine/advanced/ui.md).
+::: tip
+ The topic is quite extensive, and it's fully covered in its dedicated page. For more information about state management, head over [here](/engine/advanced/state_management.md). If you need a deeper introduction to UI, please refer to [this page](/engine/advanced/ui.md).
+:::
+:::
+
+
 
 For this guide, we're going to introduce two simple components, one called `SpeedIndicator` and another one called `ResetButton`.
 First, let's create the `SpeedIndicator` component.
@@ -95,7 +102,12 @@ What is happening in `Root.js`:
   - `GameRunner.getCurrentLevel()`: belongs to the `GameRunner` module, which is responsible for running your levels. This method will return the instance of the level that is currently playing.
   - `car.getPhysicsState()` will return the current physic state for the object.
 
-?> More information on `GameRunner` is available on its dedicated page [here](/engine/advanced/gamerunner.md). The same applies for the `Element` [page](/engine/advanced/core/element.md), where `getPhysicsState` is explained.
+::: tip
+More information on `GameRunner` is available on its dedicated page [here](/engine/advanced/gamerunner.md). The same applies for the `Element` [page](/engine/advanced/core/element.md), where `getPhysicsState` is explained.
+:::
+:::
+
+
 
 - We're also setting a `onClick` event handler on our button. When pressed, it wil call the `resetCar` method on our current level. Unfortunately, we don't have that yet. So let's go back to our level and create it:
 
@@ -120,7 +132,12 @@ resetCar() {
 What is happening here?
 - We are calling `Physics.resetVehicle()`: since this is a phyisics based example, we need to inform the Physics module we want to reset our vehicle to a desired position and rotation. In this case, we're resetting the car to `{ x: 0, y: 20, z: 0 }` with no rotation (`constants.ZERO_QUATERNION`).
 
-?> More on the Physics module in its dedicated [page](/engine/advanced/physics.md).
+::: tip
+More on the Physics module in its dedicated [page](/engine/advanced/physics.md).
+:::
+:::
+
+
 
 ## Enabling UI
 
@@ -137,15 +154,22 @@ const config = {
 }
 ```
 
-?> Again, configuration has its dedicated page [here](/engine/advanced/configuration.md).
+::: tip
+Again, configuration has its dedicated page [here](/engine/advanced/configuration.md).
+:::
+:::
+
+
 
 This is all you need to enable the UI for this example.
 
-!> Purpose of this guide is not to explain you how to style your UI. You can use regular CSS to position everything on your screen, including the `canvas` element where your scene is rendered.
+::: warning
+Purpose of this guide is not to explain you how to style your UI. You can use regular CSS to position everything on your screen, including the `canvas` element where your scene is rendered.
+:::
 
 ### How does it look like?
 For me, something like this: 
-![Driving with UI](img/driving_ui.png "driving car with UI showing speed and reset button")
+![Driving with UI](./img/driving_ui.png "driving car with UI showing speed and reset button")
 
 As you drive around, you should be able to see your speed displayed in the `SpeedIndicator` component. When pressing the reset button, your car should reset to the position we defined earlier.
 

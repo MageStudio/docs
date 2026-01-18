@@ -18,7 +18,12 @@ First things first, you will need to setup a `index.html` page somewhere in your
 
 The structure of the page is completely up to you. The engine will automatically bind the `canvas` and the UI to the appropriate containers, which are defaulted to be the `body`. You can change this by configuring the engine with the appropriate settings. More on this in the [Configuration](/engine/advanced/configuration) section of these docs.
 
-?> As you can see, we're referring to `/dist/app.css` and `/dist/app.js`. This means we're going to assume you will have a bundling tool installed, and that you have a basic understanding of how they work. **We're not going to cover how to bundle your app in this "Getting Started" section**, so if you find yourself stuck, please refer to the [Bundling](/engine/advanced/bundling.md) page.
+::: tip
+As you can see, we're referring to `/dist/app.css` and `/dist/app.js`. This means we're going to assume you will have a bundling tool installed, and that you have a basic understanding of how they work. **We're not going to cover how to bundle your app in this "Getting Started" section**, so if you find yourself stuck, please refer to the [Bundling](/engine/advanced/bundling.md) page.
+:::
+:::
+
+
 
 ---
 
@@ -52,7 +57,12 @@ The last thing is the level import line: `import Level from './first/Level';`.
 
 This line is obviously just importing the Level from where you defined it. There are no constraints on how you name your Levels or where you define them.
 
-?> More informations on Router, how to configure your app or how to define and load your assets can be found here: [Router](/engine/advanced/router.md), [Configuration](/engine/advanced/configuration.md) and [Assets](/).
+::: tip
+More informations on Router, how to configure your app or how to define and load your assets can be found here: [Router](/engine/advanced/router.md), [Configuration](/engine/advanced/configuration.md) and [Assets](/).
+:::
+:::
+
+
 
 ---
 

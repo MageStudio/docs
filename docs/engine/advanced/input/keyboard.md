@@ -21,7 +21,12 @@ Input.enableKeyboard();
 
 ## Events
 
-?> All the following events have listeners in your Scene, according to the following pattern: for each event, the listener that will be used is `onEventName`, assuming that the event is `eventName`. Note that the difference between the listener name and the event name is the upperCase event name preceded by the prefix `on`.
+::: tip
+All the following events have listeners in your Scene, according to the following pattern: for each event, the listener that will be used is `onEventName`, assuming that the event is `eventName`. Note that the difference between the listener name and the event name is the upperCase event name preceded by the prefix `on`.
+:::
+:::
+
+
 
 If you want to set up listeners in your scripts, you have to:
 

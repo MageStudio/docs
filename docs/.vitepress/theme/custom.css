@@ -1,0 +1,687 @@
+/* ═══════════════════════════════════════════════════════════
+   Mage Studio Documentation - Custom Theme
+   Using the mage-studio design system
+   ═══════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Leckerli+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@font-face {
+  src: url("/fonts/JetBrainsMono-Regular.ttf");
+  font-family: "JetBrainsMono";
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("/fonts/JetBrainsMono-Bold.ttf");
+  font-family: "JetBrainsMono";
+  font-weight: 700;
+}
+
+:root {
+  /* Mage Studio color palette */
+  --surface-canvas: #0b1220;
+  --surface-panel: #0f1b2a;
+  --surface-toolbar: #132235;
+  --surface-elevated: #162a40;
+  --surface-hover: rgba(255, 255, 255, 0.04);
+  --surface-active: rgba(255, 255, 255, 0.07);
+
+  --accent-gold: #f1c40f;
+  --accent-orange: #ffbe76;
+  --accent-blue: #3b82f6;
+  --accent-teal: #70a9a1;
+
+  --action-primary: #3b82f6;
+  --action-primary-hover: #2563eb;
+  --action-accent: #f59e0b;
+  --action-accent-hover: #d97706;
+
+  --text-primary: #e6edf6;
+  --text-secondary: #b6c4d6;
+  --text-muted: #7f94ad;
+
+  --border-subtle: #1e3a52;
+  --border-default: #2a4a66;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  --focus-ring: rgba(59, 130, 246, 0.45);
+  --selection-bg: rgba(59, 130, 246, 0.12);
+
+  /* VitePress theme overrides */
+  --vp-c-bg: var(--surface-canvas);
+  --vp-c-bg-alt: var(--surface-panel);
+  --vp-c-bg-elv: var(--surface-toolbar);
+  --vp-c-bg-soft: var(--surface-elevated);
+
+  --vp-c-default-1: var(--text-secondary);
+  --vp-c-default-2: var(--text-secondary);
+  --vp-c-default-3: var(--text-muted);
+
+  --vp-c-text-1: var(--text-secondary);
+  --vp-c-text-2: var(--text-secondary);
+  --vp-c-text-3: var(--text-muted);
+
+  --vp-c-brand-1: var(--accent-gold);
+  --vp-c-brand-2: var(--accent-orange);
+  --vp-c-brand-3: var(--accent-gold);
+  --vp-c-brand-soft: rgba(241, 196, 15, 0.15);
+
+  --vp-c-tip-1: var(--accent-blue);
+  --vp-c-tip-2: var(--accent-blue);
+  --vp-c-tip-3: var(--accent-blue);
+  --vp-c-tip-soft: rgba(59, 130, 246, 0.15);
+
+  --vp-c-warning-1: var(--accent-orange);
+  --vp-c-warning-2: var(--accent-orange);
+  --vp-c-warning-3: var(--accent-orange);
+  --vp-c-warning-soft: rgba(255, 190, 118, 0.15);
+
+  --vp-c-divider: var(--border-subtle);
+  --vp-c-gutter: var(--border-subtle);
+
+  --vp-sidebar-bg-color: var(--surface-panel);
+  --vp-nav-bg-color: var(--surface-toolbar);
+
+  /* Code blocks */
+  --vp-code-block-bg: var(--surface-panel);
+  --vp-code-line-highlight-color: rgba(241, 196, 15, 0.1);
+
+  /* Fonts */
+  --vp-font-family-base: "Poppins", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --vp-font-family-mono: "JetBrainsMono", monospace;
+
+  /* Home page hero */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    var(--accent-gold) 0%,
+    var(--accent-orange) 100%
+  );
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle,
+    rgba(241, 196, 15, 0.15) 0%,
+    transparent 70%
+  );
+  --vp-home-hero-image-filter: blur(56px);
+
+  /* Button colors */
+  --vp-button-brand-border: var(--action-primary);
+  --vp-button-brand-text: #fff;
+  --vp-button-brand-bg: var(--action-primary);
+  --vp-button-brand-hover-border: var(--action-primary-hover);
+  --vp-button-brand-hover-text: #fff;
+  --vp-button-brand-hover-bg: var(--action-primary-hover);
+  --vp-button-brand-active-border: var(--action-primary-hover);
+  --vp-button-brand-active-text: #fff;
+  --vp-button-brand-active-bg: var(--action-primary-hover);
+
+  --vp-button-alt-border: var(--border-default);
+  --vp-button-alt-text: var(--text-primary);
+  --vp-button-alt-bg: transparent;
+  --vp-button-alt-hover-border: var(--text-muted);
+  --vp-button-alt-hover-text: var(--text-primary);
+  --vp-button-alt-hover-bg: var(--surface-hover);
+}
+
+/* Dark mode only - Mage doesn't have light mode */
+html {
+  color-scheme: dark;
+}
+
+/* Force dark mode */
+.dark {
+  --vp-c-bg: var(--surface-canvas);
+  --vp-c-bg-alt: var(--surface-panel);
+  --vp-c-bg-elv: var(--surface-toolbar);
+  --vp-c-bg-soft: var(--surface-elevated);
+}
+
+/* Logo styling */
+.VPNavBarTitle .title {
+  font-family: "Leckerli One", cursive !important;
+  color: var(--accent-gold) !important;
+  font-size: 1.5rem;
+  font-style: italic;
+  position: relative;
+}
+
+/* Nav bar */
+.VPNav {
+  background: var(--surface-toolbar) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.VPNavBar {
+  background: var(--surface-toolbar) !important;
+}
+
+.VPNavBar .VPNavBarMenu .VPNavBarMenuLink {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.VPNavBar .VPNavBarMenu .VPNavBarMenuLink:hover {
+  color: var(--text-primary);
+  background: var(--selection-bg);
+}
+
+.VPNavBar .VPNavBarMenu .VPNavBarMenuLink.active {
+  color: var(--accent-gold);
+}
+
+/* Sidebar */
+.VPSidebar {
+  background: var(--surface-panel) !important;
+  border-right: 1px solid var(--border-subtle) !important;
+}
+
+.VPSidebarItem .text {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.VPSidebarItem.is-active > .item .text {
+  color: var(--accent-gold) !important;
+  font-weight: 500;
+}
+
+.VPSidebarItem.is-link:hover .text {
+  color: var(--accent-orange) !important;
+}
+
+.VPSidebarItem .caret {
+  color: var(--text-muted);
+}
+
+/* Sidebar group title */
+.VPSidebarItem.level-0 > .item > .text {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Content */
+.VPContent {
+  background: var(--surface-canvas) !important;
+}
+
+.VPDoc {
+  background: var(--surface-canvas);
+}
+
+/* Headings */
+.vp-doc h1 {
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 2.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.vp-doc h2 {
+  color: var(--accent-orange);
+  font-weight: 600;
+  font-size: 1.75rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.vp-doc h3 {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.vp-doc h4 {
+  color: var(--accent-blue);
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Links */
+.vp-doc a {
+  color: var(--accent-gold);
+  text-decoration: none;
+}
+
+.vp-doc a:hover {
+  color: var(--accent-orange);
+  text-decoration: underline;
+}
+
+/* Code */
+.vp-doc :not(pre) > code {
+  background: var(--surface-elevated);
+  color: var(--accent-orange);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Code blocks */
+.vp-doc div[class*="language-"] {
+  background: var(--surface-panel) !important;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.vp-doc div[class*="language-"] code {
+  color: var(--text-secondary);
+}
+
+/* Syntax highlighting */
+.vp-doc div[class*="language-"] .token.keyword {
+  color: #c792ea;
+}
+
+.vp-doc div[class*="language-"] .token.string {
+  color: #c3e88d;
+}
+
+.vp-doc div[class*="language-"] .token.function {
+  color: #82aaff;
+}
+
+.vp-doc div[class*="language-"] .token.number {
+  color: #f78c6c;
+}
+
+.vp-doc div[class*="language-"] .token.comment {
+  color: #546e7a;
+  font-style: italic;
+}
+
+.vp-doc div[class*="language-"] .token.operator {
+  color: #89ddff;
+}
+
+.vp-doc div[class*="language-"] .token.class-name {
+  color: #ffcb6b;
+}
+
+/* Tables */
+.vp-doc table {
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.vp-doc th {
+  background: var(--surface-toolbar);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.vp-doc td {
+  background: var(--surface-panel);
+  color: var(--text-secondary);
+}
+
+.vp-doc tr:nth-child(even) td {
+  background: var(--surface-elevated);
+}
+
+/* Custom containers */
+.vp-doc .custom-block {
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.vp-doc .custom-block.tip {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid var(--accent-blue);
+}
+
+.vp-doc .custom-block.warning {
+  background: rgba(255, 190, 118, 0.1);
+  border-left: 4px solid var(--accent-orange);
+}
+
+.vp-doc .custom-block.danger {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid #ef4444;
+}
+
+.vp-doc .custom-block.info {
+  background: rgba(112, 169, 161, 0.1);
+  border-left: 4px solid var(--accent-teal);
+}
+
+/* Search */
+.VPLocalSearchBox {
+  background: var(--surface-panel) !important;
+}
+
+/* Footer */
+.VPFooter {
+  background: var(--surface-toolbar) !important;
+  border-top: 1px solid var(--border-subtle) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-elevated);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-default);
+}
+
+/* Mobile menu */
+.VPNavBarHamburger {
+  color: var(--text-primary);
+}
+
+/* Edit link */
+.VPDocFooter .edit-link-button {
+  color: var(--accent-gold);
+}
+
+/* On this page / outline */
+.VPDocAsideOutline {
+  border-left: 1px solid var(--border-subtle);
+}
+
+.outline-link {
+  color: var(--text-muted);
+}
+
+.outline-link:hover,
+.outline-link.active {
+  color: var(--accent-gold);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Home Page Hero Styling
+   ═══════════════════════════════════════════════════════════ */
+
+/* Hero section background */
+.VPHome {
+  background: var(--surface-canvas);
+  position: relative;
+}
+
+.VPHome::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(30, 58, 82, 0.3) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Hero name gradient */
+.VPHero .name {
+  font-weight: 700 !important;
+}
+
+.VPHero .text {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.VPHero .tagline {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Hero action buttons */
+.VPHero .actions .action {
+  margin: 0 8px;
+}
+
+.VPButton {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+.VPButton.brand {
+  background: var(--action-primary) !important;
+  border-color: var(--action-primary) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.VPButton.brand:hover {
+  background: var(--action-primary-hover) !important;
+  border-color: var(--action-primary-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.VPButton.alt {
+  background: transparent !important;
+  border-color: var(--border-default) !important;
+  color: var(--text-primary) !important;
+}
+
+.VPButton.alt:hover {
+  background: var(--surface-hover) !important;
+  border-color: var(--text-muted) !important;
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Feature Cards
+   ═══════════════════════════════════════════════════════════ */
+
+.VPFeatures {
+  background: transparent;
+  padding: 48px 0;
+}
+
+.VPFeature {
+  background: var(--surface-panel) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  transition: all 0.3s ease !important;
+}
+
+.VPFeature:hover {
+  background: var(--surface-elevated) !important;
+  border-color: var(--border-default) !important;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.VPFeature .icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.VPFeature .title {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 8px;
+}
+
+.VPFeature .details {
+  color: var(--text-secondary) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5;
+}
+
+.VPFeature .link-text {
+  color: var(--accent-gold) !important;
+  font-weight: 500;
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.VPFeature:hover .link-text {
+  color: var(--accent-orange) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Search Box
+   ═══════════════════════════════════════════════════════════ */
+
+.VPNavBarSearch .DocSearch-Button {
+  background: var(--surface-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.VPNavBarSearch .DocSearch-Button:hover {
+  border-color: var(--border-default) !important;
+}
+
+.VPNavBarSearch .DocSearch-Button-Key {
+  background: var(--surface-toolbar) !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: none !important;
+}
+
+/* Local search */
+.VPLocalSearchBox .search-input {
+  background: var(--surface-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Badge styling
+   ═══════════════════════════════════════════════════════════ */
+
+.VPBadge {
+  background: var(--surface-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-secondary) !important;
+}
+
+.VPBadge.tip {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: var(--accent-blue) !important;
+  color: var(--accent-blue) !important;
+}
+
+.VPBadge.warning {
+  background: rgba(255, 190, 118, 0.15) !important;
+  border-color: var(--accent-orange) !important;
+  color: var(--accent-orange) !important;
+}
+
+.VPBadge.danger {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Back to Top Button
+   ═══════════════════════════════════════════════════════════ */
+
+.VPBackToTop {
+  background: var(--surface-toolbar) !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--shadow-md);
+}
+
+.VPBackToTop:hover {
+  background: var(--surface-elevated) !important;
+  border-color: var(--border-default) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Prev/Next Navigation
+   ═══════════════════════════════════════════════════════════ */
+
+.pager-link {
+  background: var(--surface-panel) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  transition: all 0.2s ease !important;
+}
+
+.pager-link:hover {
+  background: var(--surface-elevated) !important;
+  border-color: var(--border-default) !important;
+}
+
+.pager-link .title {
+  color: var(--accent-gold) !important;
+}
+
+.pager-link .desc {
+  color: var(--text-muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Mobile Responsive
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .VPHero .name {
+    font-size: 2rem !important;
+  }
+
+  .VPHero .text {
+    font-size: 1.25rem !important;
+  }
+
+  .VPHero .tagline {
+    font-size: 1rem;
+  }
+
+  .VPFeature {
+    padding: 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Selection & Focus States
+   ═══════════════════════════════════════════════════════════ */
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Carbon Ads (if enabled)
+   ═══════════════════════════════════════════════════════════ */
+
+.VPDocAsideCarbonAds {
+  background: var(--surface-panel) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: 8px;
+}

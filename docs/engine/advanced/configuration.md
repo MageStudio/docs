@@ -114,7 +114,9 @@ postprocessing: {
 ```
 - `enabled: boolean`: This toggles Postprocessing for your level.
 
-!> If `enabled=false`, adding effects to the postprocessing pipeline will resul in no effects being displayed on the screen.
+::: warning
+If `enabled=false`, adding effects to the postprocessing pipeline will resul in no effects being displayed on the screen.
+:::
 
 ### lights
 
@@ -137,7 +139,12 @@ const SHADOW_TYPES = {
 ```
 - `textureAnisotropy: number`: This will determine the anisotropy for textures.
 
-?> For more information about texture anisotropy, please refer to the official Three.js documentation [here](https://threejs.org/docs/?q=texture#api/en/textures/Texture.anisotropy).
+::: tip
+For more information about texture anisotropy, please refer to the official Three.js documentation [here](https://threejs.org/docs/?q=texture#api/en/textures/Texture.anisotropy).
+:::
+:::
+
+
 
 ### physics
 
@@ -151,7 +158,12 @@ physics: {
 - `enabled: boolean`: This boolean toggles physics.
 - `path: string`: This property refers to the position of the physics worker.
 
-?> Mage uses a WebWorker for Physics handling, thanks to [AmmoJS](https://github.com/kripken/ammo.js/). For more information about enabling and working with Physics, refer to its page [here](/engine/advanced/physics.md).
+::: tip
+Mage uses a WebWorker for Physics handling, thanks to [AmmoJS](https://github.com/kripken/ammo.js/). For more information about enabling and working with Physics, refer to its page [here](/engine/advanced/physics.md).
+:::
+:::
+
+
 
 ### tween
 
@@ -220,7 +232,12 @@ const assets = {
 };
 ```
 
-?> Each entry of this object is a key value pair. The key represents the id of the asset, and will be used to retrieve it in your code. The value is the path there the asset is located in your project.
+::: tip
+Each entry of this object is a key value pair. The key represents the id of the asset, and will be used to retrieve it in your code. The value is the path there the asset is located in your project.
+:::
+:::
+
+
 
 As said before, here are the allowed assets types:
 
@@ -307,4 +324,8 @@ This line is calling the `start()` method on Router, which is currently acceptin
 
 After calling the `.start` method, your application will start (hopefully).
 
-?> A more in depth explanation of how the Router module works, how it handles levels and which methods exposes can be found [here](/engine/advanced/router.md).
+::: tip
+A more in depth explanation of how the Router module works, how it handles levels and which methods exposes can be found [here](/engine/advanced/router.md).:::
+:::
+
+

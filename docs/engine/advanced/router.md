@@ -33,7 +33,12 @@ window.addEventListener('load', () => {
 });
 ```
 
-?> Both `.on` and `.start` methods will be explained in details in the [methods](/engine/advanced/router?id=methods) sections.
+::: tip
+Both `.on` and `.start` methods will be explained in details in the [methods](/engine/advanced/router?id=methods) sections.
+:::
+:::
+
+
 
 ### Options
 
@@ -48,9 +53,16 @@ For Example, being on `https://prettycoolapplication.com?questId=10#/second`, wi
 }
 ```
 
-?> For more informations, please refer to the Level page [here](/engine/advanced/core/level.md?id=constructor);
+::: tip
+For more informations, please refer to the Level page [here](/engine/advanced/core/level.md?id=constructor);
+:::
+:::
 
-!> Be aware, this API is likely to change in the future. 
+
+
+::: warning
+Be aware, this API is likely to change in the future. 
+:::
 
 ---
 
@@ -64,7 +76,9 @@ This method is responsible for registering the desired `LevelClass` for the prov
 
 #### start(config: object, assets: object)
 
-!> This method starts your application.
+::: warning
+This method starts your application.
+:::
 
 Calling this method will effectively start your application. The moment when you decide to call this is entirely up to you. This means you can define your routes in a module (using the `.on` method explained above), and start the application only when everything you need is ready: for example, you might want to wait for an AJAX call to be completed, or for some other operation to be done before starting.
 

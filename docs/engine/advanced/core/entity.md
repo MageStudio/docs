@@ -2,7 +2,11 @@
 
 Entity is the base class for most components in Mage engine.
 
-?> The Entity class extends the EventDispatcher class from three.js. Please refer to the documentation down below.
+::: tip
+The Entity class extends the EventDispatcher class from three.js. Please refer to the documentation down below.
+:::
+
+
 
 ---
 
@@ -15,7 +19,11 @@ The entity constructor is responsible for setting base properties for the compon
 - `serializable` will determine whether this entity can be converted to JSON.
 - `tag` / `tags`: each Entity can be tagged. You can use `tags` to filter out certain entities.
 
-?> By default, each new Entity will come to life with the `all` tag.
+::: tip
+By default, each new Entity will come to life with the `all` tag.
+:::
+
+
 
 ---
 
@@ -26,7 +34,11 @@ The methods described below provide access to the entity transforms. These will 
 
 This method will return the current position of the entity.
 
-?> If this entity has been added to another one, this method will return the relative position. If you need the global position,  when this entity has been added as a child please refer to the `getWorldTransform` method.
+::: tip
+If this entity has been added to another one, this method will return the relative position. If you need the global position,  when this entity has been added as a child please refer to the `getWorldTransform` method.
+:::
+
+
 
 #### setPosition({ x?: Float, y?: Float, z?: Float })
 
@@ -38,13 +50,21 @@ entity.setPosition({ y: 2 });
 
 The method will internally merge the new position with the current one.
 
-?> If this entity is a child, calling `setPosition` will set its position relative to the parent.
+::: tip
+If this entity is a child, calling `setPosition` will set its position relative to the parent.
+:::
+
+
 
 #### getRotation(): THREE.Vector3
 
 This will return the current rotation for the entity.
 
-?> Similarly to `getPosition`, this method will return the world rotation when the entity is not a child, and the relative rotation otherwise.
+::: tip
+Similarly to `getPosition`, this method will return the world rotation when the entity is not a child, and the relative rotation otherwise.
+:::
+
+
 
 #### setRotation({ x?: Float, y?: Float, z?: Float })
 
@@ -60,7 +80,11 @@ The method will internally merge the new position with the current one.
 
 This method will return the body's quaternion.
 
-?> Similarly to `getPosition`, this method will return the world quaternion when the entity is not a child, and the relative quaternion otherwise.
+::: tip
+Similarly to `getPosition`, this method will return the world quaternion when the entity is not a child, and the relative quaternion otherwise.
+:::
+
+
 
 #### setQuaternion({ x?: Float, y?: Float, z?: Float, w?: Float })
 
@@ -108,7 +132,11 @@ This method will translate the entity on each provided axis. If one or more are 
 
 Mage engine is using a tweening library ([Between.js](https://between.js.org/)) to perform transformations and movement on Entities.
 
-?> For each function, `easing` is by default defined as `Between.Easing.Linear.None`, but feel free to use whatever function you want, as defined [here](https://www.npmjs.com/package/easing-functions): `https://www.npmjs.com/package/easing-functions` . Remember that Between renaming these functions to look like this: `Between.Easing.EASINGFUNCTION`.
+::: tip
+For each function, `easing` is by default defined as `Between.Easing.Linear.None`, but feel free to use whatever function you want, as defined [here](https://www.npmjs.com/package/easing-functions): `https://www.npmjs.com/package/easing-functions` . Remember that Between renaming these functions to look like this: `Between.Easing.EASINGFUNCTION`.
+:::
+
+
 
 Each method described below will return `Promise` that is resolved once the tweening has completed.
 
@@ -118,7 +146,11 @@ This animate the scale of this Entity. The options are as follow:
 
 - `scale`: the target scale. 
 
-?> This parameter will behave similarly to the parameter for `.setScale()`, which means that if one of the axis is missing, their value will be defaulted to the current scale.
+::: tip
+This parameter will behave similarly to the parameter for `.setScale()`, which means that if one of the axis is missing, their value will be defaulted to the current scale.
+:::
+
+
 
 - `time`: time in milliseconds to perform the tweening.
 - `easing`: this defines the easing function that will be used by the library.
@@ -129,7 +161,11 @@ This animate the scale of this Entity. The options are as follow:
 
 - `rotation`: the target rotation. 
 
-?> This parameter will behave similarly to the parameter for `.setRotation()`, which means that if one of the axis is missing, their value will be defaulted to the current rotation.
+::: tip
+This parameter will behave similarly to the parameter for `.setRotation()`, which means that if one of the axis is missing, their value will be defaulted to the current rotation.
+:::
+
+
 
 - `time`: time in milliseconds to perform the tweening.
 - `easing`: this defines the easing function that will be used by the library.
@@ -138,7 +174,11 @@ This animate the scale of this Entity. The options are as follow:
 
 - `destination`: the target destination. 
 
-?> This parameter will behave similarly to the parameter for `.setPosition()`, which means that if one of the axis is missing, their value will be defaulted to the current position.
+::: tip
+This parameter will behave similarly to the parameter for `.setPosition()`, which means that if one of the axis is missing, their value will be defaulted to the current position.
+:::
+
+
 
 - `time`: time in milliseconds to perform the tweening.
 - `easing`: this defines the easing function that will be used by the library.
@@ -158,11 +198,19 @@ This will dispose the entity. Once called, the following steps will occur:
 If it has a body:
 - If it has a state machine, it will be disposed here.
 
-?> For more information on state machines, please refer to [this](/engine/advanced/state_machines.md) page.
+::: tip
+For more information on state machines, please refer to [this](/engine/advanced/state_machines.md) page.
+:::
+
+
 
 - Each attached script will be disposed.
 
-?> For more information scripts lifecycle, please refer to [this](/engine/advanced/scripting/scripts.md) page.
+::: tip
+For more information scripts lifecycle, please refer to [this](/engine/advanced/scripting/scripts.md) page.
+:::
+
+
 
 - The scene will remove the body of this entity.
 - The body itself will be disposed.
@@ -181,7 +229,7 @@ const ENTITY_EVENTS = {
     },
     ANIMATION: {
         LOOP: 'LOOP',
-        FINISHED: 'FINISHED'
+        FINISHED: 'FINISHED',
     }
 }
 ```
@@ -226,7 +274,9 @@ This will set the body of this entity.
 
 This will set the name of this Entity.
 
-!> Be careful, Mage engine uses the name to store information about the identity. This means the name has to be unique in your application!
+::: warning
+Be careful, Mage engine uses the name to store information about the identity. This means the name has to be unique in your application!
+:::
 
 #### getName(): String
 
@@ -255,13 +305,19 @@ This method will add an entity (or more, see below) as children of this entity.
 
 - `child: Entity`: The child to be added to this entity can either be a single Entity or an array of Entities.
 
-!> `child` has to be an instance of Entity, otherwise it will not be added and an error will printed to the console.
+::: warning
+`child` has to be an instance of Entity, otherwise it will not be added and an error will printed to the console.
+:::
 
 #### isParentOf(child: Entity): boolean
 
 This will check if this entity is parent of the child argument.
 
-?> This method will be able to either look for a Mage Entity or for a `THREE.Object3D`.
+::: tip
+This method will be able to either look for a Mage Entity or for a `THREE.Object3D`.
+:::
+
+
 
 #### has(child): boolean
 
@@ -275,7 +331,11 @@ This method will remove the requested child from this Entity hierarchy.
 
 This will try to add this Entity to the target Entity.
 
-?> If a `childname` is provided, this Entity body will be added to the Target's Child's body.
+::: tip
+If a `childname` is provided, this Entity body will be added to the Target's Child's body.
+:::
+
+
 
 #### hasChildren(): boolean
 
@@ -287,7 +347,7 @@ This method will return an object representing the hierarchy of the Entity. The 
 ```
 {
     element: Entity, // the Entity itself
-    children: Array<Entity>
+    children: Array\<Entity\>
 }
 ```
 
@@ -297,15 +357,21 @@ This method will return an object representing the hierarchy of the Entity. The 
 
 Each entity can be tagged. This can simplify filtering and extraction of Entities.
 
-?> By default, entities are tagged with  `all`.
+::: tip
+By default, entities are tagged with  `all`.
+:::
+
+
 
 #### addTag(tag: String): boolean
 
 This method will append the requested tag to the list of tags. Will return `true` if the tag has been added, `false` otherwise.
 
-!> If the desired tag already belongs to the Entity, an error will be logged on the console and the method will return `false`.
+::: warning
+If the desired tag already belongs to the Entity, an error will be logged on the console and the method will return `false`.
+:::
 
-#### addTags(tags: Array<String>)
+#### addTags(tags: Array\<String\>)
 
 This method will receive a list of tags and will try to append each one to the list of tags for this entity.
 
@@ -313,7 +379,9 @@ This method will receive a list of tags and will try to append each one to the l
 
 This will try to remove the required tag from the list of tags.
 
-!> If the tag is missing or if you're trying to remove the default tag, an error message will be printed and this method will return `false`.
+::: warning
+If the tag is missing or if you're trying to remove the default tag, an error message will be printed and this method will return `false`.
+:::
 
 #### removeAllTags()
 
@@ -333,9 +401,17 @@ This will return all the tags currently assigned to this Entity.
 
 Scripts define the behaviour of Entities. You can add as many scripts as you want to each entity.
 
-?> Scripts will be executed in order. This means the first one to be added will also be the first one to be update in each frame.
+::: tip
+Scripts will be executed in order. This means the first one to be added will also be the first one to be update in each frame.
+:::
 
-?> For more information on how scripts work, please refer to the dedicated page [here](/engine/advanced/scripting/scripts.md).
+
+
+::: tip
+For more information on how scripts work, please refer to the dedicated page [here](/engine/advanced/scripting/scripts.md).
+:::
+
+
 
 #### getScript(name: String): BaseScript | boolean
 
@@ -349,7 +425,9 @@ Will return `true` or `false` depending if the Entity has any Script attached.
 
 This add the required script to this Entity. The options object will be received in the `start` method of the script.
 
-!> The Script has to be registered with the `Scripts` module first before being used. Please refer to [this page](/engine/advanced/scripting/scripts.md) for more information.
+::: warning
+The Script has to be registered with the `Scripts` module first before being used. Please refer to [this page](/engine/advanced/scripting/scripts.md) for more information.
+:::
 
 #### enableScripts()
 

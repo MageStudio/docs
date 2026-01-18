@@ -37,9 +37,19 @@ Explanation:
 - `start(mesh)`: this method will be called as soon as you attach a script to your mesh and its first argument will be the target entity. Here we are setting `this.mesh = mesh` so we can use it later, and we're setting an initial angle, `this.angle = 0`.
 - `update(dt)`: this function will be called for each frame of your scene, and it will receive the current `dt`. Here we update the angle by incrementing it by `0.01`, and we call the `setRotation` method on the mesh.
 
-?> Why multiplying the angle by `dt` ? `dt` represents the delta since the last frame. In order to achieve frame-rate indipendence and smooth animations, we need to multiply the angle by `dt`.
+::: tip
+Why multiplying the angle by `dt` ? `dt` represents the delta since the last frame. In order to achieve frame-rate indipendence and smooth animations, we need to multiply the angle by `dt`.
+:::
+:::
 
-?> Scripts have more functionalities that are not covered in this short tutorial. Please head over the corresponding API section for further details [Scripts](/engine/advanced/scripting/scripts.md).
+
+
+::: tip
+Scripts have more functionalities that are not covered in this short tutorial. Please head over the corresponding API section for further details [Scripts](/engine/advanced/scripting/scripts.md).
+:::
+:::
+
+
 
 ---
 
@@ -102,7 +112,7 @@ export default FirstScene;
 
 If you now run the application, you should see something like this:
 
-![Rotating cube on black background](/img/sample-cube-rotation.gif "Rotating cube on black background")
+![Rotating cube on black background](./img/sample-cube-rotation.gif "Rotating cube on black background")
 
 ---
 

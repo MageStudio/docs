@@ -2,7 +2,12 @@
 
 Mage engine relies on Ammo.js for its physics simulation. For the purpose of this guide, we're going to create an interesting demo: a fully controllable and physically simulated vehicle surrounded by obstacles.
 
-?> There is an entire section of this documentation dedicated to physics. Please head [here](/engine/advanced/physics.md) when you're ready to find out more.
+::: tip
+There is an entire section of this documentation dedicated to physics. Please head [here](/engine/advanced/physics.md) when you're ready to find out more.
+:::
+:::
+
+
 
 ## Enabling physics
 
@@ -26,9 +31,16 @@ const config = {
 
 Mage engine comes with the Ammo distributable included. Just head over to `node_modules/mage-engine/dist/ammo.js` , and copy the file to any destination in your project.
 
-!> Remember to make sure the path to the `ammo.js` file is publicly reachable and defined in your configuration.
+::: warning
+Remember to make sure the path to the `ammo.js` file is publicly reachable and defined in your configuration.
+:::
 
-?> Once physics is enabled, the engine will automatically import `ammo.js` and start using it
+::: tip
+Once physics is enabled, the engine will automatically import `ammo.js` and start using it
+:::
+:::
+
+
 
 The physics configuration object also allows you to set the gravity value for your game. You can tweak this value at any point during the lifecycle of your game using the [Physics API](/engine/advanced/physics.md) .
 
@@ -66,12 +78,17 @@ onCreate() {
 
 - `onUpdate` : this is a level lifecycle method. It will be invoked at every frame, and it will receive the elapsed delta time as parameter. In here, we're telling the camera to look at the camera target (the cube).
 
-?> More information on the `onUpdate` and other lifecycle methods can be found [here](/engine/advanced/core/level.md).
+::: tip
+More information on the `onUpdate` and other lifecycle methods can be found [here](/engine/advanced/core/level.md).
+:::
+:::
+
+
 
 If everything has gone right, this is what you should be able to see now:
 
 <video controls height="480" width="640" style="display: block; margin: auto; ">
-     <source src="engine/getting-started/img/falling_purple_cube.mp4"
+     <source src="/engine/getting-started/img/falling_purple_cube.mp4"
             type="video/mp4">
     Sorry, your browser doesn't support embedded videos.
 </video>

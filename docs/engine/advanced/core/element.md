@@ -15,7 +15,12 @@ By "physical object", we mean Models and each of the Base Elements. Each base el
 - [Sprite](/engine/advanced/core/base/sprite.md)
 - [AnimatedSprite](/engine/advanced/core/base/animatedsprite.md)
 
-?> For Models documentation, please refer to this page [here](/engine/advanced/assets/models.md).
+::: tip
+For Models documentation, please refer to this page [here](/engine/advanced/assets/models.md).
+:::
+:::
+
+
 
 ---
 
@@ -27,14 +32,24 @@ The Element constructor will set the body if:
 - either both geometry and material are provided.
 - or a body is provided.
 
-?> Element extends Entity, so refer to the the Entity constructor for additional information ([here](/engine/advanced/core/entity.md?id=constructor)).
+::: tip
+Element extends Entity, so refer to the the Entity constructor for additional information ([here](/engine/advanced/core/entity.md?id=constructor)).
+:::
+:::
+
+
 
 - `options` gives the Element constructor additional information. Here are the currently supported values:
   - `name: string`: If not provided, Mage will create one by default.
   - `addUniverse: boolean`: (default: `true`). This flag determines whether the element will receive updates or not. When set to `false`, the element will be rendered on the screen, but it will not receive updates.
   - `tags: string[]`: A list of initial tags for this element.
 
-?> For more information about tags, please refer to the Entity document page [here](/engine/advanced/core/entity.md).
+::: tip
+For more information about tags, please refer to the Entity document page [here](/engine/advanced/core/entity.md).
+:::
+:::
+
+
 
 #### setName(name: string, options?: object)
 
@@ -52,7 +67,12 @@ This method sets the name of this element.
 This method will set the texture map for this element.
 - `textureId: string`: This represents the texture you want to map on this element. It has to be a valid textureId, defined in your `assets` definition.
 
-?> Please refer to the page explaining how to load textures in your applications [here](/engine/advanced/assets/images_and_textures.md)
+::: tip
+Please refer to the page explaining how to load textures in your applications [here](/engine/advanced/assets/images_and_textures.md)
+:::
+:::
+
+
 
 #### setMaterialFromName(materialName: MaterialType, options; Object)`
 
@@ -108,7 +128,12 @@ If this element has animations, this methods will return a list of them.
 
 If physics are enabled, this will add this element to the Physics Engine.
 
-?> For a better description of the `options` object, have a look at the Physics page [here](/engine/advanced/physics.md).
+::: tip
+For a better description of the `options` object, have a look at the Physics page [here](/engine/advanced/physics.md).
+:::
+:::
+
+
 
 #### applyForce(force: Object)
 

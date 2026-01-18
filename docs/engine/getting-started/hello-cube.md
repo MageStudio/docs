@@ -44,7 +44,9 @@ You can inject this style in our `index.html` for now.
 
 ## Run the application
 
-!> We're going to assume you know how to bundle your application. Bundling the app should produce some distributable files (mainly a `app.js` and one `app.css`). If you're not sure how to achieve this, have a look at the [Bundling](/engine/advanced/bundling.md) page.
+::: warning
+We're going to assume you know how to bundle your application. Bundling the app should produce some distributable files (mainly a `app.js` and one `app.css`). If you're not sure how to achieve this, have a look at the [Bundling](/engine/advanced/bundling.md) page.
+:::
   
 For now, the best way to launch the application is to use a python module called `SimpleHTTPServer`. When invoked, it will launch a simple HTTP server (hence the module name) in your root folder.
 
@@ -54,6 +56,6 @@ python -m SimpleHTTPServer
 
 If you now navigate to [`http://localhost:8000/`](http://localhost:8000/), you should see something like this:
 
-![A green line on black background](/img/first_scene.png "A green line on black background")
+![A green line on black background](./img/first_scene.png "A green line on black background")
 
 A bit disappointing, right? We can do something to improve it by moving the [Camera](/engine/getting-started/camera.md) a bit.

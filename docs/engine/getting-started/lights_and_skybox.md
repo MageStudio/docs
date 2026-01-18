@@ -41,17 +41,32 @@ A number of things have happened here:
     - `color`: this will be defaulted to `WHITE` if missing.
     - `intensity`: this will be defaulted to `1` if missing. We chose an intensity of `.5`.
 
-?> Mage engine provides a set of palettes ready to use. The one we used here is the base one. More colors and options are available [here](/engine/advanced/core/constants.md)
+::: tip
+Mage engine provides a set of palettes ready to use. The one we used here is the base one. More colors and options are available [here](/engine/advanced/core/constants.md)
+:::
+:::
+
+
 
 - We also changed the cube material. This is needed because by default elements in the scene are using `BASIC` material, which is not affected by lights.
 
-?> For more details on elements API, refer to this page [here](/advanced/core/element.md);
+::: tip
+For more details on elements API, refer to this page [here](/advanced/core/element.md);
+:::
+:::
 
-?> For more details around materials, visit [this page](https://threejs.org/docs/?q=basic#api/en/materials/MeshBasicMaterial).
+
+
+::: tip
+For more details around materials, visit [this page](https://threejs.org/docs/?q=basic#api/en/materials/MeshBasicMaterial).
+:::
+:::
+
+
 
 Once everything is done and dusted, you should be able to see something like this:
 
-![Cube under ambient light](img/cube_ambient_light.png "Cube with ambient light")
+![Cube under ambient light](./img/cube_ambient_light.png "Cube with ambient light")
 
 a bit too dark, don't you think?
 
@@ -60,9 +75,9 @@ a bit too dark, don't you think?
 Before we start adding shadows, we're going to change textures and we're going to add a floor. Download the following textures:
 
 <br/>
-<img src="engine/getting-started/img/orange.png" alt="Orange texture" style="width:300px; display:inline-block;"/>
+<img src="/engine/getting-started/img/orange.png" alt="Orange texture" style="width:300px; display:inline-block;"/>
 
-<img src="engine/getting-started/img/purple.png" alt="Purple texture" style="width:300px; display:inline-block;"/>
+<img src="/engine/getting-started/img/purple.png" alt="Purple texture" style="width:300px; display:inline-block;"/>
 
 Now, update the assets config to look like this:
 
@@ -76,7 +91,12 @@ const assets = {
 }
 ```
 
-?> Why are we updating textures, you may ask? No particular reason, just felt like it looked better.
+::: tip
+Why are we updating textures, you may ask? No particular reason, just felt like it looked better.
+:::
+:::
+
+
 
 Let's create a floor now, and update the cube texture.
 
@@ -139,7 +159,7 @@ onCreate() {
 
 Once everything is in place, you should see something like this:
 
-!["Purple cube on orange floor with no shadows"](img/orange_purple_no_shadow.png "Purple cube on orange floor with no shadows")
+!["Purple cube on orange floor with no shadows"](./img/orange_purple_no_shadow.png "Purple cube on orange floor with no shadows")
 
 **Where are the shadows?**
 We are missing a crucial steps, enabling shadows. Go back to your configuration object (the empty object we passed to Router), and update it like so:
@@ -154,11 +174,16 @@ const config = {
 
 - shadows are not enabled by default, and you need to set the flag to `true` like so.
 
-?> More information about configuration can be found [here](/engine/advanced/configuration.md)
+::: tip
+More information about configuration can be found [here](/engine/advanced/configuration.md)
+:::
+:::
+
+
 
 Once shadows are enabled, the scene should look like this:
 
-![Purple rotating cube on orange floor with shadowas](img/orange_purple_shadow.png "Purple rotating cube on orange floor with shadows")
+![Purple rotating cube on orange floor with shadowas](./img/orange_purple_shadow.png "Purple rotating cube on orange floor with shadows")
 
 Things started to look a bit nicer! What about adding the last touch? A skybox maybe?
 
@@ -193,7 +218,7 @@ onCreate() {
 - `Sky` is one of the many effects available within `mage-engine`. You can find out more about it in its dedicated page [here](/engine/advanced/effects/scenery/sky.md);
 
 Here is the final look of what we achieved so far:
-![Rotating purple cube on orange floor with sky](img/orange_purple_sky.png "ROtating purple cube on orange floor with sky")
+![Rotating purple cube on orange floor with sky](./img/orange_purple_sky.png "ROtating purple cube on orange floor with sky")
 
 ### What's next?
 Now that we have a somewhat decently looking scene, how about we complicate things by [introducing physics to the mix](/engine/getting-started/physics.md)?
