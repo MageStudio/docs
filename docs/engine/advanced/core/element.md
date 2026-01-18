@@ -116,7 +116,7 @@ If this element has animations and the require `id` is a valid animation identif
 
 - `options: { duration: 0.2 }`: This option is being used when transitioning from one animation to another.
 
-#### getAvailableAnimations(): array<ThreeAnimation>
+#### getAvailableAnimations(): array\<ThreeAnimation\>
 
 If this element has animations, this methods will return a list of them.
 
