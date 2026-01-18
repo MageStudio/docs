@@ -1,120 +1,202 @@
 # Level
 
-Every level you create must be a class extending `Level` from `mage-engine`, like this:
+## What is a Level?
+
+A **Level** is the fundamental building block of any Mage application. Think of it as a self-contained scene or stage in your game—it could be a menu screen, a gameplay area, a cutscene, or any distinct section of your experience.
+
+Levels serve several important purposes:
+
+- **Organization**: They help you structure your game into logical, manageable pieces
+- **Resource Management**: Each level can define its own assets, which are loaded when entering and disposed when leaving
+- **State Isolation**: Levels maintain their own state and lifecycle, making it easier to reason about your game's flow
+- **Navigation**: Combined with the Router, levels enable seamless transitions between different parts of your application
+
+Every level you create must be a class extending `Level` from `mage-engine`:
 
 ```js
 import { Level } from 'mage-engine';
 
 export default class MyLevel extends Level {
-    ...
+
+    onCreate() {
+        // Your level setup goes here
+        // Add elements, configure lights, set up physics, etc.
+    }
 }
 ```
 
 ---
 
-## Router integration
+## Common Workflows
 
-In order for your level to be used within your application, you need to link it to the Router module using the `Router.on` method. Since every level is associated to a specific path, you need to provide both path and the Level to this method like this:
+### Setting Up a Basic Level
+
+The most common workflow is creating a level with some 3D elements:
 
 ```js
-import MyLevel from './MyLevel';
+import { Level, Cube, AmbientLight, Scene } from 'mage-engine';
+
+export default class GameLevel extends Level {
+
+    onCreate() {
+        // 1. Add lighting so objects are visible
+        const light = new AmbientLight({ color: 0xffffff, intensity: 0.8 });
+        
+        // 2. Create and position your game objects
+        const player = new Cube(2);
+        player.setPosition({ x: 0, y: 1, z: 0 });
+        
+        // 3. Set up the camera
+        Scene.getCamera().setPosition({ x: 0, y: 5, z: 10 });
+    }
+}
+```
+
+### Connecting Levels to Your App
+
+Levels don't work in isolation—they need to be registered with the Router so your application knows when to load them:
+
+```js
+import { Router } from 'mage-engine';
+import MenuLevel from './levels/Menu';
+import GameLevel from './levels/Game';
 
 window.addEventListener('load', function() {
-    const path = '/mylevel';
-
-    Router.on(path, MyLevel);
-
+    // Map URL paths to levels
+    Router.on('/', MenuLevel);           // Landing page shows menu
+    Router.on('/game', GameLevel);       // /game path loads the game
+    
     Router.start(config, assets);
 });
 ```
 
 ::: tip
-A more in depth explanation of how the Router module works, how it handles levels and which methods exposes can be found [here](/engine/advanced/router.md).
+The Router handles all the complexity of loading assets, transitioning between levels, and cleaning up resources. Learn more about routing [here](/engine/advanced/router).
 :::
-:::
-
-
-
----
-
-## Methods
-
-#### constructor(options: object)
-
-The constructor of your level will receive an `options` object, that will be available within your Level as `this.options`. This object will be provided by the Router module, and it's the representation of the URL query parameters.
-
-**Example**:
-
-The user lands on `www.domain.com/?value=10&anotherValue=20#/myLevel`. What will happen is that the `MyLevel` Level will be loaded, and the options object will be:
-```js
-{
-    path: '/myLevel',
-    value: 10,
-    anotherValue: 20
-}
-```
-
-#### loadScene(url: string)
-
-- `url` is the url (or relative path) to a JSON representation of the
-
-This method will be automatically called during your scene loading steps. By default, it will try to load a JSON from the following relative path `assets/scenes/${levelName}.json`, where `levelName` is the name of your scene.
-
-**Example**:
-
-```javascript
-import { Level } from 'mage-engine';
-
-export default class MyLevel extends Level {
-    ...
-}
-```
-
-Given the above level, the following url will be loaded: `assets/scenes/MyLevel.json`.
-
-#### toJSON(): json
-
-This method will return a JSON representation of the level.
 
 ---
 
 ## Lifecycle Methods
 
-Here is a representation of the Level lifecycle:
+Levels have a predictable lifecycle that helps you manage setup, updates, and cleanup. Understanding this flow is crucial for building robust games.
 
 ![startup lifecycle](./img/level_lifecycle.png)
 
-#### onCreate()
+### onCreate()
 
-This can be considered as the entry point of your level. Inside this method is safe to add elements to the scene, add PostProcessing effects, enabling UI and do pretty much whatever you want.
+**When it's called**: After assets are loaded and the scene is ready.
 
-#### onStateChange(state: Object)
+**What to do here**: This is your main entry point. Set up your level's elements, configure lighting, enable physics, attach scripts, and prepare everything the player will interact with.
 
-This lifecycle method gets called everytime you update the Redux store.
+```js
+onCreate() {
+    // Safe to do everything here
+    this.setupEnvironment();
+    this.spawnPlayer();
+    this.initializeUI();
+}
+```
 
-- `state: Object`: this object represents the current state of your application.
+### onUpdate(dt)
+
+**When it's called**: Every frame, receiving the delta time since the last frame.
+
+**What to do here**: Handle level-wide logic that doesn't belong to individual elements. For element-specific behavior, prefer using [Scripts](/engine/advanced/scripting/scripts) instead.
+
+```js
+onUpdate(dt) {
+    // Check win/lose conditions
+    if (this.player.health <= 0) {
+        Router.go('/game-over');
+    }
+    
+    // Update level timer
+    this.elapsedTime += dt;
+}
+```
+
+### onStateChange(state)
+
+**When it's called**: Whenever the Redux store is updated.
+
+**What to do here**: React to global state changes, like updating UI or triggering level events based on game state.
+
+```js
+onStateChange(state) {
+    if (state.game.paused) {
+        this.pauseAllAnimations();
+    }
+}
+```
 
 ::: tip
-For a more in-depth explanation on how to handle a Redux store in your Mage application, check out this [page](/engine/advanced/state_management.md).
+For state management patterns, see the [State Management](/engine/advanced/state_management) guide.
 :::
-:::
-
-
-
-#### onUpdate(dt: ms)
-
-This lifecycle method gets called for every frame. You can use this to dinamically update elements of your level, even if it's recommended to use a [script](/engine/advanced/scripts.md).
 
 ---
 
 ## Level Disposal
 
-When your application is about to change level, the current level is disposed. You can learn more about it in the Router documentation page [here](/engine/advanced/router.md). Disposing the level causes two lifecycle methods to be called.
+When navigating away from a level, Mage automatically cleans up resources. You can hook into this process for custom cleanup.
 
-#### onBeforeDispose
+### onBeforeDispose()
 
-This lifecycle methods gets called as soon as the disposal process starts. You can use this to clear up resources.
+**When it's called**: Just before disposal begins.
 
-#### onDispose
+**What to do here**: Save state, stop ongoing processes, or prepare for cleanup.
 
-This lifecycle methods gets called when the disposal process ends.
+```js
+onBeforeDispose() {
+    // Save player progress before leaving
+    this.saveProgress();
+    
+    // Stop any audio
+    this.backgroundMusic.stop();
+}
+```
+
+### onDispose()
+
+**When it's called**: After disposal is complete.
+
+**What to do here**: Final cleanup tasks, like clearing external references.
+
+---
+
+## Working with URL Parameters
+
+Levels can receive configuration through URL query parameters, making them flexible and reusable:
+
+```js
+// URL: www.yourgame.com/?difficulty=hard&level=5#/game
+
+export default class GameLevel extends Level {
+    
+    onCreate() {
+        // Access URL parameters via this.options
+        const { difficulty, level } = this.options;
+        
+        console.log(difficulty); // "hard"
+        console.log(level);      // "5"
+        
+        this.configureDifficulty(difficulty);
+        this.loadLevel(level);
+    }
+}
+```
+
+---
+
+## API Reference
+
+### constructor(options: object)
+
+The constructor receives URL query parameters as an `options` object, available as `this.options`.
+
+### loadScene(url: string)
+
+Loads a JSON scene file. By default, Mage looks for `assets/scenes/${LevelName}.json`.
+
+### toJSON(): object
+
+Returns a JSON representation of the level, useful for scene export or debugging.

@@ -1,331 +1,293 @@
 # Configuration
 
-In order to configure your Mage application, you don't need to create specific config files. The only thing you need to do is to instruct Router how to start your application: for this to happen properly, you need to provide a basic configuration (for lights, physics, screen and camera configuration) as well as your assets definition.
+## Understanding Mage Configuration
 
-An example configuration would look like this:
+Mage applications are configured through two main objects that you pass to `Router.start()`:
 
-```js
+1. **config** - Controls rendering, physics, camera, and visual settings
+2. **assets** - Defines what resources (models, textures, audio) to load
+
+This approach keeps configuration centralized and makes it easy to adjust settings without digging through code.
+
+---
+
+## Quick Start Example
+
+Here's a complete configuration for a typical 3D game:
+
+```javascript
 import { Router } from 'mage-engine';
-import Intro from './intro';
-import First from './first';
+import MenuLevel from './levels/Menu';
+import GameLevel from './levels/Game';
 
+// What resources to load
 const assets = {
-    'models': {
-        'player': 'assets/models/player.gltf'
+    models: {
+        player: 'assets/models/player.gltf',
+        enemy: 'assets/models/enemy.gltf'
     },
-    'textures': {
-        'playerTexture': 'assets/textures/player.png'
-    },
-
-    '/': {
-        'models': {
-            'modelForThisLevel': 'assets/models/box.gltf'
-        }
-    },
-    '/2dlevel': {
-        'textures': {
-            'spriteTexture': 'assets/textures/sprite.png'
-        }
+    textures: {
+        ground: 'assets/textures/grass.png',
+        sky: 'assets/textures/sky.jpg'
     }
 };
 
+// How the engine behaves
 const config = {
     screen: {
-        h : window ? window.innerHeight : 800,
-        w : window ? window.innerWidth : 600,
-        ratio : window ? (window.innerWidth / window.innerHeight) : (600/800),
-        frameRate : 60,
-        alpha: true
+        h: window.innerHeight,
+        w: window.innerWidth,
+        ratio: window.innerWidth / window.innerHeight,
+        frameRate: 60,
+        alpha: false
     },
-
-    postprocessing: {
-        enabled: true
-    },
-
-    lights: {
-        shadows: true
-    },
-
-    physics: {
-        enabled: false,
-        path: './mage.physics.js'
-    },
-
-    tween: {
-        enabled: false
-    },
-
+    
     camera: {
         fov: 75,
         near: 0.1,
-        far: 3000000
+        far: 1000
     },
-
-    fog: {
-        enabled: false,
-        density: 0,
-        color: '#ffffff'
+    
+    lights: {
+        shadows: true,
+        shadowType: 'SOFT'
     },
+    
+    physics: {
+        enabled: true,
+        path: './mage.physics.js'
+    },
+    
+    postprocessing: {
+        enabled: true
+    }
 };
 
-window.addEventListener('load', function() {
-    Router.on('/', Intro);
-    Router.on('/level', First);
-
+// Start the app
+window.addEventListener('load', () => {
+    Router.on('/', MenuLevel);
+    Router.on('/game', GameLevel);
     Router.start(config, assets, '#gameContainer');
 });
 ```
 
-Let's break it down: we're going to see how to configure your app, define your assets and provide these data to the Router module.
-
-> A full explanation of the Router module is available [here](/engine/advanced/router.md).
-
 ---
 
-## Configuration
-
-Mage configuration is split in a few different blocks.
+## Configuration Blocks
 
 ### screen
 
-```json
+Controls the rendering canvas and frame rate.
+
+```javascript
 screen: {
-    h,
-    w,
-    ratio,
-    frameRate,
-    alpha
+    h: window.innerHeight,      // Canvas height
+    w: window.innerWidth,       // Canvas width  
+    ratio: window.innerWidth / window.innerHeight,
+    frameRate: 60,              // Target FPS
+    alpha: true                 // Transparent background?
 }
 ```
-- `h: number`: is the height of the area you're using to display your application. If fullscreen, you can use `window.innerHeight`.
-- `w: number`: is the width of the area you're using to display your application. If fullscreen, you can use `window.innerWidth`.
-- `ratio: number`: is the ratio between `width` and `height`.
-- `frameRate: number`: this value will be used in one of the callbacks.
-- `alpha: boolean`: This boolean toggles transparency.
 
-### postprocessing
+**When to adjust:**
+- **alpha: true** - When overlaying the game on HTML content
+- **frameRate** - Lower for mobile/performance, higher for smooth animation
 
-The postprocessing block is only meant to either enable or disable postprocessing in your levels. Adding or removing effects can be done via code in your Level.
+### camera
 
-```json
-postprocessing: {
-    enabled
+Configures the default perspective camera.
+
+```javascript
+camera: {
+    fov: 75,     // Field of view (degrees)
+    near: 0.1,   // Closest visible distance
+    far: 1000    // Farthest visible distance
 }
 ```
-- `enabled: boolean`: This toggles Postprocessing for your level.
 
-::: warning
-If `enabled=false`, adding effects to the postprocessing pipeline will resul in no effects being displayed on the screen.
+**Understanding these values:**
+- **fov** (Field of View): Higher = wider view, more distortion. 75° is a good default.
+- **near/far** (Clipping planes): Objects outside this range aren't rendered. Keep `near` small and `far` as small as practical for better depth precision.
+
+::: tip
+For large open worlds, increase `far`. For detailed indoor scenes, keep it smaller for better visual quality.
 :::
 
 ### lights
 
-```json
- lights: {
-    shadows,
-    shadowType,
-    textureAnisotropy
+Controls global lighting and shadow behavior.
+
+```javascript
+lights: {
+    shadows: true,            // Enable shadows globally
+    shadowType: 'SOFT',       // 'BASIC', 'SOFT', or 'HARD'
+    textureAnisotropy: 16     // Texture quality (1-16)
 }
 ```
-- `shadows: boolean`: This boolean toggles shadows.
-- `shadowType: string`: This option sets the type of shadows to be used in your application. Possible options are:
 
-```js
-const SHADOW_TYPES = {
-    BASIC: 'BASIC',
-    SOFT: 'SOFT',
-    HARD: 'HARD',
-};
-```
-- `textureAnisotropy: number`: This will determine the anisotropy for textures.
+**Shadow types:**
+- **BASIC** - Fastest, blocky shadows
+- **SOFT** - Best looking, smoothed edges (recommended)
+- **HARD** - Sharp, defined shadows
 
-::: tip
-For more information about texture anisotropy, please refer to the official Three.js documentation [here](https://threejs.org/docs/?q=texture#api/en/textures/Texture.anisotropy).
+::: warning
+Shadows are expensive. On mobile, consider `shadows: false` or `shadowType: 'BASIC'`.
 :::
-:::
-
-
 
 ### physics
 
-```json
+Enables the physics simulation powered by Ammo.js.
+
+```javascript
 physics: {
-    enabled,
-    path
-},
+    enabled: true,
+    path: './mage.physics.js'   // Path to physics worker
+}
 ```
 
-- `enabled: boolean`: This boolean toggles physics.
-- `path: string`: This property refers to the position of the physics worker.
+**Why a separate path?** Mage runs physics in a Web Worker for performance. The `path` tells Mage where to find this worker script.
 
 ::: tip
-Mage uses a WebWorker for Physics handling, thanks to [AmmoJS](https://github.com/kripken/ammo.js/). For more information about enabling and working with Physics, refer to its page [here](/engine/advanced/physics.md).
-:::
+See the [Physics guide](/engine/advanced/physics) for detailed physics configuration.
 :::
 
+### postprocessing
 
+Enables visual effects pipeline (bloom, blur, color grading, etc.).
+
+```javascript
+postprocessing: {
+    enabled: true
+}
+```
+
+::: warning
+When `enabled: false`, any effects you add in code will be silently ignored. This is useful for quick performance testing.
+:::
 
 ### tween
 
-Mage uses a tweening library to handle smooth transitions from one state tom another. You can enable/disable it using this property.
+Enables smooth value interpolation for animations.
 
-```json
+```javascript
 tween: {
-    enabled
+    enabled: true
 }
 ```
 
-- `enabled: boolean`: This boolean toggles the tweening library.
-
-### camera
-
-```json
-camera: {
-    fov,
-    near,
-    far
-}
-```
-
-- `fov: number`: This represents the field of view for your camera.
-- `near: number`: This value represents the distance of the `near` plane from the camera.
-- `far: number`: This value represents the distance of the `far` plane from the camera.
+Used for smooth camera movements, UI transitions, and any value that needs to animate from A to B.
 
 ### fog
 
-```json
+Adds atmospheric depth fog to the scene.
+
+```javascript
 fog: {
-    enabled,
-    density,
-    color
+    enabled: true,
+    density: 0.01,
+    color: '#a0a0a0'
 }
 ```
 
-- `enabled: boolean`: This boolean toggles fog in your levels.
-- `density: number`: this value changes the density of the fog.
-- `color: string`: This is the hex string of the fog color.
-
-----
-
-## Assets Definition
-
-Mage assets definition is a Javascript object that describes which assets your application needs. Mage handles a specific set of assets: `Textures`, `Images`, `Models` and `Audio` (for now...). You can also define level specific assets as well as application specific ones. Mage will take care of your assets loading automatically, and will provide an easy access to them once they're ready to be used.
-
-### The structure
-
-Here is how a sample assets definition would look like:
-
-```javascript
-const assets = {
-    'models': {
-        'player': 'assets/models/player.gltf'
-    },
-    'textures': {
-        'playerTexture': 'assets/textures/player.png'
-    },
-    'audio': {
-        'rain': 'assets/audio/rain.mp3'
-    },
-    'images': {
-        'poster1': 'assets/images/poster1.png'
-    }
-};
-```
-
-::: tip
-Each entry of this object is a key value pair. The key represents the id of the asset, and will be used to retrieve it in your code. The value is the path there the asset is located in your project.
-:::
-:::
-
-
-
-As said before, here are the allowed assets types:
-
-```js
-const ASSETS_TYPES = [
-    'textures',
-    'images',
-    'models'
-    'audio'
-];
-```
-
-### Application assets
-
-The root level of the assets definition object is where you will define assets that are being shared across levels. This means you can follow the structure defined above and just add more entries to each category of asset. This changes a bit when it comes to level specific assets.
-
-### Level assets
-
-Mage allows you to define assets that will only be loaded when their level is loaded. This allows you to load only what you need, when you need it. The definition of these assets is very similar and follow the same structure, but you need to proceed like follow:
-
-```js
-const assets = {
-    // general assets
-    'models': {
-        'player': 'assets/models/player.gltf'
-    },
-    'textures': {
-        'playerTexture': 'assets/textures/player.png'
-    },
-    'audio': {
-        'rain': 'assets/audio/rain.mp3'
-    },
-    'images': {
-        'poster1': 'assets/images/poster1.png'
-    }
-
-
-    // assets for the root level
-    '/': {
-        'models': {
-            'modelForThisLevel': 'assets/models/box.gltf'
-        },
-        'audio': {
-            'modelSteps': 'assets/audio/steps.mp3',
-            'thunder': 'assets/audio/thunder.mp3'
-        }
-    },
-
-    // assets for the level "2dlevel"
-    '/2dlevel': {
-        'textures': {
-            'spriteTexture': 'assets/textures/sprite.png'
-        }
-    }
-};
-```
-
-as you can see, we now a deeper structure: we are defining assets for the root level `/` and for `/2dlevel`. For each level, the structure is the same as above.
+**Use fog for:**
+- Hiding the far clipping plane
+- Creating atmosphere (mist, haze)
+- Guiding player attention
 
 ---
 
-## Router initialisation
+## Assets Configuration
 
-This is one of the most important steps of your application, the one that starts the engine and loads the configuration. In the example above, we're pretending to have an application with two levels.
+Assets define what resources Mage should load. The structure supports both global assets (available everywhere) and level-specific assets.
 
-```js
-window.addEventListener('load', function() {
-    Router.on('/', Intro);
-    Router.on('/2dlevel', First);
+### Global Assets
 
-    Router.start(config, assets, '#gameContainer');
-});
+Loaded once, available in all levels:
+
+```javascript
+const assets = {
+    models: {
+        player: 'assets/models/player.gltf'
+    },
+    textures: {
+        ui_button: 'assets/textures/button.png'
+    },
+    audio: {
+        click: 'assets/audio/click.mp3'
+    }
+};
 ```
-In this example, we're using the `load` even on the window object to initialise Router. We're not going to explain what the `Router.on(..)` method does here, since there is a detailed explanation in the Router module page. What we care about is the next line:
 
-```js
-Router.start(config, assets, '#gameContainer');
+### Level-Specific Assets
+
+Loaded only when entering a specific level, unloaded when leaving:
+
+```javascript
+const assets = {
+    // Global assets
+    models: {
+        player: 'assets/models/player.gltf'
+    },
+    
+    // Only loaded for the '/' route
+    '/': {
+        textures: {
+            menu_bg: 'assets/textures/menu.jpg'
+        }
+    },
+    
+    // Only loaded for '/game' route
+    '/game': {
+        models: {
+            enemy: 'assets/models/enemy.gltf',
+            powerup: 'assets/models/powerup.gltf'
+        },
+        textures: {
+            level1_ground: 'assets/textures/grass.png'
+        }
+    }
+};
 ```
 
-This line is calling the `start()` method on Router, which is currently accepting three parameters:
-- `config`: this is the configuration object we defined earlier.
-- `assets`: this is the assets definition object, which we just explained.
-- `'#gameContainer'`: this is the DOM selector for the container of your application. If Mage fails to find the given selector, it will generate a container automatically.
+**Why level-specific assets?** Loading everything upfront takes time and memory. By specifying per-level assets, Mage only loads what's needed, improving startup time and memory usage.
 
-After calling the `.start` method, your application will start (hopefully).
+---
+
+## Asset Types
+
+| Type | Description | Formats |
+|------|-------------|---------|
+| `models` | 3D objects | GLTF, GLB |
+| `textures` | Images for materials | PNG, JPG, WebP |
+| `audio` | Sound effects & music | MP3, WAV, OGG |
+| `videos` | Video textures | MP4, WebM |
 
 ::: tip
-A more in depth explanation of how the Router module works, how it handles levels and which methods exposes can be found [here](/engine/advanced/router.md).:::
+For detailed asset loading patterns, see the [Assets documentation](/engine/advanced/assets/loading).
 :::
 
+---
 
+## Router Integration
+
+The Router uses your configuration to:
+
+1. Set up the rendering engine
+2. Configure physics (if enabled)
+3. Load global assets
+4. Match URL paths to levels
+5. Load level-specific assets when navigating
+
+```javascript
+Router.on('/', MenuLevel);
+Router.on('/game', GameLevel);
+Router.on('/game/:levelId', GameLevel);  // Dynamic routes
+
+Router.start(config, assets, '#container');
+```
+
+The third parameter (`#container`) is a CSS selector for the DOM element where the game canvas will be inserted.
+
+::: tip
+Learn more about routing in the [Router documentation](/engine/advanced/router).
+:::

@@ -299,7 +299,6 @@ gtag('config', 'G-434GQWY0J2');`,
     ],
 
     footer: {
-      message: "Released under the MIT License.",
       copyright: "Copyright © 2026 Mage Studio",
     },
   },

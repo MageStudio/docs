@@ -1,106 +1,217 @@
 # Router
 
-Mage uses a naive, hash based internal Router. This module handles changes in the page location, and its main goal is to start the right level for the right path. It also offers additional useful method to handle the state of the application.
+## What is the Router?
 
-## How it works
+The Router is Mage's navigation system. It connects URL paths to your Levels, making your game feel like a web application where different "pages" are actually different game states or scenes.
 
-Router will use the `location.hash` to determine which level should be loaded at any given time. Changes in the `location.hash` will be registerd, and Router will try to load the required level if available, and resorting to the root level if not.
+**Why URL-based routing?**
+- **Shareable links** - Players can share direct links to specific levels
+- **Browser navigation** - Back/forward buttons work naturally
+- **Deep linking** - Start at any level, not just the beginning
+- **Developer convenience** - Jump directly to the level you're working on
 
-Assuming that your application has been deployed on `http://prettycoolapplication.com`, the root level is what will be loaded.
-This means Router is internally mapping your levels like this:
+---
 
-- `/`: Root level, required. If missing, Mage will load a default empty level. Your location will look like this `http://prettycoolapplication.com/#/`.
+## How Navigation Works
 
-- `/second`: A generic second level, optional. The name of the path can be whatever you prefer. Your location will look like this `http://prettycoolapplication.com/#/second`.
+Mage uses hash-based URLs to track the current level:
 
-## Initialisation
+```
+https://mygame.com/#/           → Root level (menu)
+https://mygame.com/#/game       → Game level
+https://mygame.com/#/boss       → Boss level
+```
 
-Router initialisation has to be the first step of your application. This process requires two steps:
+When the URL hash changes (user clicks a link, presses back, or you call `goTo()`), the Router:
 
-- Registering which level has to be loaded for which path.
-- Call the `start` method with `assets` and `config` descriptions.
+1. Parses the new path from the hash
+2. Cleans up the current level
+3. Loads assets for the new level (if any)
+4. Creates and starts the new level
+
+---
+
+## Setting Up Routes
+
+Define routes before starting your application:
 
 ```javascript
 import { Router } from 'mage-engine';
-import RootLevel from './levels/root';
-import SecondLevel from './levels/second';
+import MenuLevel from './levels/Menu';
+import GameLevel from './levels/Game';
+import BossLevel from './levels/Boss';
 
 window.addEventListener('load', () => {
-    Router.on('/', RootLevel);
-    Router.on('/second', SecondLevel);
-
-    Router.start(config, assets);
+    // Map paths to level classes
+    Router.on('/', MenuLevel);        // Root level (required)
+    Router.on('/game', GameLevel);
+    Router.on('/boss', BossLevel);
+    
+    // Start the engine
+    Router.start(config, assets, '#container');
 });
 ```
 
-::: tip
-Both `.on` and `.start` methods will be explained in details in the [methods](/engine/advanced/router?id=methods) sections.
-:::
-:::
-
-
-
-### Options
-
-When created, each level will receive a set of options. These options are the query params in your URL. Router will automatically extract those params from your location.
-
-For Example, being on `https://prettycoolapplication.com?questId=10#/second`, will have the following effect:
-- The Level associated with the `/second` path will be loaded.
-- The following `options` object will be passed to the Level constructor
-```javascript
-{
-    questId: 10
-}
-```
-
-::: tip
-For more informations, please refer to the Level page [here](/engine/advanced/core/level.md?id=constructor);
-:::
-:::
-
-
-
 ::: warning
-Be aware, this API is likely to change in the future. 
+The root path (`/`) is required. If a user visits an undefined path, Mage falls back to the root level.
 :::
 
 ---
 
-## Methods
+## Dynamic Routes with Parameters
 
-Router exposes a series of useful methods that can be used in your application.
+Pass data to levels via URL query parameters:
 
-#### on(path: string, LevelClass: BaseLevel)
+```
+https://mygame.com/?levelId=5&difficulty=hard#/game
+```
 
-This method is responsible for registering the desired `LevelClass` for the provided `path`. Using this method is mandatory if you're planning have levels.
+The Router extracts these and passes them to your level:
 
-#### start(config: object, assets: object)
+```javascript
+class GameLevel extends Level {
+    onCreate(options) {
+        console.log(options.levelId);    // "5"
+        console.log(options.difficulty); // "hard"
+        
+        // Load the appropriate level data
+        this.loadLevelData(options.levelId);
+    }
+}
+```
 
-::: warning
-This method starts your application.
+---
+
+## Common Workflows
+
+### Navigating Between Levels
+
+```javascript
+import { Router } from 'mage-engine';
+
+class MenuLevel extends Level {
+    onCreate() {
+        // When player clicks "Start Game"
+        this.onStartClick = () => {
+            Router.goTo('/game', { 
+                difficulty: 'normal',
+                characterId: this.selectedCharacter 
+            });
+        };
+    }
+}
+```
+
+### Checking Current Location
+
+```javascript
+const currentPath = Router.getCurrentLevel();
+
+if (currentPath === '/boss') {
+    // Show boss-specific UI
+}
+```
+
+### Level Transitions Flow
+
+```
+Menu ──────► Game ──────► Boss ──────► Victory
+  │            │            │
+  │            ▼            ▼
+  └──────── Settings    Game Over
+               │            │
+               └────────────┘
+                    │
+                    ▼
+                  Menu
+```
+
+---
+
+## API Reference
+
+### on(path, LevelClass)
+
+Registers a level for a path. Call this before `start()`.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| path | string | URL path (e.g., `/`, `/game`, `/level/boss`) |
+| LevelClass | class | A class extending Level |
+
+```javascript
+Router.on('/game', GameLevel);
+Router.on('/settings', SettingsLevel);
+```
+
+### start(config, assets, container?)
+
+Starts the application. Call this after registering all routes.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| config | object | Engine configuration |
+| assets | object | Asset definitions |
+| container | string | CSS selector for game container (optional) |
+
+```javascript
+Router.start(config, assets, '#gameContainer');
+```
+
+### goTo(path, options?)
+
+Navigates to a different level programmatically.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| path | string | Target path |
+| options | object | Query parameters to pass (optional) |
+
+```javascript
+// Simple navigation
+Router.goTo('/game');
+
+// With parameters
+Router.goTo('/game', { levelId: 5, mode: 'survival' });
+```
+
+### getCurrentLevel()
+
+Returns the current level's path.
+
+```javascript
+const path = Router.getCurrentLevel(); // "/game"
+```
+
+---
+
+## Best Practices
+
+**Keep route names semantic:**
+```javascript
+// Good
+Router.on('/menu', MenuLevel);
+Router.on('/game', GameLevel);
+Router.on('/settings', SettingsLevel);
+
+// Avoid
+Router.on('/l1', Level1);
+Router.on('/l2', Level2);
+```
+
+**Use options for level configuration:**
+```javascript
+// Pass meaningful data through options
+Router.goTo('/game', { 
+    levelId: 3,
+    difficulty: 'hard',
+    checkpoint: 'mid' 
+});
+```
+
+**Handle unknown routes gracefully:**
+The root level (`/`) acts as a fallback. Make sure it's a sensible starting point like a menu or loading screen.
+
+::: tip
+For configuration and assets setup, see the [Configuration guide](/engine/advanced/configuration).
 :::
-
-Calling this method will effectively start your application. The moment when you decide to call this is entirely up to you. This means you can define your routes in a module (using the `.on` method explained above), and start the application only when everything you need is ready: for example, you might want to wait for an AJAX call to be completed, or for some other operation to be done before starting.
-
-#### getCurrentLevel(): string
-
-This method will return the path of the current level.
-
-E.g.:
-```javascript
-// when on http://prettycoolapplication.com/#/mylevel
-
-console.log(Router.getCurrentLevel()); // will print '/level';
-```
-
-#### goTo(path: string, options: object)
-
-This method is used to programmatically navigate to a different level.
-
-- `path: string`: This has to be a valid path for your application. If it's not valid, Router will load the Root level instead.
-- `options: object`: These are the options for the level you want to navigate to. Router will set the query params on the URL, and send these options to the newly create Level.
-
-E.g.:
-```javascript
-Router.goTo('/boss', { questId: 10 });
-```
