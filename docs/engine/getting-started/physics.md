@@ -139,4 +139,4 @@ Sure, one falling cube looks nice, but what about 50 small ones? We can have som
 
 ## Let's go for a drive now
 
-We created a platform, we created 50 "obstacles". What's the best way to proceed? Drive through the obstacles and watch them flying! Let's start [driving around](/engine/getting-started/driving-around.md).
+We created a platform, we created 50 "obstacles". What's the best way to proceed? Drive through the obstacles and watch them flying! Let's start [driving around](/engine/getting-started/driving_around).

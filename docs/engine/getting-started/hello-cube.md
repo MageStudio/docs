@@ -54,7 +54,7 @@ For now, the best way to launch the application is to use a python module called
 python -m SimpleHTTPServer
 ```
 
-If you now navigate to [`http://localhost:8000/`](http://localhost:8000/), you should see something like this:
+If you now navigate to `http://localhost:8000/`, you should see something like this:
 
 ![A green line on black background](./img/first_scene.png "A green line on black background")
 

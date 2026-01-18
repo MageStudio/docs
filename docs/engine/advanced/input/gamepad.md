@@ -115,7 +115,7 @@ Whenever you press or keep pressed a button on your gamepad, the following event
   - `pressed`: true
   - `value` if the button is analogic, this will hold its value
   - `index` represents the unique id of the button on this gamepad
-  - `key`. Mage will map the button to a key. If a mapping can't be found, Mage will use the [default mapping](/advanced/input/gamepad.md#mapping)
+  - `key`. Mage will map the button to a key. If a mapping can't be found, Mage will use the [default mapping](#mapping)
 - `gamepad` follows the definition described [here](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad).
 
 ### `gamepadButtonReleased`
@@ -134,7 +134,7 @@ Whenever you release a button on your gamepad, the following event will be dispa
   - `pressed`: false
   - `value` if the button is analogic, this will hold its value
   - `index` represents the unique id of the button on this gamepad
-  - `key`. Mage will map the button to a key. If a mapping can't be found, Mage will use the [default mapping](/advanced/input/gamepad.md#mapping)
+  - `key`. Mage will map the button to a key. If a mapping can't be found, Mage will use the [default mapping](#mapping)
 - `gamepad` follows the definition described [here](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad).
 
 ---

@@ -153,7 +153,7 @@ Scene.getCamera().addScript(Scripts.BUILTIN.SMOOTH_CAMERA_FOLLOW, { target: car 
 The script options must include a target, which is the car we just created.
 
 ::: tip
-The `SMOOTH_CAR_FOLLOW` script is configurable, and its API is fully described [here](/engine/advanced/scripting/builtin/smooth_car_follow.md).
+The `SMOOTH_CAR_FOLLOW` script is configurable, and its API is fully described [here](/engine/advanced/scripting/builtin/smoothcarfollow).
 :::
 :::
 

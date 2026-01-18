@@ -42,8 +42,7 @@ A number of things have happened here:
     - `intensity`: this will be defaulted to `1` if missing. We chose an intensity of `.5`.
 
 ::: tip
-Mage engine provides a set of palettes ready to use. The one we used here is the base one. More colors and options are available [here](/engine/advanced/core/constants.md)
-:::
+Mage engine provides a set of palettes ready to use. The one we used here is the base one.
 :::
 
 
@@ -51,7 +50,7 @@ Mage engine provides a set of palettes ready to use. The one we used here is the
 - We also changed the cube material. This is needed because by default elements in the scene are using `BASIC` material, which is not affected by lights.
 
 ::: tip
-For more details on elements API, refer to this page [here](/advanced/core/element.md);
+For more details on elements API, refer to this page [here](/engine/advanced/core/element);
 :::
 :::
 

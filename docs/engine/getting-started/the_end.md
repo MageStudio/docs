@@ -44,7 +44,7 @@ Scripts documentation is [here](/engine/advanced/scripting/scripts.md).
 
 ## Handing user input (keyboard and mouse) via level or script.
 
-Handlng user input is fundamental. The topic is very big and is covere in its separate pages. In this step we simply figured out how to move our simple cube on script based on which key was pressed. All of that happened [here](/engine/getting-starte/handling-input.md).
+Handlng user input is fundamental. The topic is very big and is covere in its separate pages. In this step we simply figured out how to move our simple cube on script based on which key was pressed. All of that happened [here](/engine/getting-started/handling-input).
 
 ::: tip
 Keyboard input documentation is [here](/engine/advanced/input/keyboard.md)

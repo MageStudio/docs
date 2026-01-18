@@ -142,8 +142,7 @@ This event will be fired once the page receives a `meshClick` event. Your listen
 - `meshes`: this is a list of all the meshes that intercepted the click.
 
 ::: tip
-Each entry of the `meshes` list is a `BaseMesh`. Please refer to the [BaseMesh](/advanced/mesh.md) documentation.
-:::
+Each entry of the `meshes` list is a `BaseMesh`. Please refer to the [Element](/engine/advanced/core/element) documentation.
 :::
 
 
@@ -177,8 +176,7 @@ console.log(meshes); // [ { mesh1 }, { mesh2 } ... ]
 ```
 
 ::: tip
-Each entry of the returned list is a `BaseMesh`. Please refer to the [BaseMesh](/advanced/mesh.md) documentation.
-:::
+Each entry of the returned list is a `BaseMesh`. Please refer to the [Element](/engine/advanced/core/element) documentation.
 :::
 
 

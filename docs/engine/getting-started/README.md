@@ -24,6 +24,6 @@ Instructions on how to get started with Mage
 
 - Input handling
 
-[Installing Mage Engine](/installing-mage-engine.md)
-[Setting up your project](/setting-up-your-project.md)
-[Creating the first scene](/creating-the-first-scene.md)
+[Installing Mage Engine](/engine/getting-started/installing-mage-engine)
+[Setting up your project](/engine/getting-started/setting-up-your-project)
+[Creating the first scene](/engine/getting-started/creating-first-level)
