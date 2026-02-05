@@ -1,6 +1,92 @@
 # Changelog
 
-## patch: `v3.20.1` **Latest**
+## patch: `v3.23.40` **Latest**
+
+Camera improvements:
+- Camera now supports `setPosition()` method with position syncing
+- Added `getPosition()` returning a plain `{x, y, z}` object
+- Added `update(dt)` method to Camera class
+
+Asset path resolution improvements:
+- Root-relative paths (starting with `/`) are now preserved as-is across Audio, Images, and Models loaders
+- These paths are served from the public folder and no longer have `MAGE_ASSETS_BASE_URL` prepended incorrectly
+
+## patch: `v3.23.39`
+
+Asset path resolution improvements:
+- Root-relative paths (starting with `/`) are now preserved as-is across Audio, Images, and Models loaders
+- These paths are served from the public folder and no longer have `MAGE_ASSETS_BASE_URL` prepended incorrectly
+
+## patch: `v3.23.38`
+
+Input validation improvements:
+- Added better input validation for number types
+- Improved validation across input handlers
+
+## patch: `v3.23.37`
+
+Importer fixes:
+- Models are now correctly imported into the scene
+
+## patch: `v3.23.36`
+
+Build and importer fixes:
+- Fixed babel version target for better browser compatibility
+- Fixed importer texture loading issues
+
+## patch: `v3.23.35`
+
+Material import improvements:
+- Now setting all material properties correctly on import
+
+## patch: `v3.23.34`
+
+Importer path fix:
+- Fixed importer not using the correct asset path
+
+## patch: `v3.23.33`
+
+Texture runtime fix:
+- Added missing `needsUpdate=true` after setting textures at runtime
+
+## patch: `v3.23.32`
+
+Asset URL handling:
+- Better handling of asset URLs throughout the engine
+
+## patch: `v3.23.30`
+
+Loader updates:
+- Updated FBXLoader to latest version
+
+## patch: `v3.23.29`
+
+URL resolution:
+- Using correct URLs for asset loading
+
+## patch: `v3.23.28`
+
+Image path fixes:
+- Fixed images not using resolved paths (part 2)
+
+## patch: `v3.23.27`
+
+Image path fixes:
+- Fixed images not using resolved paths
+
+## patch: `v3.23.26`
+
+Missing asset handling:
+- Better handling of missing assets with improved error messages
+
+## patch: `v3.23.25`
+
+Asset importing improvements:
+- Better importing of modules using `MAGE_ASSETS_BASE_URL` environment variable for relative path resolution
+
+---
+
+## patch: `v3.20.1`
 
 Better tweening:
 - exposing `tweenTo` function from `easing` module.

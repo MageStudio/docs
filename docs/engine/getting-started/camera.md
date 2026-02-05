@@ -36,8 +36,7 @@ camera.lookAt(cube.getPosition());
 ```
 
 ::: tip
-Fore more in depth explanation of the Camera object, please refer to the API section. [Camera](/engine/advanced/core/camera.md)
-:::
+For more in depth explanation of the Camera object, please refer to the API section. [Camera](/engine/advanced/core/camera.md)
 :::
 
 
