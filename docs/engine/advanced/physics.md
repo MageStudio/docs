@@ -21,7 +21,10 @@ Enable physics in your configuration:
 const config = {
     physics: {
         enabled: true,
-        path: './mage.physics.js'  // Path to physics worker
+        path: './mage.physics.js',          // Path to physics worker
+        gravity: { x: 0, y: -30, z: 0 },    // World gravity (m/s²)
+        fixedTimeStep: 1 / 60,              // Simulation step (seconds)
+        maxSubSteps: 3                      // Substeps per frame to catch up
     }
 };
 
@@ -31,6 +34,25 @@ Router.start(config, assets);
 ::: warning
 Physics runs in a Web Worker for performance. Make sure `mage.physics.js` is accessible at the specified path.
 :::
+
+### Per-level overrides
+
+Different levels can override any of the physics fields above. The engine deep-merges the common physics config with the active level's overrides — only the keys you specify are replaced:
+
+```javascript
+const config = {
+    physics: {
+        enabled: true,
+        gravity: { x: 0, y: -30, z: 0 }
+    },
+    levels: {
+        '/moon':  { physics: { gravity: { y: -1.6 } } },
+        '/space': { physics: { gravity: { y: 0 } } }
+    }
+};
+```
+
+See [Per-Level Configuration](/engine/advanced/configuration#per-level-configuration) for the full mechanism.
 
 ---
 
