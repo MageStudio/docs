@@ -141,11 +141,19 @@ Enables the physics simulation powered by Ammo.js.
 ```javascript
 physics: {
     enabled: true,
-    path: './mage.physics.js'   // Path to physics worker
+    path: './mage.physics.js',          // Path to physics worker
+    gravity: { x: 0, y: -30, z: 0 },    // World gravity vector (m/s²)
+    fixedTimeStep: 1 / 60,              // Internal simulation step (seconds)
+    maxSubSteps: 3                      // Cap on substeps per frame
 }
 ```
 
 **Why a separate path?** Mage runs physics in a Web Worker for performance. The `path` tells Mage where to find this worker script.
+
+**Tuning the simulation:**
+- **gravity** - Defaults to `-30` on the Y axis (snappier than real-world `-9.8` for typical game-feel). Override per axis as needed.
+- **fixedTimeStep** - The simulation's internal step size. Smaller = more accurate, more expensive. `1/60` is the standard.
+- **maxSubSteps** - If a frame's delta exceeds `fixedTimeStep`, Bullet substeps to catch up. With `1` (Ammo's default), long frames silently lose simulation time; `3` lets the engine catch up on hitches without stalling.
 
 ::: tip
 See the [Physics guide](/engine/advanced/physics) for detailed physics configuration.
@@ -250,6 +258,43 @@ const assets = {
 ```
 
 **Why level-specific assets?** Loading everything upfront takes time and memory. By specifying per-level assets, Mage only loads what's needed, improving startup time and memory usage.
+
+---
+
+## Per-Level Configuration
+
+Config blocks can be overridden per level using the `levels` key. The engine merges the common config with the active level's overrides, so each level can tune what it needs without restating the rest.
+
+```javascript
+const config = {
+    // common defaults — apply everywhere
+    physics: {
+        enabled: true,
+        gravity: { x: 0, y: -30, z: 0 }
+    },
+
+    // per-level overrides
+    levels: {
+        '/moon': {
+            physics: { gravity: { y: -1.6 } }       // only y is overridden
+        },
+        '/space': {
+            physics: { gravity: { y: 0 }, fixedTimeStep: 1 / 120 }
+        }
+    }
+};
+```
+
+**How it works:**
+- The Router pushes the current level into `Config` whenever it switches routes.
+- Getters like `Config.physics()` return the common values deep-merged with the current level's overrides.
+- Because each level switch already disposes and re-inits physics, per-level physics flows through naturally — no extra wiring needed.
+
+**Supported blocks:** today only `physics` is wired through the per-level path end-to-end. Other blocks (`fog`, `lights`, `camera`, etc.) accept overrides in the same shape, but they are read at level-load time only — there is no hot-swap on mid-level changes.
+
+::: tip
+Pass an explicit level name to any getter — `Config.physics('/moon')` — to inspect a level's resolved config without switching to it. Useful for tooling and tests.
+:::
 
 ---
 
