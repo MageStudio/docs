@@ -35,7 +35,7 @@ Sun light emits parallel rays in a single direction, simulating distant light so
 | **Cast Shadow** | Enable/disable shadow casting |
 | **Shadow Map Size** | Resolution of the shadow map (higher = sharper shadows) |
 | **Shadow Bias** | Offset to reduce shadow artifacts (shadow acne) |
-| **Shadow Camera** | Near, far, left, right, top, bottom bounds for the shadow camera frustum |
+| **Shadow Camera** | Near, far, and FOV settings for the shadow camera frustum |
 
 ## Spotlight
 
@@ -63,6 +63,8 @@ Point light radiates equally in all directions from a single point, like a light
 | **Intensity** | Brightness |
 | **Distance** | Maximum range (0 = infinite) |
 | **Decay** | Rate of falloff with distance |
+| **Cast Shadow** | Enable/disable shadow casting |
+| **Shadow Map Size / Bias / Camera Near & Far** | Shadow quality and artifact controls |
 
 ## Hemisphere Light
 

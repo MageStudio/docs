@@ -1,14 +1,14 @@
 # Adding Elements
 
-You can add new entities to your scene using the **Add Element** dropdown in the left toolbar or by dragging assets from the assets panel into the viewport.
+You can add new entities to your scene using the **Add** menu in the floating toolbar or by dragging assets from the assets panel into the viewport.
 
 ## Element Types
 
-The Add Element dropdown provides quick access to all built-in entity types:
+The Add menu is organized into four categories:
 
-### Primitives
+### Element
 
-Basic geometric shapes that can be used as building blocks:
+Basic geometric shapes and special surfaces:
 
 | Element | Description |
 |---------|-------------|
@@ -18,20 +18,21 @@ Basic geometric shapes that can be used as building blocks:
 | **Cone** | A cone mesh |
 | **Box** | A box mesh (similar to cube with separate dimensions) |
 | **Plane** | A flat plane mesh |
+| **Mirror** | A reflective planar surface |
 
-### Lights
+### Light
 
 Light sources that illuminate the scene:
 
 | Element | Description |
 |---------|-------------|
 | **Ambient Light** | Uniform light that affects all objects equally |
-| **Sun Light** | Directional light with shadow support (like sunlight) |
-| **Spotlight** | Cone-shaped light with angle and penumbra controls |
+| **Sun** | Directional light with shadow support (like sunlight) |
+| **Spot Light** | Cone-shaped light with angle and penumbra controls |
 | **Point Light** | Light that radiates in all directions from a point |
 | **Hemisphere Light** | Gradient light from sky color to ground color |
 
-### Audio
+### Sound
 
 Sound sources placed in the scene:
 
@@ -40,11 +41,16 @@ Sound sources placed in the scene:
 | **Ambient Sound** | Non-directional background audio |
 | **Directional Sound** | Positional audio that changes with listener distance |
 
-### Other
+### FX
+
+Particle effects and scenery:
 
 | Element | Description |
 |---------|-------------|
-| **Camera** | A perspective camera for rendering the scene |
+| **Fire / Explosion / Trail / Rain / Snow / Fountain** | Particle emitters, fully configurable in the inspector |
+| **Sky** | Procedural sky |
+| **Skybox** | Cube-mapped sky |
+| **Water** | Animated water surface |
 
 ## Adding Models
 

@@ -7,7 +7,7 @@ Text scripts let you write game logic in JavaScript using a built-in code editor
 The text script editor is powered by CodeMirror and provides:
 
 - **Syntax highlighting** for JavaScript/JSX
-- **Auto-save** — Scripts are saved automatically when the editor loses focus
+- **Auto-save** — Scripts are saved automatically a couple of seconds after you stop typing, with a brief "Saved" indicator
 - **Keyboard shortcut** — `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) to save manually
 
 ## Creating Text Scripts

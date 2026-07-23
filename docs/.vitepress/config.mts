@@ -300,6 +300,7 @@ gtag('config', 'G-434GQWY0J2');`,
             { text: "3D Viewport", link: "/editor/scene/viewport" },
             { text: "Hierarchy", link: "/editor/scene/hierarchy" },
             { text: "Adding Elements", link: "/editor/scene/adding-elements" },
+            { text: "Game Preview", link: "/editor/scene/preview" },
           ],
         },
         {

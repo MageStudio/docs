@@ -12,6 +12,7 @@ Select a material type from the dropdown at the top of the material tab:
 | **Lambert** | Diffuse material with simple lighting (non-glossy) |
 | **Phong** | Glossy material with specular highlights |
 | **Standard** | PBR material with metalness and roughness (most realistic) |
+| **Toon** | Cartoon-style cel shading |
 | **Depth** | Renders depth information (useful for effects) |
 
 ## Common Properties
@@ -65,8 +66,20 @@ Textures can be applied to standard and phong materials to add surface detail:
 To apply a texture:
 
 1. Upload an image via the [Assets Panel](/editor/assets/)
-2. In the material tab, click the texture slot you want to fill
-3. Select the image from the asset picker
+2. In the material tab, drop the image onto the texture slot you want to fill (or pick it from the asset picker)
+
+### Texture Options
+
+Once a texture is applied, its card expands to reveal per-texture options:
+
+| Option | Description |
+|--------|-------------|
+| **Repeat X / Y** | How many times the texture tiles on each axis |
+| **Offset X / Y** | Shifts the texture on each axis |
+| **Wrapping** | What happens beyond the texture's edge: **Repeat**, **Clamp to edge**, or **Mirrored repeat** |
+| **Mapping** | How the texture is projected: UV, Cube, or Equirectangular |
+
+Wrapping is linked across both axes by default — use the link/unlink toggle to set the horizontal (S) and vertical (T) wrapping modes independently.
 
 ::: tip
 The Standard material type provides the most realistic results and is recommended for most use cases. It uses physically-based rendering (PBR) which produces consistent, predictable lighting.
