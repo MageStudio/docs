@@ -1,6 +1,179 @@
 # Changelog
 
-## patch: `v3.23.40` **Latest**
+## patch: `v3.28.1` **Latest**
+
+Reparenting and import fixes:
+- Child scale is now persisted when reparenting elements
+- Child transforms are reconstructed relative to their parent on import
+- Fixed case-mismatched relative imports inside the engine
+
+## minor: `v3.28.0`
+
+Compound physics bodies:
+- Rigidly-attached children now contribute compound colliders to their parent's physics body
+- Compound bodies are rebuilt when elements are reparented at runtime
+- Fixed compound child collider placement
+
+## patch: `v3.27.4`
+
+Kinematic colliders:
+- Added kinematic collider support for movable platforms — kinematic bodies push dynamic bodies but are driven by their element's transform
+
+## patch: `v3.27.3`
+
+Per-axis texture wrapping:
+- `setTexture` options now support `wrapS` and `wrapT` for independent horizontal/vertical wrapping
+- The legacy single `wrap` option still works as a fallback for both axes
+
+## patch: `v3.27.2`
+
+Texture offset:
+- `setTexture` options now support `offset: { x, y }` alongside `repeat`
+- Added `Element.setTextureOptions(textureType, options)` to update options on an already-set texture
+
+## patch: `v3.27.1`
+
+Reparenting fix:
+- World transform is now preserved when reparenting elements out of, or between, parents
+
+## minor: `v3.27.0` / `v3.26.0`
+
+Per-level physics configuration:
+- Physics can now be configured per level via the `physics` config resolver
+- Configurable `gravity` (`{ x, y, z }`) and simulation step settings, merged over common defaults
+- Fixed a TDZ crash in `handleVehicleUpdate` and camera positioning in `SmoothCarFollow`
+
+## patch: `v3.25.8`
+
+Bounding box unification:
+- Unified how bounding boxes are calculated across the engine
+- Sphere and player collider sizes now use world-space AABBs
+
+## patch: `v3.25.7`
+
+Layers and overridable bounding boxes:
+- Gizmos are now rendered on a separate layer
+- `Element.boundingBox` can now be overridden
+- Now re-exporting `LineSegments2`, `LineSegmentsGeometry` and `LineMaterial`
+
+## patch: `v3.25.6`
+
+Physics dispatcher fix:
+- Added missing `sendElementDisposed` to the physics dispatcher
+
+## patch: `v3.25.5`
+
+**Behaviour change** — default physics mass:
+- Bodies without an explicit `mass` are now **static** (`mass: 0`) instead of dynamic (`mass: 1`)
+- Set `mass` explicitly on elements that should react to forces and gravity
+
+## patch: `v3.25.4`
+
+Physics race condition:
+- Fixed the retry loop in `setThirdPersonControls` to clear stale entries before re-adding
+
+## patch: `v3.25.3`
+
+On-demand physics:
+- Physics is now enabled on demand when Third Person Controls are requested — no need to enable physics upfront in your configuration
+
+## patch: `v3.25.2`
+
+Error handling:
+- Added missing `.catch()` on the `init()` chain in `GameRunner.start()`
+
+## patch: `v3.25.1`
+
+Physics and Third Person Controls improvements:
+- Improved the physics system and third person controls behaviour
+- Removed debug logging, engine-wide lint cleanup
+
+## minor: `v3.25.0`
+
+Third Person Controls:
+- New `ThirdPersonControl`, available via `controls.setThirdPersonControls(target, options)` and the `CONTROLS.TPS` constant
+- Physics pipeline fixes to support character controllers
+- Added new examples
+
+## patch: `v3.24.10`
+
+Universe fix:
+- Fixed universe imports
+
+## patch: `v3.24.9`
+
+Keyboard input:
+- `isKeyPressed` is now tracked correctly using `keydown`/`keyup` events
+
+## patch: `v3.24.8`
+
+Mouse input:
+- Controls now dispatch the previously missing `drag_end` event
+
+## patch: `v3.24.7`
+
+Camera serialization:
+- Camera position is now synced from its holder before serializing in `toJSON`
+
+## patch: `v3.24.6`
+
+Scene integrity:
+- Duplicate elements are now prevented when adding elements to the scene
+
+## patch: `v3.24.5`
+
+Importer fixes:
+- Fixed importing cameras
+- Fixed FBX models that have a root offset
+
+## patch: `v3.24.4`
+
+Animations and skeletons:
+- Skinned models and their skeletons are now handled correctly
+- Added animation crossfade functions for smooth transitions between animations
+
+## patch: `v3.24.3`
+
+Scenery effects:
+- Scenery effects are now usable outside of examples, with working import/export
+
+## patch: `v3.24.2`
+
+Parent/child handling:
+- Better parent/child handling using `attach`/`add`, with correct position handling and importing
+
+## patch: `v3.24.1`
+
+Particles fix:
+- Fixed deleting emitters
+
+## minor: `v3.24.0`
+
+Particles rewrite:
+- All particle emitters now use only the Proton engine
+- Particle emitters can now be imported and exported (serialization support)
+
+## patch: `v3.23.44`
+
+Lights fix:
+- Lights now update their matrix when updated
+
+## patch: `v3.23.43`
+
+Lights fix:
+- Fixed using the wrong function when deserialising sunlights
+
+## patch: `v3.23.42`
+
+Editor support:
+- Camera holder now sets its UUID correctly and is selectable
+
+## patch: `v3.23.41`
+
+**Behaviour change** — element storage:
+- Elements are now stored and looked up by UUID instead of by name
+
+## patch: `v3.23.40`
 
 Camera improvements:
 - Camera now supports `setPosition()` method with position syncing

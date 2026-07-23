@@ -6,13 +6,13 @@ Installing the Engine is as simple as running the following npm command:
 npm install --save mage-engine@latest
 ```
 
-This will install mage-engine `v3.23.40`. You should be able to see something like this in your `package.json` under the `dependencies` section:
+This will install mage-engine `v3.28.1`. You should be able to see something like this in your `package.json` under the `dependencies` section:
 
 ```json
 "libraryA": "0.0.1",
 "anotherLibrary": "1.11.1",
 "inferno": "7.3.2",
-"mage-engine": "3.23.40",
+"mage-engine": "3.28.1",
 ```
 
 ::: tip
