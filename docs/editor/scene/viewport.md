@@ -18,6 +18,8 @@ Click on any entity in the viewport to select it. When an entity is selected:
 - The entity is highlighted in the [Hierarchy Panel](/editor/scene/hierarchy)
 - Its properties are displayed in the [Inspector](/editor/inspector/properties)
 
+Hold `Ctrl/Cmd` or `Shift` while clicking to select **multiple** entities and transform them as a group — see [Selecting Multiple Entities](/editor/scene/hierarchy#selecting-multiple-entities).
+
 To deselect, press `Esc` or click on empty space in the viewport. Press `F` to frame the camera on the selected entity.
 
 ## Transform Gizmos

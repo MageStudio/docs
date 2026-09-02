@@ -68,6 +68,14 @@ Event nodes trigger the connected logic when a specific event occurs:
 | **Set Position / Rotation / Scale** | Set absolute transform values |
 | **Translate** | Move relative to current position |
 | **Look At** | Orient entity to face a target |
+| **Get / Set Position By Key** | Read or write one component (`x`, `y`, `z`) of position, chosen by a string key |
+| **Get / Set Rotation By Key** | Read or write one component of rotation by key |
+| **Get / Set Scale By Key** | Read or write one component of scale by key |
+| **Get / Set Quaternion By Key** | Read or write one component of the quaternion by key |
+
+::: tip By-key nodes
+The **By Key** nodes take the axis as a `key` input (a string like `"y"`) instead of a fixed node per axis — handy when the axis is computed or comes from a variable. Passing an invalid key raises a clear runtime error.
+:::
 
 ### Transition Nodes
 
@@ -189,6 +197,54 @@ Event nodes trigger the connected logic when a specific event occurs:
 ## Action Nodes
 
 Action nodes are special container nodes. You can drag other nodes inside them to group related logic. This helps organize complex graphs into clear, logical blocks.
+
+## Node Groups
+
+Groups bundle several nodes into a single labelled container you can collapse, reuse, and reason about as a unit.
+
+### Creating a group
+
+Select two or more nodes, then press `Ctrl/Cmd+G` — or right-click and choose **Group N nodes**. The nodes are wrapped in a labelled container.
+
+### Collapsing and expanding
+
+**Double-click** a group to collapse it to a compact node (or expand it again) — collapsed groups expose one handle per boundary port and hide their internals. You can also use **Collapse** / **Expand** from the right-click menu.
+
+### Group ports
+
+Right-click a node inside a group to **Expose input** or **Expose output** for one of its handles — this promotes that handle to a named port on the group's edge, so you can wire the group from outside without expanding it. Exposed ports persist even when nothing is connected; choose **Unexpose** to remove one.
+
+### Ungrouping
+
+Press `Ctrl/Cmd+Shift+G`, or right-click and choose **Ungroup**, to dissolve a group back into its individual nodes.
+
+### Right-click menu
+
+The canvas context menu adapts to what's under the cursor and offers, as applicable: **Group N nodes**, **Collapse** / **Expand**, **Ungroup**, **Add to library**, and per-handle **Expose / Unexpose** options.
+
+## Block Library
+
+A **block** is a saved, reusable snapshot of a group — its nodes, internal wiring, and ports — that you can drop into any script. Unlike a group (which lives in one script), a block persists in a library and can be reused freely; each dropped instance is an independent copy.
+
+### Saving a block
+
+Right-click a group and choose **Add to library** to open the **Save block to library** dialog:
+
+- **Block name** — a descriptive name (the group is renamed to match)
+- **Available in all projects** — when on (the default), the block is saved to your account and appears in every project; when off, it's saved to the current project only
+
+### Using blocks
+
+The node palette has a **Library** section at the bottom, split into:
+
+- **This project** — blocks scoped to the current project
+- **My library** — your account-wide blocks
+
+Each entry shows the block's name and port count. Drag a block onto the canvas to add an independent copy, or use its delete button to remove it from the library.
+
+## Variable Reference Node
+
+The **Variable Reference** node lets you reuse a variable's value anywhere in the graph without dragging a long wire across the canvas — pick a named variable and its outputs are mirrored at the reference. See the [Variable Nodes](#variable-nodes) list.
 
 ## Entity Picker
 

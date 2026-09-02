@@ -2,6 +2,16 @@
 
 The editor ships continuously — this changelog groups the highlights by month.
 
+## August 2026
+
+- **Collision decomposition** — new Collision tab in the asset inspector generates named collision variants from a model (Fast / Balanced / Precise presets), selectable per instance in the physics inspector
+- **Model preview** — model assets now render a live clay preview in the asset inspector
+- **Visual coding — node groups** — group a selection (`Ctrl/Cmd+G`), collapse/expand it, expose internal handles as named ports, and ungroup (`Ctrl/Cmd+Shift+G`)
+- **Visual coding — block library** — save a group as a reusable block, scoped to the project or your whole account, and drag it from the palette's Library section into any script
+- **By-key transform nodes** — Get/Set Position, Rotation, Scale, and Quaternion by a string key
+- **Multi-select** — `Ctrl/Cmd`/`Shift`-select multiple scene elements, transform them as a group, and batch-reparent them
+- Physics inspector adds **Model Shape** and **None** collider types; engine updated to `v3.31.0`
+
 ## July 2026
 
 - **Kinematic colliders** — new Kinematic toggle in the physics inspector for movable platforms that carry other bodies

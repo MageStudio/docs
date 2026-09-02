@@ -38,6 +38,15 @@ Click on any entity in the hierarchy to:
 
 The hierarchy and viewport selections are always in sync — selecting in one updates the other. Clicking the root **Level** node selects the level itself and opens its level-wide settings (including [per-level physics](/editor/inspector/physics#per-level-physics)).
 
+### Selecting Multiple Entities
+
+You can select several entities at once, in the hierarchy or the viewport:
+
+- **`Ctrl/Cmd` + click** — add or remove an entity from the selection
+- **`Shift` + click** (hierarchy) — select the range between the last-clicked entity and this one
+
+With multiple entities selected, the transform gizmo acts on them as a group — move, rotate, or scale them together — and dragging any one of them in the hierarchy **reparents the whole selection** under the new parent. The inspector shows properties only when a single entity is selected; with several selected it prompts you to narrow to one.
+
 ## Renaming
 
 Double-click an entity in the tree to open the **Rename Entity** dialog. You can also edit the name field in the inspector's Global tab.

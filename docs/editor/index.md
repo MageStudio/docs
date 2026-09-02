@@ -8,7 +8,7 @@ Mage Editor is a browser-based 3D game editor built on top of the [Mage Engine](
 - **Game Preview** — Play your game inside the editor with real physics, scripts, and controls — no build required
 - **Inspector** — Context-aware property panels for meshes, lights, cameras, materials, physics, particles, and animations
 - **Asset Management** — Upload and organize 3D models, textures, audio, video, and scripts with drag-and-drop support
-- **Visual Scripting** — Build game logic with a node-based editor featuring 90+ node types across events, transforms, materials, physics, controls, audio, and more
+- **Visual Scripting** — Build game logic with a node-based editor featuring 90+ node types, plus reusable node groups and a shareable block library
 - **Text Scripting** — Write JavaScript scripts with a built-in code editor powered by CodeMirror
 - **Scene Hierarchy** — Tree view of all entities with search, rename, copy/paste, and drag-and-drop reparenting
 - **Build & Deploy** — Build your game and publish it to the cloud with a single click

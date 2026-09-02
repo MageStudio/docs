@@ -12,7 +12,6 @@ Physics does not simulate while editing the scene, but it **runs in the [Game Pr
 |----------|-------------|
 | **Mass** | The mass of the entity. A mass of 0 makes the entity static (immovable) |
 | **Collider Type** | The shape used for collision detection |
-| **Apply Physics Update** | Sync the physics simulation back to the entity's transform |
 | **Kinematic** | Makes a mass-0 collider movable: it can be driven by scripts and carries bodies resting on it — ideal for moving platforms |
 
 ## Collider Types
@@ -23,10 +22,12 @@ The collider type determines the shape used for physics collision calculations:
 |----------|-------------|
 | **Box** | Axis-aligned bounding box |
 | **Sphere** | Bounding sphere |
+| **Model Shape** | Convex hull wrapped around the model's geometry — best for imported models |
 | **Player** | Capsule collider designed for characters |
+| **None** | No shape of its own; acts as a frame for physics-enabled children |
 
 ::: tip
-Collider sizes are computed automatically from the entity's bounding box. Keep colliders simple — box and sphere are the cheapest to simulate.
+Collider sizes are computed automatically from the entity's bounding box. Keep colliders simple — box and sphere are the cheapest to simulate. **Model Shape** follows the mesh but is convex, so concave detail (arches, doorways) is filled in — use [collision variants](#collision-variants) to keep openings.
 :::
 
 ## Collider Size
@@ -36,6 +37,15 @@ The **Collider Size** section lets you override the automatically computed colli
 - Per-axis inputs (Width/Height/Length for Box, Radius for Sphere, Width/Height for Player) show `AUTO` when using the computed size
 - A reset button restores the computed value for each axis
 - The **Show Collider** toggle displays this entity's collider outline in the viewport (there's also a scene-wide collider toggle in the floating toolbar)
+
+## Collision Variants
+
+For a **Model Shape** collider, the **Collision Shape** dropdown selects how accurately the collider matches the model:
+
+- **Auto (single hull)** — one convex hull around the whole model (the default)
+- Any named variant generated from the model — a set of convex hulls that preserves concavities like doorways and arches
+
+Variants are generated once per model in the asset inspector's **Collision** tab (see [Assets](/editor/assets/#collision-decomposition)), then chosen per placed instance here. This mirrors the engine's [collision variants](/engine/advanced/physics#collision-variants).
 
 ## State
 
