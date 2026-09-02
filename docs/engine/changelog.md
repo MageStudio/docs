@@ -1,6 +1,33 @@
 # Changelog
 
-## patch: `v3.28.1` **Latest**
+## minor: `v3.31.0` **Latest**
+
+Collision decomposition:
+- A `MODEL_SHAPE` collider can now use **collision variants** — precomputed sets of convex hulls shipped alongside a model — to approximate concave shapes (doorways, arches, gaps) that a single convex hull would fill in
+- Select a variant per placed instance with the new `collisionVariant` physics option; each hull in the set becomes a leaf of the element's compound body, and every leaf still reports contacts under the model's own UUID
+- Variant hull sets are loaded automatically from model asset dependencies keyed `collision:<variant>`
+
+## minor: `v3.30.0`
+
+- Version re-tag of `v3.29.0`; no functional changes.
+
+## minor: `v3.29.0`
+
+Model-shape colliders and static collision events:
+- New **`MODEL_SHAPE`** collider type (briefly named `HULL` during development) — wraps the element's own geometry in a convex hull, ideal for imported models. It collides with every other collider type and can be static or dynamic
+- New **`collisionEvents`** physics option: opt a static (mass-0) body into collision reporting so overlapping static bodies emit `PHYSICS_EVENTS.ELEMENT.COLLISION` — useful for trigger zones (events only, no physical response)
+- A subtree whose colliders are all `NONE` is now treated as a valid "no collider" configuration instead of an error
+
+## patch: `v3.28.2`
+
+Collider building overhaul:
+- All Box, Sphere, `MODEL_SHAPE` and `NONE` colliders are now built through a single world-space path, so a collider lines up with its visible mesh regardless of scale, rotation, geometry offset, or nesting — and a runtime `enablePhysics()` collider is placed identically to an imported one
+- **Rotated box colliders** are now sized by their true extents instead of an inflated axis-aligned bounds
+- New **`NONE`** collider type: an element with no shape of its own that still acts as the rigid frame its physics-enabled descendants weld to
+- **Sky and Skybox** scenery are now excluded from physics — they no longer generate enormous colliders
+- Physics realization is now isolated per element on import, so one bad element can't abort the whole scene
+
+## patch: `v3.28.1`
 
 Reparenting and import fixes:
 - Child scale is now persisted when reparenting elements

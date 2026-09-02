@@ -121,6 +121,8 @@ Bodies without an explicit `mass` default to **static** (`mass: 0`). If you want
 | `SPHERE` | Balls, projectiles |
 | `PLAYER` | Character capsules (used by Third Person Controls) |
 | `VEHICLE` | Cars and other vehicles |
+| `MODEL_SHAPE` | Imported models — wraps the model's geometry in a convex hull (since v3.29.0) |
+| `NONE` | No shape of its own — a frame that hosts physics-enabled children (since v3.28.2) |
 
 ```javascript
 // Sphere for a ball
@@ -128,7 +130,14 @@ ball.enablePhysics({ mass: 0.5, colliderType: 'SPHERE' });
 
 // Static floor (mass defaults to 0)
 ground.enablePhysics({ colliderType: 'BOX' });
+
+// Imported model — collider follows the mesh's convex hull
+statue.enablePhysics({ colliderType: 'MODEL_SHAPE' });
 ```
+
+::: tip Model colliders
+`MODEL_SHAPE` builds a **convex** hull around the model's geometry. Because it's convex, concave detail is lost — an archway is filled in, a staircase becomes a ramp. To keep openings and concavities, use [collision variants](#collision-variants).
+:::
 
 Collider sizes are computed automatically from the element's bounding box (in world space since v3.25.8). You can override the size explicitly:
 
@@ -263,7 +272,59 @@ platform.add(bumper);
 
 ---
 
+## Collision Variants
+
+A single `MODEL_SHAPE` collider is convex, so it fills in a model's concavities — an archway becomes solid, a staircase becomes a ramp. Since **v3.31.0**, a model can carry **collision variants**: precomputed sets of convex hulls that together approximate the concave shape, preserving doorways, arches, and gaps.
+
+Variants are shipped as model asset dependencies keyed `collision:<variant>` and are loaded automatically. Select which variant a placed instance uses with the `collisionVariant` option:
+
+```javascript
+statue.enablePhysics({
+    colliderType: 'MODEL_SHAPE',
+    collisionVariant: 'detailed',   // matches a "collision:detailed" dependency
+    mass: 0
+});
+```
+
+Each hull in the selected set becomes a leaf of the element's [compound body](#compound-bodies), and every leaf reports contacts under the model's own UUID. If no variant is selected (or the named one isn't found), the element falls back to a single computed convex hull.
+
+::: tip
+In the [Mage Studio editor](/editor/inspector/physics#collision-variants), collision variants are generated from a model in the asset inspector's **Collision** tab and selected per instance in the physics inspector — you rarely author the `collision:<variant>` assets by hand.
+:::
+
+---
+
 ## Collision Detection
+
+### Physics Collision Events
+
+Bodies in the physics simulation emit a collision event when they touch:
+
+```javascript
+import { PHYSICS_EVENTS } from 'mage-engine';
+
+element.addEventListener(PHYSICS_EVENTS.ELEMENT.COLLISION, ({ data }) => {
+    // data.contacts: [{ distance, elements: [{ uuid, velocity, worldPos, localPos }, …] }]
+});
+```
+
+By default only pairs involving a dynamic (moving) body report contacts — two static bodies never do. To make a static body (such as a trigger zone) report overlaps, opt it in with `collisionEvents` (since **v3.29.0**):
+
+```javascript
+triggerZone.enablePhysics({
+    colliderType: 'BOX',
+    mass: 0,
+    collisionEvents: true   // static body now reports overlaps (events only, no physical response)
+});
+```
+
+::: warning
+`collisionEvents` gives you overlap **events only** — there is no solver response between two static bodies. Use it for triggers and overlap detection, not to make static objects push each other.
+:::
+
+### Ray Colliders
+
+Elements can also detect collisions using ray-based colliders:
 
 Elements detect collisions using ray-based colliders:
 
