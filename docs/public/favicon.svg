@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs><mask id="cube"><polygon points="32,6 54,19 54,45 32,58 10,45 10,19" fill="#fff" stroke="#fff" stroke-width="8" stroke-linejoin="round"></polygon></mask></defs>
+  <g mask="url(#cube)" transform="translate(32,32) scale(1.18) translate(-32,-32)">
+      <polygon points="10,19 32,32 32,58 10,45" fill="#3B82F6"></polygon>
+      <polygon points="54,19 54,45 32,58 32,32" fill="#1D5FD1"></polygon>
+      <polygon points="32,6 54,19 32,32 10,19" fill="#7FB2FA"></polygon>
+    </g>
+</svg>
