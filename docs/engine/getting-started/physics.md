@@ -23,11 +23,15 @@ const config = {
     physics: {
         enabled: true,
         path: 'path/to/ammo.js',
-        gravity: { x: 0, y: -9.8, z: 0}
+        gravity: { x: 0, y: -30, z: 0 }
     },
     // rest of configuration
 };
 ```
+
+::: tip
+The default gravity is `-30` (snappier than real-world `-9.8` for typical game-feel). See the [Configuration guide](/engine/advanced/configuration#physics) for the full set of physics knobs including `fixedTimeStep` and `maxSubSteps`, and how to set them per level.
+:::
 
 Mage engine comes with the Ammo distributable included. Just head over to `node_modules/mage-engine/dist/ammo.js` , and copy the file to any destination in your project.
 

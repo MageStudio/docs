@@ -8,8 +8,8 @@ Mage includes a physics simulation powered by [Ammo.js](https://github.com/kripk
 - Gravity and forces on objects
 - Collision detection between entities
 - Realistic rigid body dynamics (bouncing, rolling, stacking)
-- Raycasting for hit detection
-- Vehicle physics
+- Kinematic platforms that carry other bodies
+- Character and vehicle physics
 
 ---
 
@@ -21,7 +21,10 @@ Enable physics in your configuration:
 const config = {
     physics: {
         enabled: true,
-        path: './mage.physics.js'  // Path to physics worker
+        path: './ammo.js',                  // Path to the physics worker
+        gravity: { x: 0, y: -30, z: 0 },    // World gravity (default)
+        fixedTimeStep: 1 / 60,              // Simulation step (seconds)
+        maxSubSteps: 3                      // Substeps per frame to catch up
     }
 };
 
@@ -29,8 +32,31 @@ Router.start(config, assets);
 ```
 
 ::: warning
-Physics runs in a Web Worker for performance. Make sure `mage.physics.js` is accessible at the specified path.
+Physics runs in a Web Worker for performance. Make sure the worker script is accessible at the specified `path`.
 :::
+
+::: tip Since v3.25.3
+When you request [Third Person Controls](/engine/advanced/controls/third.md) with `physicsEnabled: true`, the engine enables physics on demand — you don't need to enable it upfront in your configuration.
+:::
+
+### Per-level overrides
+
+Different levels can override any of the physics fields above. The engine deep-merges the common physics config with the active level's overrides — only the keys you specify are replaced:
+
+```javascript
+const config = {
+    physics: {
+        enabled: true,
+        gravity: { x: 0, y: -30, z: 0 }
+    },
+    levels: {
+        '/moon':  { physics: { gravity: { y: -1.6 } } },
+        '/space': { physics: { gravity: { y: 0 } } }
+    }
+};
+```
+
+See [Per-Level Configuration](/engine/advanced/configuration#per-level-configuration) for the full mechanism.
 
 ---
 
@@ -47,15 +73,15 @@ Game Loop ──────► Sync ──────► Physics Step
 Display ◄────────────────── Transform Updates
 ```
 
-1. Your game sets positions, applies forces
-2. Physics worker simulates the next step
+1. Your game sets positions, applies velocities
+2. The physics worker simulates the next step
 3. Transforms are synced back to Three.js objects
 
-### Bodies and Shapes
+### Bodies and Colliders
 
-Every physics-enabled entity has:
+Every physics-enabled element has:
 - **Body** - The physics representation (mass, velocity, forces)
-- **Shape** - The collision geometry (box, sphere, capsule, mesh)
+- **Collider** - The collision shape, derived from the element's bounding box (or set explicitly)
 
 ---
 
@@ -71,42 +97,68 @@ class GameLevel extends Level {
         // Create a cube with physics
         const box = new Cube(2, 2, 2);
         box.setPosition({ x: 0, y: 10, z: 0 });
-        
-        // Enable physics with a box shape
+
+        // Enable physics — set a mass to make it dynamic
         box.enablePhysics({
-            mass: 1,           // 0 = static (immovable)
-            shape: 'box'
+            mass: 1,
+            colliderType: 'BOX'
         });
-        
-        Scene.add(box);
+
         // The cube will now fall due to gravity!
     }
 }
 ```
 
-### Physics Shapes
+::: warning Since v3.25.5
+Bodies without an explicit `mass` default to **static** (`mass: 0`). If you want an object to fall or react to forces, always set a `mass` greater than `0` — previously the default was `1` (dynamic).
+:::
 
-| Shape | Use Case |
-|-------|----------|
-| `box` | Crates, buildings, walls |
-| `sphere` | Balls, projectiles |
-| `capsule` | Characters (better for slopes) |
-| `cylinder` | Barrels, pillars |
-| `mesh` | Complex static geometry |
+### Collider Types
+
+| Collider Type | Use Case |
+|---------------|----------|
+| `BOX` | Crates, buildings, walls, floors (default) |
+| `SPHERE` | Balls, projectiles |
+| `PLAYER` | Character capsules (used by Third Person Controls) |
+| `VEHICLE` | Cars and other vehicles |
+| `MODEL_SHAPE` | Imported models — wraps the model's geometry in a convex hull (since v3.29.0) |
+| `NONE` | No shape of its own — a frame that hosts physics-enabled children (since v3.28.2) |
 
 ```javascript
 // Sphere for a ball
-ball.enablePhysics({ mass: 0.5, shape: 'sphere' });
+ball.enablePhysics({ mass: 0.5, colliderType: 'SPHERE' });
 
-// Capsule for a character
-player.enablePhysics({ mass: 80, shape: 'capsule' });
+// Static floor (mass defaults to 0)
+ground.enablePhysics({ colliderType: 'BOX' });
 
-// Static floor (mass = 0)
-ground.enablePhysics({ mass: 0, shape: 'box' });
+// Imported model — collider follows the mesh's convex hull
+statue.enablePhysics({ colliderType: 'MODEL_SHAPE' });
+```
+
+::: tip Model colliders
+`MODEL_SHAPE` builds a **convex** hull around the model's geometry. Because it's convex, concave detail is lost — an archway is filled in, a staircase becomes a ramp. To keep openings and concavities, use [collision variants](#collision-variants).
+:::
+
+Collider sizes are computed automatically from the element's bounding box (in world space since v3.25.8). You can override the size explicitly:
+
+```javascript
+crate.enablePhysics({
+    mass: 1,
+    colliderType: 'BOX',
+    colliderWidth: 2,
+    colliderHeight: 1,
+    colliderLength: 2
+});
+
+ball.enablePhysics({
+    mass: 0.5,
+    colliderType: 'SPHERE',
+    colliderRadius: 0.75
+});
 ```
 
 ::: tip
-Use simpler shapes when possible. A `box` is much faster than a `mesh` shape.
+Since v3.25.7 you can also override `element.boundingBox` with your own `Box3` — automatic collider sizing will use it. See [Element](/engine/advanced/core/element.md).
 :::
 
 ---
@@ -118,8 +170,7 @@ Use simpler shapes when possible. A `box` is much faster than a `mesh` shape.
 ```javascript
 const floor = new Cube(100, 1, 100);
 floor.setPosition({ y: -0.5 });
-floor.enablePhysics({ mass: 0, shape: 'box' });  // mass: 0 = static
-Scene.add(floor);
+floor.enablePhysics({ colliderType: 'BOX' });  // mass defaults to 0 = static
 ```
 
 ### Dropping Objects
@@ -127,118 +178,41 @@ Scene.add(floor);
 ```javascript
 for (let i = 0; i < 10; i++) {
     const box = new Cube(1, 1, 1);
-    box.setPosition({ 
+    box.setPosition({
         x: Math.random() * 10 - 5,
         y: 10 + i * 2,
         z: Math.random() * 10 - 5
     });
-    box.enablePhysics({ mass: 1, shape: 'box' });
-    Scene.add(box);
+    box.enablePhysics({ mass: 1, colliderType: 'BOX' });
 }
 ```
 
-### Applying Forces
+### Setting Velocities
 
 ```javascript
-// Push an object
-object.applyForce({ x: 100, y: 0, z: 0 });
-
-// Apply impulse (instant velocity change)
-object.applyImpulse({ x: 0, y: 50, z: 0 });
-
-// Set velocity directly
+// Set linear velocity directly
 object.setLinearVelocity({ x: 10, y: 0, z: 0 });
+object.getLinearVelocity();
+
+// Spin an object
+object.setAngularVelocity({ x: 0, y: 5, z: 0 });
+object.getAngularVelocity();
 ```
 
-### Player Character with Physics
+### Player Characters
+
+For physics-driven characters, use [Third Person Controls](/engine/advanced/controls/third.md) — the engine creates a `PLAYER` capsule body for the target, handles movement, jumping, and ground detection for you:
 
 ```javascript
-class PlayerController extends BaseScript {
-    start(player) {
-        this.player = player;
-        this.player.enablePhysics({
-            mass: 80,
-            shape: 'capsule',
-            friction: 0.5
-        });
-    }
-    
-    update(dt) {
-        const input = Input.keyboard;
-        const force = { x: 0, y: 0, z: 0 };
-        
-        if (input.isPressed('w')) force.z = -500;
-        if (input.isPressed('s')) force.z = 500;
-        if (input.isPressed('a')) force.x = -500;
-        if (input.isPressed('d')) force.x = 500;
-        
-        this.player.applyForce(force);
-    }
-}
-```
+import { Controls } from 'mage-engine';
 
----
-
-## Collision Detection
-
-### Collision Events
-
-```javascript
-box.addEventListener('collision', (event) => {
-    const other = event.body;  // The entity we collided with
-    console.log('Hit:', other.getName());
+const control = await Controls.setThirdPersonControls({
+    target: character,
+    physicsEnabled: true,
+    speed: 2,
+    jumpSpeed: 2
 });
 ```
-
-### Collision Filtering
-
-Control which objects can collide:
-
-```javascript
-// Group A objects only collide with Group B
-boxA.enablePhysics({ 
-    mass: 1, 
-    shape: 'box',
-    collisionGroup: 1,
-    collisionMask: 2  // Only collide with group 2
-});
-
-boxB.enablePhysics({
-    mass: 1,
-    shape: 'box', 
-    collisionGroup: 2,
-    collisionMask: 1  // Only collide with group 1
-});
-```
-
----
-
-## Raycasting
-
-Cast rays to detect objects in a direction:
-
-```javascript
-import { Physics } from 'mage-engine';
-
-// Cast a ray from origin in direction
-const origin = { x: 0, y: 5, z: 0 };
-const direction = { x: 0, y: -1, z: 0 };
-
-const hit = Physics.raycast(origin, direction, 100);
-
-if (hit) {
-    console.log('Hit:', hit.entity.getName());
-    console.log('Distance:', hit.distance);
-    console.log('Point:', hit.point);
-    console.log('Normal:', hit.normal);
-}
-```
-
-**Common raycast uses:**
-- Ground detection (is player on floor?)
-- Line of sight checks
-- Shooting/projectiles
-- Object picking with mouse
 
 ---
 
@@ -248,16 +222,19 @@ if (hit) {
 
 | Property | Description | Default |
 |----------|-------------|---------|
-| `mass` | Weight in kg (0 = static) | 1 |
-| `friction` | Surface friction (0-1) | 0.5 |
-| `restitution` | Bounciness (0-1) | 0.2 |
-| `linearDamping` | Air resistance | 0 |
-| `angularDamping` | Rotation resistance | 0 |
+| `mass` | Weight in kg (0 = static) | 0 |
+| `colliderType` | `BOX`, `SPHERE`, `PLAYER` or `VEHICLE` | `BOX` |
+| `kinematic` | Script-driven body that pushes dynamic bodies | `false` |
+| `friction` | Surface friction | 1 |
+| `restitution` | Bounciness (dynamic bodies) | 0.9 |
+| `damping` | `{ linear, angular }` resistance (dynamic bodies) | `{ linear: 0.2, angular: 0.2 }` |
+| `ccdRadius` | Continuous collision detection radius (fast-moving dynamic bodies) | 0 |
+| `colliderWidth` / `colliderHeight` / `colliderLength` / `colliderRadius` | Explicit collider size overrides | auto |
 
 ```javascript
 ball.enablePhysics({
     mass: 0.5,
-    shape: 'sphere',
+    colliderType: 'SPHERE',
     friction: 0.1,       // Slippery
     restitution: 0.9     // Very bouncy
 });
@@ -265,51 +242,123 @@ ball.enablePhysics({
 
 ### Kinematic Bodies
 
-Kinematic bodies are controlled by code but still affect physics objects:
+Kinematic bodies (since v3.27.4) are controlled by your code but still push and carry dynamic bodies — perfect for moving platforms:
 
 ```javascript
 // Moving platform
 platform.enablePhysics({
     mass: 0,
-    shape: 'box',
+    colliderType: 'BOX',
     kinematic: true
 });
 
-// Move platform in update loop
+// Move the platform from a script — riders are carried along
 platform.setPosition({ y: Math.sin(time) * 5 });
+```
+
+::: tip
+A static body is automatically promoted to kinematic the first time a script moves or rotates it, so forgetting the flag won't freeze your platform.
+:::
+
+### Compound Bodies
+
+Since v3.28.0, when a physics-enabled element has physics-enabled children attached to it, the engine builds a single **compound body**: the parent's collider plus one collider per child, welded together. Moving or rotating the parent carries every child collider with it, and compound bodies are rebuilt automatically when elements are reparented at runtime.
+
+```javascript
+platform.enablePhysics({ mass: 0, kinematic: true });
+bumper.enablePhysics({});      // child of platform → welded into the platform's body
+platform.add(bumper);
+```
+
+---
+
+## Collision Variants
+
+A single `MODEL_SHAPE` collider is convex, so it fills in a model's concavities — an archway becomes solid, a staircase becomes a ramp. Since **v3.31.0**, a model can carry **collision variants**: precomputed sets of convex hulls that together approximate the concave shape, preserving doorways, arches, and gaps.
+
+Variants are shipped as model asset dependencies keyed `collision:<variant>` and are loaded automatically. Select which variant a placed instance uses with the `collisionVariant` option:
+
+```javascript
+statue.enablePhysics({
+    colliderType: 'MODEL_SHAPE',
+    collisionVariant: 'detailed',   // matches a "collision:detailed" dependency
+    mass: 0
+});
+```
+
+Each hull in the selected set becomes a leaf of the element's [compound body](#compound-bodies), and every leaf reports contacts under the model's own UUID. If no variant is selected (or the named one isn't found), the element falls back to a single computed convex hull.
+
+::: tip
+In the [Mage Studio editor](/editor/inspector/physics#collision-variants), collision variants are generated from a model in the asset inspector's **Collision** tab and selected per instance in the physics inspector — you rarely author the `collision:<variant>` assets by hand.
+:::
+
+---
+
+## Collision Detection
+
+### Physics Collision Events
+
+Bodies in the physics simulation emit a collision event when they touch:
+
+```javascript
+import { PHYSICS_EVENTS } from 'mage-engine';
+
+element.addEventListener(PHYSICS_EVENTS.ELEMENT.COLLISION, ({ data }) => {
+    // data.contacts: [{ distance, elements: [{ uuid, velocity, worldPos, localPos }, …] }]
+});
+```
+
+By default only pairs involving a dynamic (moving) body report contacts — two static bodies never do. To make a static body (such as a trigger zone) report overlaps, opt it in with `collisionEvents` (since **v3.29.0**):
+
+```javascript
+triggerZone.enablePhysics({
+    colliderType: 'BOX',
+    mass: 0,
+    collisionEvents: true   // static body now reports overlaps (events only, no physical response)
+});
+```
+
+::: warning
+`collisionEvents` gives you overlap **events only** — there is no solver response between two static bodies. Use it for triggers and overlap detection, not to make static objects push each other.
+:::
+
+### Ray Colliders
+
+Elements can also detect collisions using ray-based colliders:
+
+Elements detect collisions using ray-based colliders:
+
+```javascript
+import { constants } from 'mage-engine';
+
+const { VECTOR_FRONT, VECTOR_DOWN, DOWN } = constants;
+
+// Set up colliders in the directions you care about
+player.setColliders(
+    [VECTOR_FRONT, VECTOR_DOWN],
+    [{ near: 0.5 }, { near: 0.5 }]
+);
+
+// Check all colliders — dispatches a collision event when something is hit
+const collisions = player.checkCollisions();
+
+// Or check a single direction (e.g. ground detection)
+const ground = player.isCollidingOnDirection(DOWN);
+```
+
+Each collider accepts `near`, `far` (default `10`), `offset` (`{ x, y, z }`) and `debug` options. Available direction vectors: `VECTOR_UP`, `VECTOR_DOWN`, `VECTOR_LEFT`, `VECTOR_RIGHT`, `VECTOR_FRONT`, `VECTOR_BACK`.
+
+Collision state for physics bodies is also available via the physics state:
+
+```javascript
+element.getPhysicsState();  // includes collision information from the simulation
 ```
 
 ---
 
 ## Performance Tips
 
-1. **Use simple shapes** - Box and sphere are fastest
+1. **Use simple colliders** - `BOX` and `SPHERE` are fastest
 2. **Limit dynamic objects** - Static objects are cheap
-3. **Sleep inactive bodies** - Objects at rest don't simulate
-4. **Use collision masks** - Reduce unnecessary collision checks
-5. **Don't raycast every frame** - Cache results when possible
-
-```javascript
-// Bad: Complex mesh for moving object
-crate.enablePhysics({ shape: 'mesh', mass: 1 }); // Slow!
-
-// Good: Simple box shape
-crate.enablePhysics({ shape: 'box', mass: 1 }); // Fast!
-```
-
----
-
-## Disabling Physics
-
-```javascript
-// Remove physics from an entity
-entity.disablePhysics();
-
-// Temporarily freeze physics
-entity.setPhysicsEnabled(false);
-entity.setPhysicsEnabled(true);  // Resume
-```
-
-::: tip
-Disabling physics is useful for cutscenes, menus, or paused game states.
-:::
+3. **Prefer kinematic over dynamic** for script-driven movers
+4. **Use `ccdRadius` sparingly** - Only for fast-moving objects that tunnel through walls

@@ -2,6 +2,10 @@
 
 The Particles system allows you to create dynamic visual effects like fire, explosions, rain, snow, and custom particle emitters.
 
+::: tip Since v3.24.0
+All particle emitters run exclusively on the [Proton](https://github.com/drawcall/three.proton) engine, and every emitter supports serialization: emitters are included when a scene is exported via `toJSON()` and are recreated on import. This is what allows particles to be edited and saved from the Mage Studio editor.
+:::
+
 ## Import
 
 ```javascript

@@ -8,9 +8,51 @@ Third Person Controls position the camera behind a target entity, commonly used 
 import { Controls, Scripts, BUILTIN_SCRIPTS } from 'mage-engine';
 ```
 
+## ThirdPersonControl
+
+Since `v3.25.0`, the engine ships a full third-person character controller. It orbits the camera around a target, handles WASD/arrow movement, jumping, and (optionally) drives the character through the physics simulation with a `PLAYER` capsule body.
+
+```javascript
+import { Controls } from 'mage-engine';
+
+const control = await Controls.setThirdPersonControls({
+    target: character,       // required — the Element to control
+    physicsEnabled: true,
+    distance: 5,
+    cameraHeight: 2,
+    speed: 2,
+    jumpSpeed: 2
+});
+// Click the canvas to acquire pointer lock; WASD/arrows to move, Space to jump.
+```
+
+`setThirdPersonControls` is async and returns the control instance. It is stored under the `CONTROLS.TPS` constant and can be retrieved later via `Controls.getControl(CONTROLS.TPS)`. Setting third person controls disposes any active first person, fly, or orbit controls.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `target` | `Element` | required | The element to control |
+| `physicsEnabled` | `boolean` | `false` | Drive the character through the physics simulation |
+| `distance` | `number` | `5` | Camera orbit distance from the character |
+| `cameraHeight` | `number` | `2` | Camera height above the character |
+| `sensitivity` | `number` | `0.002` | Mouse look sensitivity |
+| `speed` | `number` | `2` | Walk speed |
+| `jumpSpeed` | `number` | `2` | Jump impulse |
+| `mass` | `number` | `100` | Mass used for the character's physics body |
+| `groundLevel` | `number` | `0.5` | Floor Y coordinate (non-physics mode only) |
+| `slowDownFactor` | `number` | `20` | How quickly the character decelerates |
+| `minPolarAngle` | `number` | `0.1` | Camera pitch clamp (lower) |
+| `maxPolarAngle` | `number` | `π/2 - 0.1` | Camera pitch clamp (upper) |
+| `originOffset` | `object` | `{ x: 0, y: 0, z: 0 }` | Offset from model origin to capsule centre |
+
+::: tip On-demand physics — since v3.25.3
+If `physicsEnabled` is `true` and physics is not enabled in your configuration, the engine enables it automatically and registers every physics-enabled element — no upfront physics configuration required.
+:::
+
 ## Using SmoothCarFollow Script
 
-The recommended way to create third-person camera following is using the `SmoothCarFollow` script:
+For simple camera-follow behaviour without a character controller (e.g. vehicle cameras), use the `SmoothCarFollow` script:
 
 ```javascript
 import { Scene, Scripts, BUILTIN_SCRIPTS } from 'mage-engine';

@@ -285,11 +285,67 @@ gtag('config', 'G-434GQWY0J2');`,
       ],
       "/editor/": [
         {
-          text: "Editor",
+          text: "Getting Started",
+          collapsed: false,
           items: [
             { text: "Introduction", link: "/editor/" },
-            { text: "Changelog", link: "/editor/changelog" },
+            {
+              text: "Interface Overview",
+              link: "/editor/getting-started/interface",
+            },
+            { text: "Projects", link: "/editor/getting-started/projects" },
+            { text: "Levels", link: "/editor/getting-started/levels" },
           ],
+        },
+        {
+          text: "Scene",
+          collapsed: false,
+          items: [
+            { text: "3D Viewport", link: "/editor/scene/viewport" },
+            { text: "Hierarchy", link: "/editor/scene/hierarchy" },
+            { text: "Adding Elements", link: "/editor/scene/adding-elements" },
+            { text: "Game Preview", link: "/editor/scene/preview" },
+          ],
+        },
+        {
+          text: "Inspector",
+          collapsed: false,
+          items: [
+            { text: "Properties", link: "/editor/inspector/properties" },
+            { text: "Materials", link: "/editor/inspector/materials" },
+            { text: "Lights", link: "/editor/inspector/lights" },
+            { text: "Physics", link: "/editor/inspector/physics" },
+          ],
+        },
+        {
+          text: "Assets",
+          collapsed: false,
+          items: [
+            { text: "Managing Assets", link: "/editor/assets/" },
+          ],
+        },
+        {
+          text: "Scripting",
+          collapsed: false,
+          items: [
+            { text: "Text Scripts", link: "/editor/scripting/text-scripts" },
+            {
+              text: "Visual Scripts",
+              link: "/editor/scripting/visual-scripts",
+            },
+          ],
+        },
+        {
+          text: "Build & Deploy",
+          collapsed: false,
+          items: [
+            { text: "Building", link: "/editor/build-and-deploy/building" },
+            { text: "Deploying", link: "/editor/build-and-deploy/deploying" },
+          ],
+        },
+        {
+          text: "Changelog",
+          link: "/editor/changelog",
         },
       ],
     },

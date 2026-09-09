@@ -62,14 +62,41 @@ This method sets the name of this element.
 
 - `color` can be a string representation of a color (e.g. 'black', '#fefefe'), or its hex value (e.g. 0x000000 for black).
 
-#### setTextureMap(textureId: string, options: Object)
+#### setTexture(textureId: string, textureType?: string, options?: Object)
 
-This method will set the texture map for this element.
+This method sets a texture on one of the element's material slots.
+
 - `textureId: string`: This represents the texture you want to map on this element. It has to be a valid textureId, defined in your `assets` definition.
+- `textureType: string` (default: `'map'`): The material slot to set — one of `map`, `alphaMap`, `aoMap`, `envMap`, `lightMap`, `specularMap`, `emissiveMap`, `bumpMap`, `displacementMap`, `normalMap`, `metalnessMap`, `roughnessMap`, `gradientMap`.
+- `options: Object`:
+  - `repeat: { x, y }` (default: `{ x: 1, y: 1 }`): how many times the texture repeats on each axis.
+  - `offset: { x, y }` (default: `{ x: 0, y: 0 }`, since `v3.27.2`): texture offset on each axis.
+  - `wrapS` / `wrapT` (since `v3.27.3`): per-axis wrapping mode (THREE wrapping constants). The legacy single `wrap` option is still supported as a fallback for both axes (default: `RepeatWrapping`).
+
+```javascript
+box.setTexture('crate', 'map', {
+    repeat: { x: 4, y: 4 },
+    offset: { x: 0.5, y: 0 }
+});
+```
 
 ::: tip
 Please refer to the page explaining how to load textures in your applications [here](/engine/advanced/assets/images_and_textures.md)
 :::
+
+#### setTextureOptions(textureType?: string, options?: Object)
+
+Since `v3.27.2`. Updates the options of an **already-set** texture without changing the texture itself. The options are merged over the current ones — only the keys you pass are replaced.
+
+```javascript
+// Tweak just the repeat — offset and wrapping are preserved:
+box.setTextureOptions('map', { repeat: { x: 8, y: 8 } });
+```
+
+#### setTextureMap(textureId: string, options: Object)
+
+::: warning Deprecated
+`setTextureMap` forwards to `setTexture(textureId, 'map', options)`. Use `setTexture` instead.
 :::
 
 
@@ -106,19 +133,62 @@ const MATERIALS = {
 
 This will return a JSON representation of this element.
 
+#### boundingBox
+
+Since `v3.25.7`, `element.boundingBox` (a THREE `Box3`) is auto-computed from the element's geometry — or, for models, the largest bounding box across children — and can be **overridden** with your own `Box3`. Physics collider sizing uses it when computing collider dimensions:
+
+```javascript
+import { Box3, Vector3 } from 'three';
+
+element.boundingBox = new Box3(
+    new Vector3(-1, 0, -1),
+    new Vector3(1, 2, 1)
+);
+```
+
 ---
 
 ### Animations
 
-#### playAnimation(id: string, options: Object)
+Since `v3.24.4`, skinned models and their skeletons are handled correctly, and animations support smooth crossfading.
 
-If this element has animations and the require `id` is a valid animation identifier, that animation will be played.
+#### playAnimation(id: string, options?: Object)
 
-- `options: { duration: 0.2 }`: This option is being used when transitioning from one animation to another.
+If this element has animations and the required `id` is a valid animation identifier, that animation will be played. If another animation is already playing, the engine automatically crossfades to the new one.
 
-#### getAvailableAnimations(): array\<ThreeAnimation\>
+- `options: { loop, blendDuration = 0.3, timeScale = 1, weight = 1, clampWhenFinished = true }`
 
-If this element has animations, this methods will return a list of them.
+#### crossFadeTo(id: string, options?: Object)
+
+Smoothly blends from the currently playing animation to `id`.
+
+- `options: { blendDuration = 0.3, loop, timeScale = 1, warp = false, clampWhenFinished = true }`
+- `warp: true` synchronises time scales during the fade — useful for walk → run transitions.
+
+```javascript
+model.playAnimation('Idle');
+model.crossFadeTo('Run', { blendDuration: 0.25 });
+```
+
+#### stopAnimation(id?: string, fadeOutDuration?: number)
+
+Stops the given animation (or the current one when `id` is omitted), optionally fading it out.
+
+#### stopAllAnimations()
+
+#### setAnimationWeight(id: string, weight: number, fadeDuration?: number)
+
+Sets an animation's blend weight (`0`–`1`) for layered blending.
+
+#### setAnimationTimeScale(id: string, timeScale: number)
+
+#### getAnimationDuration(id: string): number
+
+#### isAnimationPlaying(id: string): boolean
+
+#### getAvailableAnimations(): string[]
+
+If this element has animations, this method will return a list of their names.
 
 ---
 
@@ -135,10 +205,14 @@ For a better description of the `options` object, have a look at the Physics pag
 
 
 
-#### applyForce(force: Object)
+#### setLinearVelocity(velocity: Object) / getLinearVelocity()
+
+#### setAngularVelocity(velocity: Object) / getAngularVelocity()
+
+#### getPhysicsState(key?: string)
 
 #### setColliders(vectors: array, options: array)
 
 #### checkCollisions()
 
-#### isCollidingOnDirection(direction: Object)
+#### isCollidingOnDirection(direction: string)
